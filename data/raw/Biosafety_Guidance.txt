@@ -1,0 +1,578 @@
+P a g e | 2 Biosafety Guidance Document
+Table of Contents
+Change/Highlight Section...................................................................................................................................3
+Introduction........................................................................................................................................................3
+Definitions ..........................................................................................................................................................4
+Biosafety/Biocontainment Plan Provision Requirements..................................................................................4
+Hazardous Characteristics of Select Agents and Toxins.................................................................................4
+Safeguards for Protecting Against Exposure to Select Agents and Toxins.....................................................5
+Engineering controls...................................................................................................................................5
+Containment equipment............................................................................................................................6
+Secondary Containment.............................................................................................................................6
+Enclosure and Isolation ..............................................................................................................................7
+Administrative Controls..............................................................................................................................7
+Work Practices............................................................................................................................................7
+Personal protective equipment (PPE) ........................................................................................................8
+Disinfection, Decontamination or Destruction of Select Agent and Toxin ....................................................9
+Handling Select Agents and Toxins in Shared Spaces...................................................................................11
+Appendix I: Principles of decontamination, sterilization, and disinfection......................................................13
+P a g e | 3 Biosafety Guidance Document
+Change/Highlight Section 
+Revisions: This is a living document subject to ongoing improvement. Feedback or suggestions for
+improvement from entities registered with the Federal Select Agent Program, as well as the general public, 
+are welcomed. Submit comments directly to the Federal Select Agent Program at:
+DSAT: LRSAT@cdc.gov
+AgSAS: AgSAS@aphis.usda.gov
+Revision History: 
+March 2017: Initial posting
+July 2018: Revised format, removed appendices 1 and 2 and added “Disinfectants” section to appendix. 
+Introduction
+This document is intended to provide guidance and assist entities in developing and implementing a written 
+biosafety/biocontainment plan, as required by section 12 of the select agent regulations (7 C.F.R. Part 331, 
+9 C.F.R. Part 121, and 42 C.F.R. Part 73). This template summarizes current regulatory and procedural 
+criteria for registered entities and provides examples for verifying compliance. It does not add to, delete 
+from, or change current regulatory requirements or standards. For entities registered for Tier 1 select 
+agents and toxins that require an occupational health program, reference the Occupational Health Program 
+Guidance for more information. It should be noted that information regarding an occupational health 
+program may be incorporated into the biosafety plan and that two separate plans are not required. 
+There are resources available to assist entities in the development of biosafety/biocontainment plans such 
+as:
+ “Biosafety in Microbiological and Biomedical Laboratories (BMBL),”
+ “NIH Guidelines for Research Involving Recombinant or Synthetic Nucleic Acid Molecules (NIH
+Guidelines),”
+ Occupational Safety and Health Administration, “Laboratory Safety Guidance,”
+ “Containment Facilities and Safeguards for Exotic Plant Pathogens and Pests” (Robert P. Kahn and
+S.B. Mathur eds., 1999),
+ “A Practical Guide to Containment: Plant Biosafety in Research Greenhouses” (Dann Adair and Ruth
+Irwin, 2008), and
+ Detailed instructions on training requirements, including Biosafety/Biocontainment Training, can be
+found in Guidance for Select Agent Regulation Training Requirements.
+These resources can be used as guidance to assist in the development of the biosafety/biocontainment 
+plan. However, entities may use other comparable biosafety/biocontainment guidelines when 
+developing and implementing a written plan. It should be noted that the Federal Select Agent Program 
+inspects registered entities in accordance with the current versions of these nationally recognized 
+standards. 
+P a g e | 4 Biosafety Guidance Document
+Definitions
+As used in this document the following terms have the following meanings: 
+Decontamination – Disinfection or sterilization of articles contaminated with toxins or agents to make the 
+articles safe for use or disposal. 
+Disinfection – The elimination of nearly all recognized pathogenic microorganisms but not necessarily all 
+microbial forms (e.g., bacterial spores) on inanimate objects.
+Risk – The potential for an adverse outcome assessed as a function of threats, vulnerabilities, and 
+consequences associated with an incident, event, or occurrence.
+Risk Assessment – The process of evaluating the risk(s) arising from a hazard(s), taking into account the 
+adequacy of any existing controls and deciding whether or not the risk(s) is acceptable.
+Select agents and toxins – A subset of biological agents and toxins that the Departments of Health and 
+Human Services (HHS) and Agriculture (USDA) have determined to have the potential to pose a severe 
+threat to public health and safety, to animal or plant health, or to animal or plant products. The current list 
+of select agents and toxins can be found at 42 CFR §§ 73.3, 73.4, 9 CFR §§ 121.3, 121.4, and 7 CFR § 331.3.
+Also see the current select agents and toxins list.
+Sterilization – Any item, device, or solution is considered to be sterile when it is completely free of all living 
+microorganisms and viruses. The definition is categorical and absolute (i.e., an item is either sterile or it is 
+not). A sterilization procedure is one that kills all detectable microorganisms, including high numbers of 
+bacterial endospores.
+Tier 1 Select agents and toxins – A subset of select agents and toxins have been designated as Tier 1 
+because these biological agents and toxins present the greatest risk of deliberate misuse with significant 
+potential for mass casualties or devastating effect to the economy, critical infrastructure, or public 
+confidence, and pose a severe threat to public health and safety: Bacillus anthracis, Bacillus cereus Biovar 
+anthracis, Botulinum neurotoxins, Botulinum neurotoxin producing species of Clostridium, Burkholderia 
+mallei, Burkholderia pseudomallei, Ebola virus, Francisella tularensis, Foot-And-Mouth Disease virus, 
+Marburg virus, Rinderpest virus, Variola major virus (Smallpox virus), Variola minor virus (Alastrim), and 
+Yersinia pestis.
+Biosafety/Biocontainment Plan Provision Requirements
+Hazardous Characteristics of Select Agents and Toxins
+It is important that the biosafety/biocontainment plan contain the hazardous characteristics of each agent 
+or toxin listed on the entity's registration and the biosafety/biocontainment risk associated with laboratory 
+procedures related to the select agent or toxin.
+To assist with identifying the hazardous characteristics of each agent or toxin and the biosafety risk 
+P a g e | 5 Biosafety Guidance Document
+associated with laboratory procedures related to the select agent or toxin, the BMBL is an excellent 
+reference and includes agent summary statements that describe the hazards, recommended precautions,
+additional risks, and levels of containment appropriate for handling select agents and toxins in the 
+laboratory. The BMBL also states that HEPA filtration of exhaust air should be required when working with
+all BSL-4 select agents, and other agents to include: Classical swine fever virus, Reconstructed 1918 
+influenza virus, Rift Valley fever virus, Venezuelan equine encephalitis virus, and Highly pathogenic avian 
+influenza virus.
+The NIH Guidelines provide further guidance on risk assessment, physical containment, and biological 
+containment provisions relating to genetic elements, recombinant nucleic acids and recombinant select 
+agents and toxins.
+In addition, AgSAS has developed Guidelines for Avian Influenza Viruses to assist individuals and entities 
+with developing policies and implementing procedures for working safely with these viruses.
+In considering hazardous characteristics of each agent or toxin, the entity should discuss the hazards of 
+agent cross-contamination in laboratories performing work with multiple select agents and agent strains to 
+prevent the accidental transfer of agents. Areas to consider are:
+• Characteristics of agent or toxin (e.g., virus, bacteria; [e.g., spore or non-spore forming], mode of 
+transmission, etc.), and work being performed
+• Work practices to prevent dissemination outside primary containment and exposure 
+• Engineering Controls to prevent dissemination 
+• Decontamination of laboratory work surfaces, equipment, and select agent and toxin waste to 
+prevent dissemination 
+Safeguards for Protecting Against Exposure to Select Agents and Toxins
+Section 12(a)(2) of the select agent regulations state that the biosafety/biocontainment plan must include
+Safeguards in place with associated work practices to protect entity personnel, the public, and the 
+environment from exposure to the select agent or toxin including, but not limited to: 
+ Engineering controls such as containment equipment; including, but not limited to:
+o Biological safety cabinets 
+o Animal caging systems
+o Centrifuge safety containers
+ Administrative Controls such as vaccinations and the creation of biosafety plans and procedures
+ Work Practices such as procedures that describes safe and proper work practices
+ Personal protective equipment (PPE)
+Please note that the entity should focus and think about the agents and procedures specific to their facility 
+to ensure that they are using the appropriate equipment and practices for the conditions of their 
+laboratory.
+Engineering controls
+The basic concept behind engineering controls is that, to the extent feasible, the work environment and the 
+biosafety/biocontainment risk associated with the laboratory procedures should be designed to eliminate 
+P a g e | 6 Biosafety Guidance Document
+hazards or reduce exposure to hazards. Engineering controls should be based on the following principles:
+ If feasible, design the facility, equipment, or process to remove the hazard.
+ If removal is not feasible, enclose the hazard to prevent exposure during normal operations.
+ Where complete enclosure is not feasible, establish barriers or local ventilation to reduce exposure 
+to the hazard during normal operations.
+The basic types of engineering controls are:
+ Process control 
+ Enclosure and/or isolation of source 
+ Ventilation
+Some examples of engineering controls may include: 
+ Building ventilation/exhaust or HVAC (heating, ventilation and air conditioning) must provide safe, 
+comfortable, breathable environments for all employees and the public, and to minimize exposures 
+to hazardous air contaminants. At BSL-3 and BSL-4, exhaust laboratory air must be directly 
+exhausted to the outside since it is considered potentially contaminated. The exhausted room air 
+can be high-efficiency particulate air (HEPA)-filtered to prevent the hazards from being released to 
+the outside environment. The HVAC exhaust system must be sized to handle both the room 
+exhaust and the exhaust requirements of all containment devices that may be present. Adequate 
+supply air must be provided to ensure proper function of the exhaust system.
+ Biological safety cabinet (BSC) is an enclosed, ventilated laboratory workspace for safely working 
+with materials contaminated with BSAT. The BMBL is an excellent reference to assist with 
+identifying and selecting a BSC.
+ Effluent Decontamination System (EDS) is defined as a system that sterilizes biohazardous liquid 
+waste generated from biocontainment laboratories or other facilities prior to discharge. 
+ Pathological incinerators, alkaline hydrolysis digesters, or other approved means, must be provided 
+for the safe disposal of the large carcasses of infected animals. Redundancy and the use of multiple 
+technologies need to be considered and evaluated.
+ Anaerobic digesters use a biochemical process in which organic matter is decomposed by bacteria 
+in the absence of oxygen. Digesters must be airtight (no oxygen) for anaerobic digestion to occur.
+Containment equipment
+The containment equipment should focus on:
+o Biological safety cabinets 1 Evers et. al. (2013) Laboratory Decontamination of HHS-listed 
+and HHS/USDA Overlap Select Agents and Toxins. Applied Biosafety. 18: 2, pp. 59-72.
+o Animal/arthropod caging systems
+o Plant growth chambers
+o Centrifuge safety containers
+Secondary Containment 
+Secondary containment is the protection of the environment external to the laboratory from exposure to 
+infectious materials and is provided by a combination of facility design and operational practices. 
+Secondary containment may include separation of the laboratory work area from public access, availability 
+of decontamination equipment (e.g., autoclave), separate clean and dirty corridors, double entry ways, air 
+locks, hand washing facilities, etc. 
+P a g e | 7 Biosafety Guidance Document
+Enclosure and Isolation
+An enclosure keeps a selected hazard "physically" separated from workers. Enclosed equipment, for 
+example, is tightly sealed and it is typically only opened for moving samples/cultures or for cleaning and 
+maintenance. Examples include closed animal caging, "glove boxes" or Class III biosafety cabinets. Care 
+must be taken when the enclosure is opened for maintenance as exposure could occur if adequate 
+precautions are not taken. The enclosure itself must be well maintained to prevent leaks.
+Isolation places the hazardous process "geographically" away from the majority of the workers. Common 
+isolation techniques are to create a contaminant-free area either around the equipment or around the 
+employee workstations.
+Administrative Controls
+Administrative controls are those that modify workers’ work schedules and tasks in ways that minimize
+their exposure to workplace hazards. Examples include vaccinations and developing plans and procedures 
+to reduce the risk to the worker. The plan should explain the following: 
+ Process controls should be appropriate for the activities performed and the select agent or toxin in 
+use. Biosafety/biocontainment levels are dependent on the risks of the work being performed. 
+o For example, the BMBL recommends BSL-3 practices, containment equipment and facilities 
+for all manipulations of suspect cultures of Francisella tularensis. In contrast, BSL-2 
+practices, containment equipment, and facilities are recommended for diagnostic activities 
+involving infectious cultures of Bacillus anthracis, Burkholderia mallei, Burkholderia 
+pseudomallei, and Yersinia pestis, where there is no propagation of the agent or risk of 
+aerosol or droplet formation only. All other activities with these agents are to be conducted 
+at BSL-3.
+ Describe detailed safety measures to ensure that primary and secondary containment are 
+maintained during especially hazardous procedures (e.g., intentional production of select agent 
+infectious aerosols or select toxin aerosols).
+Work Practices
+Work practices should involve procedures to reduce the risk of exposure (e.g., hand washing, spill 
+procedures, using foot decontamination methods, maintaining the concept of clean and dirty spaces, etc.). 
+Monitoring should be done before and after any change is implemented to make sure a change results in 
+lower exposures. The plan should also describe the biosafety and containment procedures employed for 
+experimentally exposed or infected animals or plants, if applicable:
+ When animals or plants are to be infected with or exposed to select agents, describe the 
+administration route(s) employed and the equipment used.
+ Describe in detail appropriate containment of all organic material (select agent-infected carcasses, 
+tissues, plant biomass) until final destruction (e.g., autoclave, incineration, etc.).
+ Describe or reference procedures to monitor animals or plants for accidental infection. 
+ Describe procedures to ensure containment of animals accidentally exposed to or infected with 
+select agents. Considerations for developing these procedures include but are not limited to, 
+situations where an airflow reversal has occurred from a room harboring experimentally infected 
+P a g e | 8 Biosafety Guidance Document
+animals to an adjacent room housing native animals; or movement of personnel, equipment, or 
+laboratory waste from a select agent area to a non-select agent area has resulted in accidental 
+exposure.
+ When animals infected with select agents are either loosely housed or housed in open caging, there 
+is an increased potential of room-level select agent contamination. Unless it can be demonstrated 
+that the animal model does not shed the agent, the increased hazard of not using containment 
+caging must be mitigated by procedural or facility enhancements. 
+Personal protective equipment (PPE) 
+In determining the PPE and other safety equipment needed, consider the hazardous characteristics of each 
+agent or toxin listed on the entity's registration and the risk associated with laboratory procedures related 
+to the select agent or toxin. The PPE and other safety equipment should focus on:
+ Breathing or respiratory protection 
+ Eye and face protection
+ Head protection
+ Hearing protection
+ Hand/arm protection (gloves, sleeves)
+ Foot protection
+ Full body protection
+When considering laboratory clothing, the entity needs to determine what PPE should be worn to prevent 
+hazards from leaving the laboratory (i.e., how clothing can be a fomite to carry BSAT out of laboratories and 
+how the clothing should be cleaned, disinfected, or disposed, should street clothes being worn or wearing 
+scrubs or full body PPE, should individuals shower out, include general principles for separation of clean 
+and dirty boundaries). Employees should be educated that PPE must not be worn outside the containment 
+laboratory except when transporting samples between laboratories within containment. It must not be 
+worn (or stored) in break rooms, office areas, toilets, or outside the building. Employees must be properly 
+instructed on how to don (put on) required PPE before entering an area with a potential hazard that 
+requires the use of the PPE. Procedures for employees to remove (doff) required PPE before leaving the 
+area of potential exposure should be structured to prevent transfer of infectious material outside 
+laboratory room, as well as protect workers from exposure to infectious agents during exit procedures.
+P a g e | 9 Biosafety Guidance Document
+Biological Safety - Personal Protective Equipment (PPE) Requirements*
+BSL-1 BSL-2 BSL-3 BSL-4
+ Protective laboratory 
+coats, gowns, or 
+uniforms recommended to 
+prevent contamination of 
+personal clothing. 
+ Protective eyewear worn 
+when conducting 
+procedures that have the 
+potential to create 
+splashes of 
+microorganisms or other 
+hazardous materials. 
+Personnel who wear 
+contact lenses in 
+laboratories should also 
+wear eye protection. 
+ Gloves must be worn to 
+protect hands from 
+exposure to hazardous 
+materials. 
+ Protective laboratory 
+coats, gowns, smocks, 
+or uniforms must be worn 
+while working with 
+hazardous materials. 
+ Eye and face protection 
+(goggles, mask, face 
+shield or other splatter 
+guard) must be used for 
+anticipated splashes or 
+sprays of infectious or 
+other hazardous materials 
+when the microorganisms 
+are handled outside the 
+Biological Safety Cabinet 
+(BSC) or physical 
+containment device.
+Personnel who wear 
+contact lenses in 
+laboratories should also 
+wear eye protection. 
+ Gloves must be worn to 
+protect hands from 
+exposure to hazardous 
+materials.
+ Eye, face and respiratory 
+protection should be used 
+in rooms containing 
+infected animals. 
+ Protective laboratory 
+clothing with a solidfront, such as tie-back or 
+wrap-around gowns, scrub 
+suits, or coveralls must be 
+worn. 
+ Eye and face protection 
+(goggles, mask, face 
+shield or other splash 
+guard) must be used for 
+anticipated splashes or 
+sprays of infectious or 
+other hazardous materials. 
+[All procedures involving 
+the manipulation of 
+infectious materials must 
+be conducted within a 
+BSC, or other physical 
+containment devices.]
+Personnel who wear 
+contact lenses in 
+laboratories must also 
+wear eye protection. 
+ Gloves must be worn to 
+protect hands from 
+exposure to hazardous 
+materials. 
+ Eye, face, and 
+respiratory protection 
+must be used in rooms 
+containing infected 
+animals. 
+ Cabinet Laboratory: All 
+work is conducted in a 
+class III biosafety cabinet,
+ All materials appropriately 
+decontaminated 
+(disinfectant tank) prior to 
+removal from biosafety 
+cabinet.
+ The class III biosafety 
+cabinet serves as 
+engineering control to 
+prevent worker exposure 
+to infectious agents and 
+material.
+• Protective Suit 
+Laboratory: All work is 
+conducted within a class II 
+biosafety cabinet with the 
+Use of a positive pressure 
+suit connected to a HEPA 
+filtered airline. The 
+positive pressure suit 
+completely isolates the 
+laboratory worker from the 
+laboratory environment, 
+ensuring there is no
+contact with potentially 
+hazardous material. 
+Laboratory personnel who 
+work in positive pressure 
+suits require significant 
+training.
+Disinfection, Decontamination or Destruction of Select Agent and Toxin1
+See the Inactivation guidance for more information on the inactivation of and rendering samples free of 
+select agents and select toxins for future use. In addition, reference Appendix I: Principles of 
+decontamination, sterilization, and disinfection provides additional information regarding decontamination 
+and disinfection. 
+For material that is disinfected, decontaminated, or destroyed as waste, section 12(a)(3) states that the 
+biosafety/biocontainment plan must contain written procedures for each validated method used for 
+disinfection, decontamination, or destruction, as appropriate, of all contaminated or presumptively 
+contaminated material including, but not limited to:
+ Cultures and other materials related to the propagation of select agents or toxins
+ Items related to the analysis of select agents and/or toxins
+ 
+1 Evers et. al. (2013) Laboratory Decontamination of HHS-listed and HHS/USDA Overlap Select Agents and Toxins. 
+Applied Biosafety. 18: 2, pp. 59-72.
+P a g e | 10 Biosafety Guidance Document
+ Personal protective equipment
+ Animal caging systems and bedding (if applicable)
+ Animal carcasses or extracted tissues and fluids (if applicable)
+ Plant biomass (if applicable)
+ Laboratory surfaces and equipment
+ Surfaces of transport containers
+ Effluent material
+The plan should describe the following:
+ Adherence to the concentration and contact time specified by the manufacturer of a disinfectant
+during laboratory surface decontamination procedures to be effective in decontaminating the 
+select agent and toxin material.
+ Ensure that procedures follow any equipment manufacturer guidance on the disinfectants 
+compatible with their equipment. 
+ Define waste management procedures based on the types of waste generated (e.g., PPE, plates, 
+liquids, eggs, animal caging, carcasses, sharps) and the containers most appropriate for the types of 
+waste being produced.
+ Describe in detail safety procedures for decontaminating reusable sharps.
+ Describe the procedure for safe transport of waste to the decontamination site, including the 
+location of the decontamination equipment in relation to the laboratory generating the waste. 
+Transport procedures must take into account any safety requirements to protect personnel and the 
+environment during transport. 
+ Specify the actual method(s) used to decontaminate select agent and toxin waste (e.g., autoclave, 
+incinerators, renderers, tissue digester, chemical, etc.). 
+ Describe the means of verifying that decontamination equipment is operating correctly, and how 
+often verification is performed (i.e., biological indicators [BIs], confirmation of cycle parameters). 
+o For autoclave verification, BIs or parametric monitors should be placed in the center of the 
+load in a manner expected to provide the maximum challenge for steam penetration. 
+When BIs are used, they should be incubated for the length of time stated by the 
+manufacturer and a positive control should be used. The temperature of the material to be 
+autoclaved must be considered when verifying the autoclave parameters (e.g., frozen 
+carcasses will require a longer sterilization time than non-frozen carcasses).
+o For chemical decontamination, the chemical used must be appropriate for the select agent 
+or toxin (Manufacturers normally test surrogates and not select agents and toxins. This 
+would be acceptable), and the chemical concentration and contact time must be defined in 
+the procedure. The procedure should also address whether chemicals used for 
+decontamination must be freshly prepared or can be stored, and the shelf life if stored.
+ Describe the method(s) used to decontaminate laboratory surfaces and equipment (e.g., chemical 
+surface decontamination, or space fumigation using Vaporized Hydrogen Peroxide, 
+paraformaldehyde, or chlorine dioxide). The method selected must be appropriate for the 
+P a g e | 11 Biosafety Guidance Document
+equipment and the select agents and toxins used in the laboratory. Procedures should indicate 
+contact time required which may be variable depending on agent and equipment. 
+o Fumigation used as a means to inactivate select toxins requires the use of a published 
+method or method validation.
+o Fumigation procedures for select agent inactivation should include the use of biological 
+indicators to verify adequate decontamination.
+ Describe how entity personnel are notified of the status of decontamination of laboratory surfaces 
+and equipment.
+ Describe how entity personnel are notified of ongoing or completed decontamination activities for 
+laboratory spaces.
+ Describe when laboratory surfaces and equipment should be decontaminated. 
+Note: Although the regulations require written procedures for each validated method used for 
+disinfection, decontamination or destruction, as appropriate, of all contaminated or presumptively 
+contaminated materials, an entity does not have to validate the method in-house. A validated method 
+is a method that has been shown to render materials safe to handle (i.e., safe in the context of being 
+reasonably free from a risk of disease transmission). The validation of methods for disinfection, 
+decontamination or destruction of select agent waste does not have to occur in-house since this 
+material is not for future use. Further, validation does not have to be performed on select agents but 
+can be performed on surrogates. However, entities must use the concentrations and conditions 
+prescribed by manufacturers, the BMBL, or other government regulations, such as those promulgated 
+by the Environmental Protection Agency (EPA). The inactivation provisions for future use material do 
+not apply to disinfection, decontamination or destruction of select agent waste.
+Handling Select Agents and Toxins in Shared Spaces
+Section 12(a)(4) of the regulations requires the entity to describe procedures for the handling of select 
+agents and toxins in the same spaces with non-select agents and toxins in order to prevent unintentional 
+contamination. For example: 
+ Laboratory work surfaces, equipment, and all select agent and toxin waste that must be 
+decontaminated prior to transitioning to work with non-select agents or toxins.
+ How personnel are made aware of the status of any particular room or laboratory at any given 
+time.
+ Spatial and/or temporal considerations when performing tissue culture studies.
+ Any concurrent work with Reconstructed 1918 Influenza virus and highly pathogenic avian 
+influenza virus.
+ Sterilization of all samples at the end of the study/experiment/procedure.
+Precautions should be taken to prevent cross-contamination of viral select agents in cell cultures. Some 
+means of preventing accidental transfer of agents between cultures include: 
+o Working with only one select agent at a time.
+P a g e | 12 Biosafety Guidance Document
+o Decontaminating biosafety cabinet with a surface disinfectant between select agents and 
+toxins.
+o Allowing a certain amount of time to pass between decontamination and beginning work 
+with another select agent.
+o Changing gloves when changing from one select agent to another.
+o Aliquoting growth medium and other reagents so that the same vessel is not used for more 
+than one select agent.
+P a g e | 13 Biosafety Guidance Document
+Appendix I: Principles of decontamination, sterilization, and disinfection 
+Decontamination
+Decontamination can include a number of processes that render an area, device, item, or material safe to 
+handle (i.e., safe in the context of being reasonably free from a risk of disease transmission). The primary 
+objective is to reduce the level of microbial contamination so that infection transmission is eliminated. The 
+decontamination process may include a cleaning step prior to disinfection or sterilization.
+2
+Cleaning
+Cleaning is a process that can be an important adjunct in the decontamination process by removal of organic 
+and inorganic materials from objects and surfaces prior to sterilization or disinfection. This process can remove a 
+large number of microorganisms as well and the organic matter protecting them. Cleaning is normally
+accomplished manually or mechanically using water with detergents or enzymatic products. Liquid for cleaning 
+should be treated as liquid biohazardous waste.
+Disinfection
+Some chemical germicides used as disinfectants do, in fact, kill large numbers of spores, though high 
+concentrations of the chemical germicides and several hours of exposure may be required. Non-sporicidal 
+disinfectants may differ in their capacity to accomplish disinfection. Some germicides rapidly kill only the 
+vegetative forms of bacteria such as staphylococci and streptococci, some forms of fungi, and lipid-enveloped
+viruses, whereas others are effective against such relatively resistant organisms as Mycobacterium tuberculosis
+var. bovis, non-lipid viruses, and most forms of fungi.
+3
+The effectiveness of a disinfection procedure is controlled by several factors, including:
+ Nature and number of contaminating microorganisms (especially the presence of bacterial spores)
+ Amount of organic matter present (e.g., soil, feces, and blood)
+ Type and condition of instruments, devices, and materials to be disinfected
+ Temperature
+ Time
+ pH
+ Water hardness
+ Other chemicals used (e.g., mixing with certain detergents)
+Sterilization
+Results from sterilization procedures, however, can only be expressed in terms of the probability of viable 
+ 
+2
+Fraise, AP. (2004) Decontamination of the environment and medical equipment in hospitals. In Principles and Practices of 
+Disinfection, Preservation and Sterilization, 4th edition eds Fraise, AP, Lambert, PA and Maillard J-Y, p 565.
+3 BMBL, p 327
+P a g e | 14 Biosafety Guidance Document
+organisms surviving after a sterilization procedure.4 A probability level of less than one in one million microbial 
+survivors (10-6
+) after treatment is a commonly accepted measure of sterility. This is referred to as the “sterility 
+assurance level.”
+5
+Decontamination of Solid and Liquid Wastes
+All laboratory waste materials, contaminated animal or plant materials, and personal protective equipment 
+(PPE) that are contaminated with BSAT should be decontaminated prior to removal from BSAT registered 
+containment areas. However, there are situations when equipment used for terminal decontamination such as
+autoclaves, incinerators, digesters, renderers, or effluent decontamination systems (EDS), are located outside of 
+registered BSAT spaces. 
+If the solid waste decontamination area (e.g., such as autoclave rooms, digester or renderer rooms, and 
+incinerator facilities) is not inside the containment barrier of the laboratory, an entity should ensure the 
+following practices are in place (Note: The area would not need to be listed on an entity registration or 
+separately registered as long as the area is not used for the storage of BSAT solid waste):
+ Ensure that a person who has FSAP approved access to BSAT (approved by FSAP to have access to BSAT 
+subsequent to a FBI security risk assessment) transports solid BSAT waste. For a Tier 1 BSAT, or material 
+contaminated with a Tier 1 BSAT, the person also must be enrolled in the entity’s personnel suitability 
+program.
+ Transport waste by FSAP approved staff using personal protective equipment (PPE) deemed appropriate 
+for the agent or toxin as determined by a risk assessment.
+ Transport solid waste to the decontamination unit in leak-proof sealed containers. The outside surface 
+of these containers must be decontaminated with an appropriate disinfectant before being removed 
+from containment. Place the container in the decontamination apparatus. The container must remain 
+sealed until the decontamination cycle is completed. 
+ Start the decontamination unit as soon as the material is placed in the unit. The FSAP approved person 
+must confirm to his satisfaction that the decontamination cycle has begun. This person is not required to 
+remain in the area during the entire decontamination cycle but only to be reasonably assured that the 
+cycle has begun.
+ The FSAP approved person confirms that the decontamination cycle, using system settings validated to 
+render the contaminated material non-infectious or non-toxic, has been completed according to system 
+specifications.
+ Keep the decontamination unit on a maintenance schedule. Maintenance schedules usually include 
+periodic spot-checks for problems, semi/annual service, and re-certification by a qualified technician.
+ Create a process for verifying all parameters of the decontamination cycle have been attained (e.g., 
+recording tape, biological indicators, probes, etc.).
+ Maintain written documentation that the decontamination procedure is validated for the specific agent, 
+toxin, and/or material decontaminated.
+ Maintain a chain of custody document for solid waste that leave registered spaces for decontamination.
+ Check if the decontamination apparatus is working properly and is adequately maintained.
+The entity incident response plan should include a plan for material that leaves the laboratory to be 
+ 
+4
+Lambert, PA. (2004) Sterilization. In Principles and Practices of Disinfection, Preservation and Sterilization, 4th edition eds
+Fraise, AP, Lambert, PA and Maillard J-Y, p 389.
+5 Baird, RM. (2004) Sterility assurance: concepts, methods and problems. In Principles and Practices of Disinfection, 
+Preservation and Sterilization, 4th edition eds Fraise, AP, Lambert, PA and Maillard J-Y, p 526-539.
+P a g e | 15 Biosafety Guidance Document
+decontaminated offsite and for material that remains in the building. Ideally, waste should not be transported 
+through an unregistered area. If the entity has no other option, include a description in the entity’s incident 
+response plan addressing how the entity will deal with a spillage or release. The plan must also include 
+procedures for documenting unintended spills or accidents during transport. There is a requirement for the 
+notification of the appropriate Federal, state, and/or local officials and first responders in the event of an offsite 
+spill.
+Ensure that procedures are in place for decontamination of personnel and the PPE worn by personnel 
+responding to a spill. As needed, include medical surveillance after potential exposure to select agents and 
+toxins during the clean-up process.
+Any departure from a standardized method protocol should be revalidated. The entity could validate the 
+autoclaved decontamination method used with a biological indicator, such as Geobacillus stearothermophilus.
+Liquid waste that is not decontaminated in the solid waste decontamination stream may be decontaminated by 
+several means. Contaminated liquid from showers may be disinfected by chemical disinfectant following 
+manufacturer’s specifications including purging the plumbing trap before and after the shower. Contaminated 
+liquid waste may be decontaminated by holding in a container or sink with a chemical disinfectant for the 
+appropriate amount of time. An EDS, while not required, may also be utilized if large amounts of liquid waste, 
+such as liquid from showers and from animal holding facilities, are generated. If the entity has an EDS, the entity 
+should conduct the following practices: 
+• Restrict access to the EDS. Non-FSAP-approved staff or visitors should be monitored and allowed 
+controlled access for official duties only.
+• Create and maintain written documentation that the decontamination procedure is validated for the 
+specific agent, toxin, and/or material being decontaminated.
+• Validate any changes in standardized methods.
+• Keep a regular maintenance schedule. Maintenance schedules may include daily or monthly checks 
+or regular service.
+• Validate the EDS system under actual in-use conditions that may include high levels of bioburden or 
+high matrix content, such as in infected animal holding areas. 
+o This may include use the solid waste decontamination process above for disposing of animal 
+bedding and/or high volume of fecal matter. 
+• Maintain training records that the EDS operation staff have been trained on how to respond to leaks 
+and spills. 
+• Inspect the pipe leading from the containment area to the EDS to ensure it is sealed at least
+annually. A double walled pipe is preferred. 
+• Put procedures and structures in place to contain more liquid than the EDS system would process in 
+the event a spill of the liquid from the EDS tanks (e.g. a berm surrounding the EDS tanks that holds 
+greater volumes than the tanks). 
+• Ensure that procedures are in place for the cleanup and decontamination of a spill from the EDS.
