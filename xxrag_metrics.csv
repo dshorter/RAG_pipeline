@@ -1,0 +1,10 @@
+timestamp,document,total_tokens,num_chunks,avg_chunk_size,max_chunk_size,min_chunk_size,tokenization_time,chunking_time
+Biosafety_Guidance.txt,6214,15,414,500,214,0.05,0.02,2024-08-29T11:01:18.449298
+Biosafety_Guidance.txt,6214,15,414,500,214,0.05,0.02,2024-08-29T11:08:30.940685
+Biosafety_Guidance.txt,6214,15,414,500,214,0.05,0.02,2024-08-29T11:09:27.257082
+Biosafety_Guidance.txt,6214,15,414,500,214,0.05,0.02,2024-08-29T11:16:41.999762
+Biosafety_Guidance.txt,6214,15,414,500,214,0.05,0.02,2024-08-29T11:25:48.205427
+Biosafety_Guidance.txt,6214,15,414,500,214,0.05,0.02,2024-08-29T11:29:33.472434
+Biosafety_Guidance.txt,10,474.5,500,245,2024-08-29T11:29:33.509245
+Biosafety_Guidance.txt,6214,15,414,500,214,0.05,0.02,2024-08-29T11:49:57.008911
+Biosafety_Guidance.txt,10,474.5,500,245,2024-08-29T11:49:57.052248

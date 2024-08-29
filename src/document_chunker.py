@@ -1,99 +1,53 @@
-import nltk
-from nltk.tokenize import sent_tokenize, word_tokenize
-import re
-import json
+import logging
+import time
+from typing import Dict
 
-nltk.download('punkt', quiet=True)
+logger = logging.getLogger(__name__)
 
-def advanced_chunk(text, max_chunk_size=500, overlap=100):
-    paragraphs = re.split(r'\n\s*\n', text)
-    
+def chunk_document(
+    text: str,
+    chunk_size: int = 500,
+    chunk_overlap: int = 50,
+    strategy: str = 'fixed'
+) -> Dict[str, any]:
+    logger.info(f"Chunking document with strategy: {strategy}")
+    logger.info(f"Chunk size: {chunk_size}, Overlap: {chunk_overlap}")
+
+    start_time = time.time()
+
+    # Tokenization (simple word splitting for now)
+    words = text.split()
+    tokenization_time = time.time() - start_time
+
     chunks = []
-    current_chunk = []
-    current_size = 0
-    
-    for paragraph in paragraphs:
-        sentences = sent_tokenize(paragraph)
-        
-        for sentence in sentences:
-            sentence_size = len(word_tokenize(sentence))
-            
-            if current_size + sentence_size > max_chunk_size and current_chunk:
-                chunks.append(' '.join(current_chunk))
-                
-                overlap_size = 0
-                for s in reversed(current_chunk):
-                    overlap_size += len(word_tokenize(s))
-                    if overlap_size >= overlap:
-                        break
-                current_chunk = current_chunk[-overlap_size:]
-                current_size = sum(len(word_tokenize(s)) for s in current_chunk)
-            
-            current_chunk.append(sentence)
-            current_size += sentence_size
-    
-    if current_chunk:
-        chunks.append(' '.join(current_chunk))
-    
-    return chunks
+    start = 0
 
-def load_processed_document(file_path):
-    with open(file_path, 'r', encoding='utf-8') as file:
-        content = file.read()
-    
-    # Parse the content as JSON
-    doc_data = json.loads(content)
-    
-    return doc_data['content'], doc_data['metadata']
+    while start < len(words):
+        end = start + chunk_size
+        chunk = ' '.join(words[start:end])
+        chunks.append(chunk)
+        logger.debug(f"Created chunk of size {len(chunk.split())} words")
+        start = end - chunk_overlap
 
-def chunk_document(content, metadata, max_chunk_size=500, overlap=100):
-    chunks = advanced_chunk(content, max_chunk_size, overlap)
-    
-    chunked_doc = []
-    for i, chunk in enumerate(chunks, 1):
-        chunked_doc.append({
-            'chunk_id': f"{metadata['title']}_chunk_{i}",
-            'content': chunk,
-            'metadata': {
-                'source_document': metadata['title'],
-                'chunk_number': i,
-                'total_chunks': len(chunks),
-                'word_count': len(word_tokenize(chunk))
-            }
-        })
-    
-    return chunked_doc
+    chunking_time = time.time() - start_time - tokenization_time
 
-def calculate_max_chunk_size(model_token_limit, num_chunks, avg_question_tokens, max_response_tokens, prompt_tokens):
-    available_tokens = model_token_limit - avg_question_tokens - max_response_tokens - prompt_tokens
-    max_chunk_size = available_tokens // num_chunks
-    return max_chunk_size
+    logger.info(f"Created {len(chunks)} chunks")
 
-# Example calculation for GPT-3.5-turbo
-model_token_limit = 4096
-num_chunks = 3  # Number of chunks we want to retrieve
-avg_question_tokens = 50  # Average length of user questions
-max_response_tokens = 500  # Maximum length we want for the model's response
-prompt_tokens = 50  # Any additional prompt text
+    # Collect metrics
+    metrics = {
+        'total_words': len(words),
+        'num_chunks': len(chunks),
+        'avg_chunk_size': sum(len(chunk.split()) for chunk in chunks) / len(chunks),
+        'max_chunk_size': max(len(chunk.split()) for chunk in chunks),
+        'min_chunk_size': min(len(chunk.split()) for chunk in chunks),
+        'tokenization_time': tokenization_time,
+        'chunking_time': chunking_time
+    }
 
-max_chunk_size = calculate_max_chunk_size(model_token_limit, num_chunks, avg_question_tokens, max_response_tokens, prompt_tokens)
-
-    print(f"Maximum chunk size: {max_chunk_size} tokens")
-
-
-# Main execution
-file_path = 'path/to/your/processed/Biosafety_Guidance.txt'  # Update this path
-content, metadata = load_processed_document(file_path)
-
-chunked_document = chunk_document(content, metadata)
-
-# Print some information about the chunks
-print(f"Total number of chunks: {len(chunked_document)}")
-print(f"\nFirst chunk:")
-print(json.dumps(chunked_document[0], indent=2))
-print(f"\nLast chunk:")
-print(json.dumps(chunked_document[-1], indent=2))
-
-# Optionally, save the chunked document
-with open('chunked_Biosafety_Guidance.json', 'w', encoding='utf-8') as f:
-    json.dump(chunked_document, f, indent=2)
+    return {'chunks': chunks, 'metrics': metrics}
+# Example usage
+if __name__ == "__main__":
+    sample_text = "This is a sample text. It contains multiple sentences. " * 100
+    chunks = chunk_document(sample_text)
+    for i, chunk in enumerate(chunks):
+        print(f"Chunk {i + 1}: {chunk[:50]}...")

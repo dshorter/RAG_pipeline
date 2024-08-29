@@ -1,13 +1,19 @@
 import logging
 from src.knowledge_base import process_documents
+from src.document_chunker import chunk_document
+from src.metrics_collector import  MetricsCollector      
+from typing import Dict  
+from time import time  
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 class RAGPipeline:
-    def __init__(self, config):
-        self.config = config
+    def __init__(self, config, metrics_collector=None ):
+        self.config = config  
+        self.metrics_collector = metrics_collector if metrics_collector is not None else MetricsCollector()  
+        
         logger.info("RAG Pipeline initialized with config: %s", config)
 
     def process_document(self, file_path):
@@ -21,8 +27,17 @@ class RAGPipeline:
             raise
 
     # Placeholder methods for future implementation
+ 
     def chunk_document(self, processed_doc):
-        logger.info("Document chunking not yet implemented")
+        logger.info("Chunking document")
+        content = processed_doc['content']
+        result = chunk_document(content)
+        chunks = result['chunks']
+        metrics = result['metrics']
+        metrics['document'] = processed_doc['metadata']['title']
+        self.metrics_collector.log_metrics(metrics)
+        logger.info(f"Document chunked into {len(chunks)} parts")
+        return chunks
 
     def generate_embeddings(self, chunks):
         logger.info("Embedding generation not yet implemented")
