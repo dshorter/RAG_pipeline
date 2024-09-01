@@ -2,6 +2,7 @@ import os
 import sys
 import json
 import logging
+from typing import List
 
 # Add the project root to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -42,8 +43,8 @@ def main():
     logger.info("First 100 characters of processed content: %s", processed_doc['content'][:100])
 
     # Placeholder calls for future implementations
-    pipeline.chunk_document(processed_doc)
-    pipeline.generate_embeddings([])
+    chunks = pipeline.chunk_document(processed_doc)
+    pipeline.generate_embeddings(chunks)
     pipeline.index_documents([])
 
 
