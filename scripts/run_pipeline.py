@@ -42,9 +42,9 @@ def main():
     logger.info("Document metadata: %s", processed_doc['metadata'])
     logger.info("First 100 characters of processed content: %s", processed_doc['content'][:100])
 
-    # Placeholder calls for future implementations
     chunks = pipeline.chunk_document(processed_doc)
     pipeline.generate_embeddings(chunks)
+    # Placeholder calls for future implementations
     pipeline.index_documents([])
 
 
