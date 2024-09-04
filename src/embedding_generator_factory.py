@@ -1,5 +1,5 @@
 from .embedding_generator_base_class import EmbeddingGenerator
-from .azure_openai_embedding_generator   import AzureOpenAIEmbeddingGenerator
+from .azure_openai_embedding_generator import AzureOpenAIEmbeddingGenerator
 from .huggingface_embedding_generator import HuggingFaceEmbeddingGenerator
 
 class EmbeddingGeneratorFactory:

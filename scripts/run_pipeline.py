@@ -9,7 +9,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from src.rag_pipeline import RAGPipeline  
 from src.document_chunker import chunk_document
-
+from src.config import RAG_CONFIG, EMBEDDING_GENERATOR_CONFIG
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -18,10 +18,18 @@ logger = logging.getLogger(__name__)
 def main():
     logger.info("Starting RAG pipeline execution")
 
+    # config = {
+    #     'raw_docs_dir': os.path.join('data', 'raw'),
+    #     'processed_docs_dir': os.path.join('data', 'processed'),    
+    #     'embedding_generator_type': os.getenv("EMBEDDING_GENERATOR_TYPE")
+    # }
+
     config = {
-        'raw_docs_dir': os.path.join('data', 'raw'),
-        'processed_docs_dir': os.path.join('data', 'processed'),
+        **RAG_CONFIG,
+        'embedding_generator_config': EMBEDDING_GENERATOR_CONFIG[RAG_CONFIG['embedding_generator_type']]
     }
+    
+
     logger.info("Configuration loaded: %s", config)
 
     pipeline = RAGPipeline(config)
@@ -43,9 +51,9 @@ def main():
     logger.info("First 100 characters of processed content: %s", processed_doc['content'][:100])
 
     chunks = pipeline.chunk_document(processed_doc)
-    pipeline.generate_embeddings(chunks)
+    embeddings =   pipeline.generate_embeddings(chunks)
     # Placeholder calls for future implementations
-    pipeline.index_documents([])
+    pipeline.index_documents(chunks, embeddings)
 
 
     # Example query (will just print a placeholder message for now)

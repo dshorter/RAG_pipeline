@@ -1,10 +1,10 @@
 from transformers import AutoTokenizer, AutoModel
 import torch
 from typing import List
-from embedding_generator_base_class   import EmbeddingGeneratorBaseClass
+from .embedding_generator_base_class   import EmbeddingGenerator
 
-class HuggingFaceEmbeddingGenerator(EmbeddingGeneratorBaseClass):
-    def __init__(self, model_name="ada"):
+class HuggingFaceEmbeddingGenerator(EmbeddingGenerator):
+    def __init__(self, model_name="sentence-transformers/all-MiniLM-L6-v2"):
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModel.from_pretrained(model_name)
         self._dimension = self.model.config.hidden_size
