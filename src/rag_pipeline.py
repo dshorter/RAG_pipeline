@@ -19,6 +19,7 @@ class RAGPipeline:
         self.rag_system = RAGSystem(vector_dimension=self.embedding_generator.dimension)
         logger.info("RAG Pipeline initialized with config: %s", config)
 
+
     def _initialize_embedding_generator(self):
         return EmbeddingGeneratorFactory.create(
             generator_type=self.config["embedding_generator_type"],
@@ -44,7 +45,7 @@ class RAGPipeline:
         chunks = result['chunks']
         metrics = result['metrics']
         metrics['document'] = processed_doc['metadata']['title']
-        self.metrics_collector.log_metrics(metrics)
+        self.metrics_collector.log_metrics("chinks", metrics)
         logger.info(f"Document chunked into {len(chunks)} parts")
         return chunks
 
@@ -61,9 +62,11 @@ class RAGPipeline:
             metrics = {
                 'num_embeddings': len(embeddings),
                 'embedding_dimension': len(embeddings[0]) if embeddings else 0,
+                'embedding_generation_start_time': start_time, 
+                'embedding_generation_end_time': end_time, 
                 'embedding_generation_time': embedding_time
             }
-            self.metrics_collector.log_metrics(metrics)
+            self.metrics_collector.log_metrics("embeddings", metrics)
             
             logger.info(f"Generated {len(embeddings)} embeddings in {embedding_time:.2f} seconds")
             return embeddings
@@ -75,10 +78,10 @@ class RAGPipeline:
         logger.info(f"Indexing {len(chunks)} documents")
         for chunk, embedding in zip(chunks, embeddings):
             self.rag_system.add_chunk(
-                chunk=chunk['text'],
+                chunk,
                 vector=embedding,
-                source=chunk.get('source', 'unknown'),
-                start_index=chunk.get('start_index', 0),
+                source= " " ,    # chunk.get('source', 'unknown'),
+                start_index= chunk.get('start_index', 0),
                 end_index=chunk.get('end_index', len(chunk['text']))
             )
         logger.info("Indexing completed")

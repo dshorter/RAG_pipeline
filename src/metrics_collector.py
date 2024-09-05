@@ -38,7 +38,7 @@ class MetricsCollector:
                                  'avg_chunk_size', 'max_chunk_size', 'min_chunk_size', 
                                  'tokenization_time', 'chunking_time'])
 
-    def log_metrics(self, metrics):
+    def log_metrics(self, table_name: str  , metrics):
         metrics['timestamp'] = datetime.now().isoformat()
         with open(self.csv_file, 'a', newline='') as file:
             writer = csv.DictWriter(file, fieldnames=metrics.keys())
@@ -58,4 +58,4 @@ metrics = {
     'tokenization_time': 0.05,
     'chunking_time': 0.02
 }
-metrics_collector.log_metrics(metrics)
+metrics_collector.log_metrics("test", metrics)

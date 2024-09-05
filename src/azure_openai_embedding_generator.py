@@ -2,15 +2,15 @@ from openai import AzureOpenAI
 from azure.identity import ChainedTokenCredential, ManagedIdentityCredential, EnvironmentCredential, AzureCliCredential
 from typing import List
 import logging
-from .embedding_generator_base_class import EmbeddingGenerator
+from src.embedding_generator_base_class import EmbeddingGenerator
 
 class AzureOpenAIEmbeddingGenerator(EmbeddingGenerator):
     def __init__(self, azure_endpoint: str, api_version: str, deployment: str):
-        self.azure_endpoint = azure_endpoint
-        self.api_version = api_version
-        self.deployment = deployment
+        self.azure_endpoint = "https://edav-dev-openai-eastus2-shared.openai.azure.com"   #azure_endpoint
+        self.api_version =  "2023-05-15"   # api_version
+        self.deployment = "api-shared-text-embedding-ada-v002-nofilter" #deployment
         self.client = self._initialize_client()
-        self.model = "text-embedding-ada-002"
+        self.model = "api-shared-text-embedding-ada-v002-nofilter"
         self._dimension = 1536  # Known dimension for this model
 
     def _initialize_client(self):

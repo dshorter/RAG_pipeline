@@ -8,11 +8,12 @@ logger = logging.getLogger(__name__)
 
 class EmbeddingGenerator:
     def __init__(self, azure_endpoint: str, api_version: str, deployment: str):
-        self.azure_endpoint = azure_endpoint
-        self.api_version = api_version
-        self.deployment = deployment
-        self.client = self._initialize_client()
-        self.model = "text-embedding-ada-002"     #  text-embedding-ada-002      
+         self.azure_endpoint = "https://edav-dev-openai-eastus2-shared.openai.azure.com"   #azure_endpoint
+         self.api_version =  "2023-05-15"   # api_version
+         self.api_version =  "2023-05-15"   # api_version
+         self.deployment = "api-shared-text-embedding-ada-v002-nofilter" #deployment
+         self.client = self._initialize_client()
+         self.model = "api-shared-text-embedding-ada-v002-nofilter"     #  text-embedding-ada-002      
 
     def _initialize_client(self):
         credential = ChainedTokenCredential(
