@@ -149,7 +149,7 @@ dmypy.json
 *.sublime-workspace
 
 # VS Code
-.vscode/
+.vscode/Scripts
 
 # PyCharm
 .idea/
@@ -157,6 +157,7 @@ dmypy.json
 *.iws
 *.ipr
 out/
+
 
 # MacOS
 .DS_Store

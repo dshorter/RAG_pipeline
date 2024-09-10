@@ -1,0 +1,43 @@
+# RAG Pipeline Configuration
+
+gpt:
+  provider: "azure_openai"
+  model_name: "api-shared-gpt-4-turbo-nofilter"
+  temperature: 0.7
+  max_tokens: 150
+  top_p: 1.0
+  frequency_penalty: 0.0
+  presence_penalty: 0.0
+  azure_tennant_id: "9ce70869-60db-44fd-abe8-d2767077fc8f" 
+  azure_client_id: "" 
+  azure_client_secret: ""  
+  api_key: ""
+  api_base: ""
+  api_version: "2024-02-01"  
+
+pipeline:
+  embedding:
+    provider: "azure_openai"  # Can be "azure_openai" or "huggingface"
+    models:
+      azure_openai:
+        model_name: "api-shared-text-embedding-ada-v002-nofilter"
+        dimension: 1536
+        api_key: ""  # Leave empty to use environment variable
+        api_base: ""
+        api_version: "2023-05-15"
+        azure_tennant_id: "9ce70869-60db-44fd-abe8-d2767077fc8f" 
+        azure_client_id: "2b4d82a0-d008-4a10-977b-9c7ef362ef88" 
+        azure_client_secret: ""  
+
+      huggingface:
+        model_name: "sentence-transformers/all-MiniLM-L6-v2"
+        dimension: 384
+    active_model: "huggingface"  # Specifies which model configuration to use
+  chunk_size: 500
+  chunk_overlap: 50
+  raw_docs_dir: "./data/raw"
+  processed_docs_dir: "./data/processed"
+
+faiss_index_dir: "./data/faiss_index"
+
+# You can add more sections or settings as needed for your specific implementation
