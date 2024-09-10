@@ -1,56 +1,140 @@
 import os
+from dataclasses import dataclass, field
+from typing import Dict, Any, Optional
+import yaml
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
+@dataclass
+class GPTConfig:
+    provider: str
+    model_name: str
+    temperature: float
+    max_tokens: int
+    top_p: float
+    frequency_penalty: float
+    presence_penalty: float
+    api_key: Optional[str] = None
+    api_base: Optional[str] = None
+    api_version: Optional[str] = None 
+    azure_tennant_id: Optional[str] = None
+    azure_client_id: Optional[str] = None
+    azure_client_secret: Optional[str] = None 
 
-# OpenAI Configuration
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-OPENAI_API_BASE = os.getenv("OPENAI_API_BASE")
-OPENAI_API_VERSION = os.getenv("OPENAI_API_VERSION")
+@dataclass
+class OpenAIEmbeddingConfig:
+    model_name: str
+    dimension: int
+    api_key: Optional[str] = None
+    api_base: Optional[str] = None
+    api_version: Optional[str] = None
 
-# FAISS Configuration
-FAISS_INDEX_DIR = os.getenv("FAISS_INDEX_DIR", "./data/faiss_index")
+@dataclass
+class HuggingFaceEmbeddingConfig:
+    model_name: str
+    dimension: int
 
-# Embedding Generator Configuration
-EMBEDDING_GENERATOR_TYPE = os.getenv("EMBEDDING_GENERATOR_TYPE")
+@dataclass
+class EmbeddingConfig:
+    provider: str
+    models: Dict[str, Any]
+    active_model: str
 
+@dataclass
+class PipelineConfig:
+    embedding: EmbeddingConfig
+    chunk_size: int
+    chunk_overlap: int
+    raw_docs_dir: str
+    processed_docs_dir: str
 
-EMBEDDING_GENERATOR_CONFIG = {
-    "azure_openai": {
-        "azure_endpoint": os.getenv("AZURE_OPENAI_ENDPOINT"),
-        "api_version": os.getenv("AZURE_OPENAI_API_VERSION"),
-        "deployment": os.getenv("AZURE_OPENAI_DEPLOYMENT")
-    },
-    "huggingface": {
-        "model_name": os.getenv("HUGGINGFACE_MODEL_NAME", "sentence-transformers/all-MiniLM-L6-v2")
-    }
-}
+@dataclass
+class Config:
+    pipeline: PipelineConfig
+    faiss_index_dir: str
+    additional_settings: Dict[str, Any] = field(default_factory=dict)
 
-# RAG Pipeline Configuration
-RAG_CONFIG = {
-    "embedding_generator_type": EMBEDDING_GENERATOR_TYPE,
-    "embedding_generator_config": EMBEDDING_GENERATOR_CONFIG[EMBEDDING_GENERATOR_TYPE],
-    "raw_docs_dir": os.getenv("RAW_DOCS_DIR", "./data/raw"),
-    "processed_docs_dir": os.getenv("PROCESSED_DOCS_DIR", "./data/processed"),
-    "chunk_size": int(os.getenv("CHUNK_SIZE", "500")),
-    "chunk_overlap": int(os.getenv("CHUNK_OVERLAP", "50"))
-}
+class Configuration:
+    def __init__(self, config_file: str):
+       
+        load_dotenv()  # Load environment variables from .env file
+        
+        # Get the directory of the current file (config.py)
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        # Construct the path to config.yml
+        config_path = os.path.join(current_dir, config_file)    
 
-# Validate required environment variables
-required_vars = ["AZURE_OPENAI_API_VERSION", "AZURE_OPENAI_ENDPOINT", "AZURE_CLIENT_SECRET", "AZURE_TENANT_ID" ]
-for var in required_vars:
-    if not os.getenv(var):
-        raise EnvironmentError(f"{var} is not set in the environment variables.")
+        with open(config_path, 'r') as f:
+            config_data = yaml.safe_load(f)
+        
+        # Load embedding configuration
+        embedding_config = config_data['pipeline']['embedding']
+        embedding_config['models']['azure_openai']['api_key'] = os.getenv('OPENAI_API_KEY') or embedding_config['models']['azure_openai'].get('api_key')
+        embedding_config['models']['azure_openai']['api_base'] = os.getenv('OPENAI_API_BASE') or embedding_config['models']['azure_openai'].get('api_base')
+        embedding_config['models']['azure_openai']['api_version'] = os.getenv('OPENAI_API_VERSION') or embedding_config['models']['azure_openai'].get('api_version')
+        
+        # Create EmbeddingConfig instance
+        embedding = EmbeddingConfig(**embedding_config)
+        
+        # Create PipelineConfig instance
+        pipeline_config = config_data['pipeline']
+        pipeline_config['embedding'] = embedding
+        pipeline = PipelineConfig(**pipeline_config)
+        
+        # Create main Config instance
+        self.config = Config(
+            pipeline=pipeline,
+            faiss_index_dir=config_data['faiss_index_dir'],
+            additional_settings=config_data.get('additional_settings', {})
+        )
+    
+    def get(self, key: str, default: Any = None) -> Any:
+        return getattr(self.config, key, default)
+    
+    def get_pipeline_config(self) -> PipelineConfig:
+        return self.config.pipeline
+    
+    def get_active_embedding_config(self):
+        embedding_config = self.config.pipeline.embedding
+        active_model = embedding_config.active_model
+        if active_model == "azure_openai":
+            return OpenAIEmbeddingConfig(**embedding_config.models["openai"])
+        elif active_model == "huggingface":
+            return HuggingFaceEmbeddingConfig(**embedding_config.models["huggingface"])
+        else:
+            raise ValueError(f"Unknown embedding model provider: {active_model}")
+    
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            'pipeline': {
+                'embedding': {
+                    'provider': self.config.pipeline.embedding.provider,
+                    'active_model': self.config.pipeline.embedding.active_model,
+                    'models': {
+                        'azure_openai': {
+                            'model_name': self.config.pipeline.embedding.models['azure_openai']['model_name'],
+                            'dimension': self.config.pipeline.embedding.models['azure_openai']['dimension'],
+                            'api_key': '********' if self.config.pipeline.embedding.models['azure_openai'].get('api_key') else None,
+                            'api_base': self.config.pipeline.embedding.models['azure_openai'].get('api_base'),
+                            'api_version': self.config.pipeline.embedding.models['azure_openai'].get('api_version'),
+                        },
+                        'huggingface': {
+                            'model_name': self.config.pipeline.embedding.models['huggingface']['model_name'],
+                            'dimension': self.config.pipeline.embedding.models['huggingface']['dimension'],
+                        }
+                    }
+                },
+                'chunk_size': self.config.pipeline.chunk_size,
+                'chunk_overlap': self.config.pipeline.chunk_overlap,
+                'raw_docs_dir': self.config.pipeline.raw_docs_dir,
+                'processed_docs_dir': self.config.pipeline.processed_docs_dir,
+            },
+            'faiss_index_dir': self.config.faiss_index_dir,
+            'additional_settings': self.config.additional_settings,
+        }
 
-# Validate embedding generator configuration
-if EMBEDDING_GENERATOR_TYPE not in EMBEDDING_GENERATOR_CONFIG:
-    raise ValueError(f"Unknown embedding generator type: {EMBEDDING_GENERATOR_TYPE}")
-
-if EMBEDDING_GENERATOR_TYPE == "azure_openai":
-    required_azure_vars = ["azure_endpoint", "api_version", "deployment"]
-    for var in required_azure_vars:
-        if not EMBEDDING_GENERATOR_CONFIG["azure_openai"][var]:
-            raise EnvironmentError(f"{var} is not set for Azure OpenAI configuration.")
-
-# Add any other configuration variables here
+# Usage example
+if __name__ == "__main__":
+    config = Configuration('config.yml')
+    print(config.get_active_embedding_config().model_name)
+    print(config.get_pipeline_config().chunk_size)
+    print(config.to_dict())

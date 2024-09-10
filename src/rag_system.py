@@ -1,3 +1,4 @@
+import hashlib
 import uuid
 import sqlite3
 from typing import List, Dict, Any
@@ -27,19 +28,26 @@ class RAGSystem:
         ''')
         self.conn.commit()
 
-    def add_chunk(self, chunk: str, vector: np.array, source: str, start_index: int, end_index: int, additional_metadata: Dict[str, Any] = {}):
-        chunk_id = uuid.uuid4().hex
+    def add_chunk(self, chunk: str, vector: np.array, 
+                  source: str, start_index: int, end_index: int, 
+                  additional_metadata: Dict[str, Any] = {}):
         
-        # Add to FAISS index
-        self.index.add_with_ids(np.array([vector]).astype('float32'), np.array([int(chunk_id, 16)]))
-        
-        # Add to SQLite metadata
-        cursor = self.conn.cursor()
-        cursor.execute('''
-        INSERT INTO metadata (uuid, source, start_index, end_index, additional_metadata)
-        VALUES (?, ?, ?, ?, ?)
-        ''', (chunk_id, source, start_index, end_index, json.dumps(additional_metadata)))
-        self.conn.commit()
+            chunk_id = uuid.uuid4().hex
+            # Create a 64-bit hash from the UUID
+            hashed_id = int(hashlib.sha256(chunk_id.encode()).hexdigest(), 16) % (2**63 - 1)  # Modulo to fit in 64-bit
+            # Ensure the hashed ID is wrapped in a NumPy array of type int64
+            id_array = np.array([hashed_id], dtype='int64')
+            
+            # Add to FAISS index
+            self.index.add_with_ids(np.array([vector]).astype('float32'), id_array )  
+            
+            # Add to SQLite metadata
+            cursor = self.conn.cursor()
+            cursor.execute('''
+            INSERT INTO metadata (uuid, source, start_index, end_index, additional_metadata)
+            VALUES (?, ?, ?, ?, ?)
+            ''', (chunk_id, source, start_index, end_index, json.dumps(additional_metadata)))
+            self.conn.commit()
 
     def search(self, query_vector: np.array, k: int = 5) -> List[Dict[str, Any]]:
         distances, indices = self.index.search(np.array([query_vector]).astype('float32'), k)

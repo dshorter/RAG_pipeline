@@ -2,11 +2,12 @@ import os
 import logging
 import time
 from typing import List, Dict
-from .knowledge_base import process_documents
+from src.knowledge_base import process_documents
 from .document_chunker import chunk_document
 from .metrics_collector import MetricsCollector
 from .embedding_generator_factory import EmbeddingGeneratorFactory
 from .rag_system import RAGSystem
+from .pipeline_result import PipelineResult, ChunkInfo, ChunkMetrics, VectorMetrics
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -19,11 +20,10 @@ class RAGPipeline:
         self.rag_system = RAGSystem(vector_dimension=self.embedding_generator.dimension)
         logger.info("RAG Pipeline initialized with config: %s", config)
 
-
     def _initialize_embedding_generator(self):
         return EmbeddingGeneratorFactory.create(
-            generator_type=self.config["embedding_generator_type"],
-            **self.config['embedding_generator_config']
+            generator_type=self.config['pipeline']['embedding']['provider'],
+            **self.config['pipeline']
         )
 
     def process_document(self, file_path: str) -> Dict:
@@ -45,7 +45,7 @@ class RAGPipeline:
         chunks = result['chunks']
         metrics = result['metrics']
         metrics['document'] = processed_doc['metadata']['title']
-        self.metrics_collector.log_metrics("chinks", metrics)
+        self.metrics_collector.log_metrics("chunks", metrics)
         logger.info(f"Document chunked into {len(chunks)} parts")
         return chunks
 
@@ -62,8 +62,8 @@ class RAGPipeline:
             metrics = {
                 'num_embeddings': len(embeddings),
                 'embedding_dimension': len(embeddings[0]) if embeddings else 0,
-                'embedding_generation_start_time': start_time, 
-                'embedding_generation_end_time': end_time, 
+                'embedding_generation_start_time': start_time,
+                'embedding_generation_end_time': end_time,
                 'embedding_generation_time': embedding_time
             }
             self.metrics_collector.log_metrics("embeddings", metrics)
@@ -74,16 +74,18 @@ class RAGPipeline:
             logger.error(f"Error generating embeddings: {str(e)}")
             raise
 
-    def index_documents(self, chunks: List[Dict], embeddings: List[List[float]]):
-        logger.info(f"Indexing {len(chunks)} documents")
-        for chunk, embedding in zip(chunks, embeddings):
+    def index_documents(self, prepared_chunks: List[Dict]):
+        logger.info(f"Indexing {len(prepared_chunks)} documents")
+        for chunk_data in prepared_chunks:
             self.rag_system.add_chunk(
-                chunk,
-                vector=embedding,
-                source= " " ,    # chunk.get('source', 'unknown'),
-                start_index= chunk.get('start_index', 0),
-                end_index=chunk.get('end_index', len(chunk['text']))
-            )
+            chunk=chunk_data['chunk'],
+            vector=chunk_data['vector'],
+            source=chunk_data['source'],
+            start_index=chunk_data['start_index'],
+            end_index=chunk_data['end_index'],
+            additional_metadata=chunk_data.get('additional_metadata', {})
+        )
+
         logger.info("Indexing completed")
 
     def query(self, user_query: str) -> str:
@@ -93,9 +95,55 @@ class RAGPipeline:
         # Process results and generate a response (you'll need to implement this part)
         return f"Found {len(results)} relevant chunks. Implement response generation here."
 
-    def run_pipeline(self, file_path: str):
+    def run_pipeline(self, file_path: str) -> PipelineResult:
+        document_name = os.path.basename(file_path)
         processed_doc = self.process_document(file_path)
-        chunks = self.chunk_document(processed_doc)
+        
+        # Use the updated chunk_document function
+        chunking_result = chunk_document(processed_doc['content'], 
+                chunk_size=self.config.get('chunk_size', 500),
+                chunk_overlap=self.config.get('chunk_overlap', 50))
+    
+        chunks = chunking_result['chunks']
+        chunk_metrics = chunking_result['metrics']        
+        
+        # Create ChunkInfo objects from the standardized chunk dictionaries
+        chunk_infos = [ChunkInfo(text=chunk['text'] ,
+                                start_index=chunk['start_index'],
+                                end_index=chunk['end_index'])
+        for chunk in chunks]
+        
+        # chunk_metrics = self.metrics_collector.get_metrics("chunks")
+        # chunk_metrics = ChunkMetrics(
+        #     total_chunks=len(chunks),
+        #     avg_chunk_size=chunk_metrics['avg_chunk_size'],
+        #     max_chunk_size=chunk_metrics['max_chunk_size'],
+        #     min_chunk_size=chunk_metrics['min_chunk_size'],
+        #     chunking_time=chunk_metrics['chunking_time']
+        # )
+        
         embeddings = self.generate_embeddings([chunk['text'] for chunk in chunks])
-        self.index_documents(chunks, embeddings)
+        embedding_metrics = self.metrics_collector.get_metrics("embeddings")
+        vector_metrics = VectorMetrics(
+            num_embeddings=embedding_metrics['num_embeddings'],
+            embedding_dimension=embedding_metrics['embedding_dimension'],
+            embedding_generation_start_time=embedding_metrics['embedding_generation_start_time'],
+            embedding_generation_end_time=embedding_metrics['embedding_generation_end_time'],
+            embedding_generation_time=embedding_metrics['embedding_generation_time']
+        )
+        
+        result = PipelineResult(
+            document_name=document_name,
+            processed_text=processed_doc['content'],
+            metadata=processed_doc['metadata'],
+            chunks=chunk_infos,
+            chunk_metrics=chunk_metrics,
+            embeddings=embeddings,
+            vector_metrics=vector_metrics
+        )
+        
+        self.index_documents(result.prepare_for_indexing())
         logger.info("Pipeline execution completed")
+        logger.info(result.summary())
+        
+        return result
