@@ -1,3 +1,4 @@
+from datetime import datetime
 import hashlib
 import uuid
 import sqlite3
@@ -13,23 +14,46 @@ class RAGSystem:
         self.db_path = db_path
         self.index = faiss.IndexIDMap(faiss.IndexFlatL2(vector_dimension))
         self.conn = sqlite3.connect(db_path)
-        self.create_metadata_table()
+        self.create_documents_table()
+        self.create_document_chunks_table()
 
-    def create_metadata_table(self):
-        cursor = self.conn.cursor()
-        cursor.execute('''
-        CREATE TABLE IF NOT EXISTS metadata (
-            uuid TEXT PRIMARY KEY,
-            source TEXT,
-            start_index INTEGER,
-            end_index INTEGER,
-            additional_metadata TEXT
-        )
-        ''')
-        self.conn.commit()
+        def create_documents_table(self):
+            cursor = self.conn.cursor()
+            cursor.execute('''
+            CREATE TABLE IF NOT EXISTS documents_metadata (
+                document_id TEXT PRIMARY KEY,
+                title TEXT,
+                author TEXT,
+                source TEXT,
+                date_added TIMESTAMP,
+                document_length INTEGER,
+                summary TEXT,
+                tags TEXT,
+                metadata JSON
+            )
+            ''')
+            self.conn.commit()
+
+        def create_document_chunks_table(self):
+            cursor = self.conn.cursor()
+            cursor.execute('''
+            CREATE TABLE IF NOT EXISTS document_chunks_metadata (
+                chunk_id INTEGER PRIMARY KEY,
+                document_id TEXT,
+                chunk_text TEXT,
+                start_index INTEGER,
+                end_index INTEGER,
+                chunk_length INTEGER,
+                metadata JSON,
+                date_added TIMESTAMP,
+                FOREIGN KEY (document_id) REFERENCES documents_metadata(document_id)
+            )
+            ''')
+            self.conn.commit()
 
     def add_chunk(self, chunk: str, vector: np.array, 
-                  source: str, start_index: int, end_index: int, 
+                  source: str, start_index: int, end_index: int,  
+                  all_metrics: Dict[str, Dict[str,Any]] = {},   
                   additional_metadata: Dict[str, Any] = {}):
         
             chunk_id = uuid.uuid4().hex
@@ -41,13 +65,43 @@ class RAGSystem:
             # Add to FAISS index
             self.index.add_with_ids(np.array([vector]).astype('float32'), id_array )  
             
-            # Add to SQLite metadata
-            cursor = self.conn.cursor()
-            cursor.execute('''
-            INSERT INTO metadata (uuid, source, start_index, end_index, additional_metadata)
-            VALUES (?, ?, ?, ?, ?)
-            ''', (chunk_id, source, start_index, end_index, json.dumps(additional_metadata)))
-            self.conn.commit()
+            # Method to insert document metadata into documents_metadata table
+    def insert_document_metadata(self, document_id, title, author, source, document_length, summary, tags, metadata):
+        cursor = self.conn.cursor()
+        cursor.execute('''
+            INSERT INTO documents_metadata (document_id, title, author, source, date_added, document_length, summary, tags, metadata)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (
+            document_id,                      # document_id, unique identifier for the document
+            title,                            # title of the document
+            author,                           # author of the document
+            source,                           # source or origin of the document
+            datetime.now(),                   # current timestamp for date_added
+            document_length,                  # length of the document (e.g., word count)
+            summary,                          # brief summary of the document
+            tags,                             # tags or keywords associated with the document
+            json.dumps(metadata)              # additional metadata stored as JSON
+        ))
+        self.conn.commit()
+
+    # Method to insert chunk metadata into document_chunks_metadata table
+    def insert_chunk_metadata(self, hashed_id, document_id, chunk_text, start_index, end_index, chunk_length, additional_metadata):
+        cursor = self.conn.cursor()
+        cursor.execute('''
+            INSERT INTO document_chunks_metadata (chunk_id, document_id, chunk_text, start_index, end_index, chunk_length, metadata, date_added)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (
+            hashed_id,                        # chunk_id, hashed 64-bit integer ID
+            document_id,                      # document_id, links to documents_metadata
+            chunk_text,                       # the actual text content of the chunk
+            start_index,                      # starting position of the chunk within the document
+            end_index,                        # ending position of the chunk within the document
+            chunk_length,                     # length of the chunk (e.g., word count or character count)
+            json.dumps(additional_metadata),  # additional metadata stored as JSON
+            datetime.now()                    # current timestamp for date_added
+        ))
+        self.conn.commit()
+
 
     def search(self, query_vector: np.array, k: int = 5) -> List[Dict[str, Any]]:
         distances, indices = self.index.search(np.array([query_vector]).astype('float32'), k)
