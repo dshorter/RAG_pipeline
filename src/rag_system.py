@@ -17,39 +17,39 @@ class RAGSystem:
         self.create_documents_table()
         self.create_document_chunks_table()
 
-        def create_documents_table(self):
-            cursor = self.conn.cursor()
-            cursor.execute('''
-            CREATE TABLE IF NOT EXISTS documents_metadata (
-                document_id TEXT PRIMARY KEY,
-                title TEXT,
-                author TEXT,
-                source TEXT,
-                date_added TIMESTAMP,
-                document_length INTEGER,
-                summary TEXT,
-                tags TEXT,
-                metadata JSON
-            )
-            ''')
-            self.conn.commit()
+    def create_documents_table(self):
+        cursor = self.conn.cursor()
+        cursor.execute('''
+        CREATE TABLE IF NOT EXISTS documents_metadata (
+            document_id TEXT PRIMARY KEY,
+            title TEXT,
+            author TEXT,
+            source TEXT,
+            date_added TIMESTAMP,
+            document_length INTEGER,
+            summary TEXT,
+            tags TEXT,
+            metadata JSON
+        )
+        ''')
+        self.conn.commit()
 
-        def create_document_chunks_table(self):
-            cursor = self.conn.cursor()
-            cursor.execute('''
-            CREATE TABLE IF NOT EXISTS document_chunks_metadata (
-                chunk_id INTEGER PRIMARY KEY,
-                document_id TEXT,
-                chunk_text TEXT,
-                start_index INTEGER,
-                end_index INTEGER,
-                chunk_length INTEGER,
-                metadata JSON,
-                date_added TIMESTAMP,
-                FOREIGN KEY (document_id) REFERENCES documents_metadata(document_id)
-            )
-            ''')
-            self.conn.commit()
+    def create_document_chunks_table(self):
+        cursor = self.conn.cursor()
+        cursor.execute('''
+        CREATE TABLE IF NOT EXISTS document_chunks_metadata (
+            chunk_id INTEGER PRIMARY KEY,
+            document_id TEXT,
+            chunk_text TEXT,
+            start_index INTEGER,
+            end_index INTEGER,
+            chunk_length INTEGER,
+            metadata JSON,
+            date_added TIMESTAMP,
+            FOREIGN KEY (document_id) REFERENCES documents_metadata(document_id)
+        )
+        ''')
+        self.conn.commit()
 
     def add_chunk(self, chunk: str, vector: np.array, 
                   source: str, start_index: int, end_index: int,  

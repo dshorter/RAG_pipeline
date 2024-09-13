@@ -2,7 +2,7 @@ import os
 import sys
 import json
 import logging
-from typing import List
+from typing import List    
 
 # Add the project root to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -10,6 +10,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.rag_pipeline import RAGPipeline
 from src.document_chunker import chunk_document
 from src.config import Configuration  # Assuming you have a Configuration class
+from src.singleton_config import ConfigSingleton      
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -19,7 +20,7 @@ def main():
     logger.info("Starting RAG pipeline execution")
 
     # Load configuration
-    config = Configuration('config.yaml')
+    config  = ConfigSingleton()          
     logger.info("Configuration loaded: %s", json.dumps(config.to_dict(), indent=2))
 
     # Initialize RAGPipeline

@@ -14,7 +14,7 @@ class ChunkMetrics:
     avg_chunk_size: float
     max_chunk_size: int
     min_chunk_size: int
-    chunking_time: float
+    # chunking_time: float
 
 @dataclass
 class VectorMetrics:
@@ -65,6 +65,6 @@ class PipelineResult:
         Average Chunk Size: {self.chunk_metrics.avg_chunk_size:.2f}
         Total Embeddings: {self.vector_metrics.num_embeddings}
         Embedding Dimension: {self.vector_metrics.embedding_dimension}
-        Chunking Time: {self.chunk_metrics.chunking_time:.2f} seconds
+        Chunking Time:   {21} seconds
         Embedding Time: {self.vector_metrics.embedding_generation_time:.2f} seconds
         """

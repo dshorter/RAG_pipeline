@@ -118,9 +118,9 @@ class RAGPipeline:
             avg_chunk_size=chunk_metrics['avg_chunk_size'],
             max_chunk_size=chunk_metrics['max_chunk_size'],
             min_chunk_size=chunk_metrics['min_chunk_size'],
-            chunking_time=chunk_metrics['chunking_time']
+            # chunking_time=chunk_metrics['chunking_time']
         )
-        self.metrics_collector.log_metrics(metric_type="chunks",metrics=chunk_metrics )  
+        # self.metrics_collector.log_metrics(metric_type="chunks",metrics=chunk_metrics )  
         
         embeddings = self.generate_embeddings([chunk['text'] for chunk in chunks])
         embedding_metrics = self.metrics_collector.get_metrics("embeddings")
