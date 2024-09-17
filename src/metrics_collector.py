@@ -60,7 +60,7 @@ if __name__ == "__main__":
         'min_chunk_size': 450,
         'chunking_time': 0.5
     }
-    metrics_collector.log_metrics("chunks", chunk_metrics)
+    # metrics_collector.log_metrics("chunks", chunk_metrics)
     
     embedding_metrics = {
         'num_embeddings': 10,
