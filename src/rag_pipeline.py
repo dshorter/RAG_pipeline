@@ -77,7 +77,7 @@ class RAGPipeline:
     def index_documents(self, prepared_chunks: List[Dict]):
         logger.info(f"Indexing {len(prepared_chunks)} documents")
         for chunk_data in prepared_chunks:
-            self.rag_system.add_chunk(
+            self.rag_system.add_vector(
             chunk=chunk_data['chunk'],
             vector=chunk_data['vector'],
             source=chunk_data['source'],

@@ -28,8 +28,6 @@ class OpenAIEmbeddingConfig:
     azure_client_id: str      
     azure_client_secret: str      
     deployment_name:  str
-    azure_tennant_id: str 
-    azure_client_secret: str 
     api_key:  str 
     api_base:  str 
     api_version:  str 
@@ -53,6 +51,8 @@ class PipelineConfig:
     chunk_overlap: int
     raw_docs_dir: str
     processed_docs_dir: str
+
+
 
 @dataclass
 class Config:

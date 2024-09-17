@@ -51,7 +51,7 @@ class RAGSystem:
         ''')
         self.conn.commit()
 
-    def add_chunk(self, chunk: str, vector: np.array, 
+    def add_vector(self, chunk: str, vector: np.array, 
                   source: str, start_index: int, end_index: int,  
                   all_metrics: Dict[str, Dict[str,Any]] = {},   
                   additional_metadata: Dict[str, Any] = {}):
@@ -64,6 +64,7 @@ class RAGSystem:
             
             # Add to FAISS index
             self.index.add_with_ids(np.array([vector]).astype('float32'), id_array )  
+            faiss.write_index(self.index, path)            
             
             # Method to insert document metadata into documents_metadata table
     def insert_document_metadata(self, document_id, title, author, source, document_length, summary, tags, metadata):
@@ -144,7 +145,7 @@ if __name__ == "__main__":
     # Adding a chunk
     chunk = "This is a sample chunk of text."
     vector = np.random.rand(128).astype('float32')  # Simulated vector
-    rag_system.add_chunk(
+    rag_system.add_vector(
         chunk, 
         vector, 
         source="Document A", 
