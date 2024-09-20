@@ -53,12 +53,12 @@ def main():
     logger.info("Processed document saved successfully")
 
     # Example query (will just print a placeholder message for now)
-    user_query = "What are the main safety measures for handling select agents?"
-    logger.info("Executing example query: %s", user_query)
-    response = pipeline.query(user_query)
-    logger.info("Query response: %s", response)
+    # user_query = "What are the main safety measures for handling select agents?"
+    # logger.info("Executing example query: %s", user_query)
+    # response = pipeline.query(user_query)
+    # logger.info("Query response: %s", response)
 
-    logger.info("RAG pipeline execution completed")
+    # logger.info("RAG pipeline execution completed")
 
 if __name__ == "__main__":
     main()

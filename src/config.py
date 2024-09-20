@@ -2,7 +2,8 @@ import os
 from dataclasses import dataclass, field
 from typing import Dict, Any, Optional
 import yaml
-from dotenv import load_dotenv
+from dotenv import load_dotenv     
+from src.data_classes import Document, ChunkMetrics
 
 @dataclass
 class GPTConfig:
@@ -63,6 +64,9 @@ class Config:
 class Configuration:
     def __init__(self, config_file: str):
        
+        self.document = Document()
+        self.chunk_metrics = ChunkMetrics()
+        
         load_dotenv()  # Load environment variables from .env file
         
         # Get the directory of the current file (config.py)
