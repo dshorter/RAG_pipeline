@@ -58,7 +58,8 @@ class PipelineConfig:
 @dataclass
 class Config:
     pipeline: PipelineConfig
-    faiss_index_dir: str
+    gpt: GPTConfig
+    faiss_index_dir: str 
     additional_settings: Dict[str, Any] = field(default_factory=dict)
 
 class Configuration:
@@ -95,10 +96,15 @@ class Configuration:
         pipeline_config = config_data['pipeline']
         pipeline_config['embedding'] = embedding
         pipeline = PipelineConfig(**pipeline_config)
-        
+         
+        # Create GPTConfig    
+        gpt_config = config_data['gpt'] 
+        gpt = GPTConfig(**gpt_config )
+          
         # Create main Config instance
         self.config = Config(
             pipeline=pipeline,
+            gpt=gpt, 
             faiss_index_dir=config_data['faiss_index_dir'],
             additional_settings=config_data.get('additional_settings', {})
         )
@@ -108,6 +114,9 @@ class Configuration:
     
     def get_pipeline_config(self) -> PipelineConfig:
         return self.config.pipeline
+    
+    def get_gpt_config(self ) -> GPTConfig:
+        return self.config.gpt
     
     def get_active_embedding_config(self):
         embedding_config = self.config.pipeline.embedding

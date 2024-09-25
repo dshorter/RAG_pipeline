@@ -5,11 +5,15 @@ import hashlib
 import json
 import numpy as np
 from datetime import datetime
-from typing import Dict, Any
+from typing import Dict, Any    
+import os  
+from  src.singleton_config import ConfigSingleton  
+
 
 class RAGSystem:
     def __init__(self, conn: sqlite3.Connection, index: faiss.IndexIDMap, 
-                 faiss_index_path: str):
+                 faiss_index_path: str): 
+        self.config = ConfigSingleton( )
         self.conn = conn     
         self.index = index
         self.faiss_index_path = faiss_index_path  # Path to save the FAISS index to disk
@@ -22,6 +26,16 @@ class RAGSystem:
 
         try:
             # Step 1: Handle SQLite transaction
+            # Define paths relative to the project folder
+            # Get the project root directory (one level up from the current file's directory)
+            project_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+            db_path = os.path.join(project_folder, 'data', 'metadata.db')
+            faiss_path = os.path.join(project_folder, 'data', 'faiss_index.bin')
+
+            # Initialize SQLite connection
+            sql_conn = sqlite3.connect(db_path)
+            self.conn = sql_conn  
+
             self.conn.execute('BEGIN')    
 
             self.create_documents_table( )
@@ -35,7 +49,7 @@ class RAGSystem:
             self.add_vector_to_faiss(vector, hashed_id)
 
             # Step 3: Save the FAISS index to disk after successful addition
-            self.save_faiss_index()
+            # self.save_faiss_index()
 
         except sqlite3.Error as e:
             # Rollback in case of SQLite error
@@ -53,9 +67,14 @@ class RAGSystem:
             # Print the shape of the input vector (after wrapping in an extra array)
             print(f"Vector shape: {np.array([vector]).shape}")  # Will print (1, dimension)        
             # Print the dimensionality of the FAISS index
-            print(f"FAISS index dimension: {self.index.d}")  # FAISS index dimension
+            # print(f"FAISS index dimension: {self.index.d}")  # FAISS index dimension
             
-            self.index.add_with_ids(np.array([vector]).astype('float32'), np.array([hashed_id], dtype='int64'))
+                        
+            index = faiss.IndexIDMap(faiss.IndexFlatL2(1536))
+            index.add_with_ids(np.array([vector]).astype('float32'), np.array([hashed_id], dtype='int64'))
+            index_path = os.path.join(os.path.dirname(__file__), 'faiss_index.bin')            
+            faiss.write_index(index, index_path)
+
         except Exception as e:
             print(f"FAISS operation failed: {e}")
             raise e
