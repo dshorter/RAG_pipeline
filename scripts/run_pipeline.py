@@ -58,7 +58,7 @@ def main():
     response = pipeline.query(user_query)
     logger.info("Query response: %s", response)
 
-    logger.info("RAG pipeline execution completed")
+    # logger.info("RAG pipeline execution completed")
 
 if __name__ == "__main__":
     main()

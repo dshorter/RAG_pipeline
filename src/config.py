@@ -2,7 +2,8 @@ import os
 from dataclasses import dataclass, field
 from typing import Dict, Any, Optional
 import yaml
-from dotenv import load_dotenv
+from dotenv import load_dotenv     
+from src.data_classes import Document, ChunkMetrics
 
 @dataclass
 class GPTConfig:
@@ -57,12 +58,16 @@ class PipelineConfig:
 @dataclass
 class Config:
     pipeline: PipelineConfig
-    faiss_index_dir: str
+    gpt: GPTConfig
+    faiss_index_dir: str 
     additional_settings: Dict[str, Any] = field(default_factory=dict)
 
 class Configuration:
     def __init__(self, config_file: str):
        
+        self.document = Document()
+        self.chunk_metrics = ChunkMetrics()
+        
         load_dotenv()  # Load environment variables from .env file
         
         # Get the directory of the current file (config.py)
@@ -91,10 +96,15 @@ class Configuration:
         pipeline_config = config_data['pipeline']
         pipeline_config['embedding'] = embedding
         pipeline = PipelineConfig(**pipeline_config)
-        
+         
+        # Create GPTConfig    
+        gpt_config = config_data['gpt'] 
+        gpt = GPTConfig(**gpt_config )
+          
         # Create main Config instance
         self.config = Config(
             pipeline=pipeline,
+            gpt=gpt, 
             faiss_index_dir=config_data['faiss_index_dir'],
             additional_settings=config_data.get('additional_settings', {})
         )
@@ -104,6 +114,9 @@ class Configuration:
     
     def get_pipeline_config(self) -> PipelineConfig:
         return self.config.pipeline
+    
+    def get_gpt_config(self ) -> GPTConfig:
+        return self.config.gpt
     
     def get_active_embedding_config(self):
         embedding_config = self.config.pipeline.embedding

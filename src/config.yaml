@@ -4,7 +4,7 @@ gpt:
   provider: "azure_openai"
   model_name: "api-shared-gpt-4-turbo-nofilter"
   temperature: 0.7
-  max_tokens: 150
+  max_tokens: 4096
   top_p: 1.0
   frequency_penalty: 0.0
   presence_penalty: 0.0
@@ -12,7 +12,7 @@ gpt:
   azure_client_id: "" 
   azure_client_secret: ""  
   api_key: ""
-  api_base: ""
+  api_base: "https://edav-dev-openai-eastus2-shared.openai.azure.com/"
   api_version: "2024-02-01"  
 
 pipeline:
@@ -40,5 +40,6 @@ pipeline:
   processed_docs_dir: "./data/processed"
 
 faiss_index_dir: "./data/faiss_index"
+faiss_index_dimensions: 1536 
 
 # You can add more sections or settings as needed for your specific implementation

@@ -1,13 +1,18 @@
 import os
 import logging
+import sqlite3
 import time
-from typing import List, Dict
+from typing import List, Dict, Any  
+from src.config import Document, ChunkMetrics  
 from src.knowledge_base import process_documents
 from .document_chunker import chunk_document
 from .metrics_collector import MetricsCollector
 from .embedding_generator_factory import EmbeddingGeneratorFactory
 from .rag_system import RAGSystem
 from .pipeline_result import PipelineResult, ChunkInfo, ChunkMetrics, VectorMetrics
+from .singleton_config import ConfigSingleton    
+import faiss    
+from .generation import Generator
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -17,7 +22,37 @@ class RAGPipeline:
         self.config = config
         self.metrics_collector = MetricsCollector()
         self.embedding_generator = self._initialize_embedding_generator()
-        self.rag_system = RAGSystem(vector_dimension=self.embedding_generator.dimension)
+        
+        # Use get() method with default values
+        conn =  self.config.get('conn')
+        index = self.config.get('index')
+        faiss_index_path = self.config.get('faiss_index_path', './data/faiss_index.bin')
+        
+        self.rag_system = RAGSystem(conn=conn, index=index, faiss_index_path=faiss_index_path)
+        self.generator = Generator(self.config.get('gpt', {}))
+        logger.info("RAG Pipeline initialized with config: %s", config)
+
+    def _initialize_embedding_generator(self):
+        return EmbeddingGeneratorFactory.create(
+            generator_type=self.config['pipeline']['embedding']['provider'],
+            **self.config['pipeline']
+        )
+        
+        # Define paths relative to the project folder
+        # Get the project root directory (one level up from the current file's directory)
+        project_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+        db_path = os.path.join(project_folder, 'data', 'metadata.db')
+        faiss_path = os.path.join(project_folder, 'data', 'faiss_index.bin')
+
+        # Initialize SQLite connection
+        sql_conn = sqlite3.connect(db_path)
+
+        # Initialize FAISS index   
+        dimension = self.configS.get_active_embedding_config().dimension     # Set your vector dimension
+        index = faiss.IndexIDMap(faiss.IndexFlatL2(dimension))        
+        
+        #  self.rag_system = RAGSystem(conn=conn, index=index, faiss_index_path=faiss_path)
+        
         logger.info("RAG Pipeline initialized with config: %s", config)
 
     def _initialize_embedding_generator(self):
@@ -31,7 +66,9 @@ class RAGPipeline:
         try:
             processed_doc = process_documents(file_path)
             logger.info("Document processed successfully. Word count: %d", processed_doc['metadata']['word_count'])
+            
             return processed_doc
+        
         except Exception as e:
             logger.error("Error processing document: %s", str(e))
             raise
@@ -88,16 +125,35 @@ class RAGPipeline:
 
         logger.info("Indexing completed")
 
-    def query(self, user_query: str) -> str:
-        logger.info(f"Received user query: {user_query}")
-        query_embedding = self.embedding_generator.generate_embedding(user_query)
-        results = self.rag_system.search(query_embedding)
-        # Process results and generate a response (you'll need to implement this part)
-        return f"Found {len(results)} relevant chunks. Implement response generation here."
+    def query(self, user_query: str) -> Dict[str, Any]:
+        try:
+            logger.info(f"Received user query: {user_query}")
+            query_embedding = self.embedding_generator.generate_embedding(user_query)
+            
+            # Perform the search, retrieving more results than we might typically use
+            search_results = self.rag_system.search(query_embedding, k=10)
+            
+            # Generate response using the LLM
+            response = self.generator.generate_response(user_query, search_results)
+            
+            return {
+                "query": user_query,
+                "response": response,
+                "search_results": search_results  # Optionally include for transparency
+            }
+        except Exception as e:
+            logger.error(f"Error processing query: {str(e)}")
+            raise
+
 
     def run_pipeline(self, file_path: str) -> PipelineResult:
         document_name = os.path.basename(file_path)
         processed_doc = self.process_document(file_path)
+
+        cs =  ConfigSingleton( )
+        cs.document = Document("","this_doc_title","DRSC","ORR","7/1/2024","100",
+                                "A summary","no tags","json_here" )
+        
         
         # Use the updated chunk_document function
         chunking_result = chunk_document(processed_doc['content'], 

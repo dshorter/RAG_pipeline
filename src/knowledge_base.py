@@ -2,7 +2,8 @@ import os
 import re
 from nltk.tokenize import PunktSentenceTokenizer, word_tokenize
 from nltk.corpus import stopwords
-import nltk
+import nltk 
+from .singleton_config import ConfigSingleton 
 
 import logging  
 
@@ -54,7 +55,12 @@ def prepare_document(text, title="", author="", date=""):
     cleaned_text = ' '.join(tokens)
     logger.info(f"Final cleaned text length: {len(cleaned_text)}")
 
+
     # Create metadata
+    documnet = ConfigSingleton().document     
+    documnet.title = title
+    documnet.document_length = len(tokens)  
+
     metadata = {
         "title": title,
         "author": author,

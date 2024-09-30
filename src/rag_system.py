@@ -1,35 +1,160 @@
-from datetime import datetime
-import hashlib
-import uuid
 import sqlite3
-from typing import List, Dict, Any
 import faiss
-import numpy as np
+import uuid
+import hashlib
 import json
-import os
+import numpy as np
+from datetime import datetime
+from typing import Dict, Any    
+import os  
+from  src.singleton_config import ConfigSingleton  
+
 
 class RAGSystem:
-    def __init__(self, vector_dimension: int, db_path: str = 'metadata.db'):
-        self.vector_dimension = vector_dimension
-        self.db_path = db_path
-        self.index = faiss.IndexIDMap(faiss.IndexFlatL2(vector_dimension))
-        self.conn = sqlite3.connect(db_path)
-        self.create_documents_table()
-        self.create_document_chunks_table()
+    def __init__(self, conn: sqlite3.Connection, index: faiss.IndexIDMap, 
+                 faiss_index_path: str): 
+        self.config = ConfigSingleton( )
+        self.conn = conn     
+        self.index = index
+        self.faiss_index_path = faiss_index_path  # Path to save the FAISS index to disk
+        self.document_id = uuid.uuid4().hex
 
+    def add_vector(self, chunk: str, vector: np.array, source: str, start_index: int, end_index: int, additional_metadata: Dict[str, Any] = {}):
+        chunk_id = self.generate_chunk_id()
+        hashed_id = self.get_hashed_id(chunk_id)
+        document_id =  self.document_id    
+
+        try:
+            # Step 1: Handle SQLite transaction
+            # Define paths relative to the project folder
+            # Get the project root directory (one level up from the current file's directory)
+            project_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+            db_path = os.path.join(project_folder, 'data', 'metadata.db')
+            faiss_path = os.path.join(project_folder, 'data', 'faiss_index.bin')
+
+            # Initialize SQLite connection
+            sql_conn = sqlite3.connect(db_path)
+            self.conn = sql_conn  
+
+            self.conn.execute('BEGIN')    
+
+            self.create_documents_table( )
+            self.create_document_chunks_table( )  
+
+            self.insert_document_metadata(document_id, "Title", "Author", source, len(chunk), "Summary", "Tags", additional_metadata)
+            self.insert_chunk_metadata(hashed_id, document_id, chunk, start_index, end_index, len(chunk), additional_metadata)
+            self.conn.commit()
+
+            # Step 2: Handle FAISS vector addition
+            self.add_vector_to_faiss(vector, hashed_id)
+
+            # Step 3: Save the FAISS index to disk after successful addition
+            # self.save_faiss_index()
+
+        except sqlite3.Error as e:
+            # Rollback in case of SQLite error
+            self.conn.rollback()
+            print(f"SQLite transaction failed: {e}")
+            raise e
+        except Exception as e:
+            # Rollback SQLite if FAISS fails, since FAISS has no rollback
+            print(f"FAISS operation failed, rolling back SQLite: {e}")
+            self.conn.rollback()  # Rollback metadata insertion due to FAISS failure
+            raise e
+
+    def add_vector_to_faiss(self, vector: np.array, hashed_id: int):
+        try:
+            # Print the shape of the input vector (after wrapping in an extra array)
+            print(f"Vector shape: {np.array([vector]).shape}")  # Will print (1, dimension)        
+            # Print the dimensionality of the FAISS index
+            # print(f"FAISS index dimension: {self.index.d}")  # FAISS index dimension
+            
+                        
+            index = faiss.IndexIDMap(faiss.IndexFlatL2(1536))
+            index.add_with_ids(np.array([vector]).astype('float32'), np.array([hashed_id], dtype='int64'))
+            index_path = os.path.join(os.path.dirname(__file__), 'faiss_index.bin')            
+            faiss.write_index(index, index_path)
+
+        except Exception as e:
+            print(f"FAISS operation failed: {e}")
+            raise e
+
+    def save_faiss_index(self):
+        try:
+            faiss.write_index(self.index, self.faiss_index_path)
+            print(f"FAISS index saved to {self.faiss_index_path}")
+        except Exception as e:
+            print(f"Failed to save FAISS index to disk: {e}")
+            raise e
+
+    def insert_document_metadata(self, document_id: str, title: str, author: str, 
+                                 source: str, document_length: int, summary: str, tags: str, metadata: Dict[str, Any]):
+        cursor = self.conn.cursor()
+        try:
+            cursor.execute('''
+                INSERT INTO documents_metadata (document_id, title, author, 
+                           source, date_added, document_length, summary, tags, metadata)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ''', (
+                document_id,
+                title,
+                author,
+                source,
+                datetime.now().strftime('%Y-%m-%d %H:%M:%S'),  # SQLite-friendly date format
+                document_length,
+                summary,
+                tags,
+                json.dumps(metadata)  # Store metadata as JSON string
+        ))            
+        except sqlite3.IntegrityError as e:
+            # Handle the unique constraint error, or log it and continue
+            print(f"IntegrityError: {e} - Skipping this document (ID: {document_id})")
+
+        except sqlite3.Error as e:
+            # Handle any other database errors
+            print(f"SQLite error: {e}")
+            raise e  # Optionally, re-raise the error if you want it to bubble up
+
+
+
+    def insert_chunk_metadata(self, chunk_id: int, document_id: str, chunk_text: str, 
+                              start_index: int, end_index: int, chunk_length: int, 
+                              additional_metadata: Dict[str, Any]):
+        cursor = self.conn.cursor()
+        cursor.execute('''
+            INSERT INTO document_chunks_metadata (chunk_id, document_id, chunk_text, 
+                       start_index, end_index, chunk_length, metadata, date_added)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (
+            chunk_id,
+            document_id,
+            chunk_text,
+            start_index,
+            end_index,
+            chunk_length,
+            json.dumps(additional_metadata),  # Store metadata as JSON string
+            datetime.now().strftime('%Y-%m-%d %H:%M:%S')  # SQLite-friendly date format
+        ))
+
+    def generate_chunk_id(self) -> str:
+        return uuid.uuid4().hex
+
+    def get_hashed_id(self, chunk_id: str) -> int:
+        return int(hashlib.sha256(chunk_id.encode()).hexdigest(), 16) % (2**63 - 1)
+    
     def create_documents_table(self):
         cursor = self.conn.cursor()
         cursor.execute('''
         CREATE TABLE IF NOT EXISTS documents_metadata (
-            document_id TEXT PRIMARY KEY,
+            document_id  TEXT  PRIMARY KEY,
             title TEXT,
             author TEXT,
             source TEXT,
-            date_added TIMESTAMP,
+            date_added TEXT,  -- Storing dates as TEXT in ISO 8601 format
             document_length INTEGER,
             summary TEXT,
             tags TEXT,
-            metadata JSON
+            metadata TEXT  -- Store JSON as TEXT
         )
         ''')
         self.conn.commit()
@@ -44,126 +169,12 @@ class RAGSystem:
             start_index INTEGER,
             end_index INTEGER,
             chunk_length INTEGER,
-            metadata JSON,
-            date_added TIMESTAMP,
+            metadata TEXT,  -- Store JSON as TEXT
+            date_added TEXT,  -- Storing dates as TEXT in ISO 8601 format
             FOREIGN KEY (document_id) REFERENCES documents_metadata(document_id)
         )
         ''')
         self.conn.commit()
 
-    def add_vector(self, chunk: str, vector: np.array, 
-                  source: str, start_index: int, end_index: int,  
-                  all_metrics: Dict[str, Dict[str,Any]] = {},   
-                  additional_metadata: Dict[str, Any] = {}):
-        
-            chunk_id = uuid.uuid4().hex
-            # Create a 64-bit hash from the UUID
-            hashed_id = int(hashlib.sha256(chunk_id.encode()).hexdigest(), 16) % (2**63 - 1)  # Modulo to fit in 64-bit
-            # Ensure the hashed ID is wrapped in a NumPy array of type int64
-            id_array = np.array([hashed_id], dtype='int64')
-            
-            # Add to FAISS index
-            self.index.add_with_ids(np.array([vector]).astype('float32'), id_array )  
-            faiss.write_index(self.index, path)            
-            
-            # Method to insert document metadata into documents_metadata table
-    def insert_document_metadata(self, document_id, title, author, source, document_length, summary, tags, metadata):
-        cursor = self.conn.cursor()
-        cursor.execute('''
-            INSERT INTO documents_metadata (document_id, title, author, source, date_added, document_length, summary, tags, metadata)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ''', (
-            document_id,                      # document_id, unique identifier for the document
-            title,                            # title of the document
-            author,                           # author of the document
-            source,                           # source or origin of the document
-            datetime.now(),                   # current timestamp for date_added
-            document_length,                  # length of the document (e.g., word count)
-            summary,                          # brief summary of the document
-            tags,                             # tags or keywords associated with the document
-            json.dumps(metadata)              # additional metadata stored as JSON
-        ))
-        self.conn.commit()
-
-    # Method to insert chunk metadata into document_chunks_metadata table
-    def insert_chunk_metadata(self, hashed_id, document_id, chunk_text, start_index, end_index, chunk_length, additional_metadata):
-        cursor = self.conn.cursor()
-        cursor.execute('''
-            INSERT INTO document_chunks_metadata (chunk_id, document_id, chunk_text, start_index, end_index, chunk_length, metadata, date_added)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-        ''', (
-            hashed_id,                        # chunk_id, hashed 64-bit integer ID
-            document_id,                      # document_id, links to documents_metadata
-            chunk_text,                       # the actual text content of the chunk
-            start_index,                      # starting position of the chunk within the document
-            end_index,                        # ending position of the chunk within the document
-            chunk_length,                     # length of the chunk (e.g., word count or character count)
-            json.dumps(additional_metadata),  # additional metadata stored as JSON
-            datetime.now()                    # current timestamp for date_added
-        ))
-        self.conn.commit()
 
 
-    def search(self, query_vector: np.array, k: int = 5) -> List[Dict[str, Any]]:
-        distances, indices = self.index.search(np.array([query_vector]).astype('float32'), k)
-        
-        results = []
-        for idx in indices[0]:
-            if idx != -1:  # -1 indicates no match found
-                uuid_hex = hex(idx)[2:].zfill(32)  # Convert back to UUID hex string
-                cursor = self.conn.cursor()
-                cursor.execute('SELECT * FROM metadata WHERE uuid = ?', (uuid_hex,))
-                result = cursor.fetchone()
-                if result:
-                    metadata = {
-                        'uuid': result[0],
-                        'source': result[1],
-                        'start_index': result[2],
-                        'end_index': result[3],
-                        'additional_metadata': json.loads(result[4])
-                    }
-                    results.append(metadata)
-        
-        return results
-
-    def save_index(self, path: str):
-        faiss.write_index(self.index, path)
-
-    def load_index(self, path: str):
-        if os.path.exists(path):
-            self.index = faiss.read_index(path)
-        else:
-            raise FileNotFoundError(f"Index file not found: {path}")
-
-    def __del__(self):
-        self.conn.close()
-
-# Usage example
-if __name__ == "__main__":
-    rag_system = RAGSystem(vector_dimension=128)
-    
-    # Adding a chunk
-    chunk = "This is a sample chunk of text."
-    vector = np.random.rand(128).astype('float32')  # Simulated vector
-    rag_system.add_vector(
-        chunk, 
-        vector, 
-        source="Document A", 
-        start_index=0, 
-        end_index=len(chunk), 
-        additional_metadata={"importance": "high", "author": "John Doe"}
-    )
-    
-    # Searching
-    query_vector = np.random.rand(128).astype('float32')  # Simulated query vector
-    results = rag_system.search(query_vector)
-    
-    for result in results:
-        print(f"Found chunk from {result['source']}, index {result['start_index']}:{result['end_index']}")
-        print(f"Additional metadata: {result['additional_metadata']}")
-        print(f"UUID: {result['uuid']}")
-        print("---")
-
-    # Save and load index example
-    rag_system.save_index("faiss_index.bin")
-    rag_system.load_index("faiss_index.bin")
