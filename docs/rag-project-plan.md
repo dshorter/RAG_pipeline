@@ -8,7 +8,7 @@
      a. Review and optimize current query processing logic
      b. Enhance response generation using retrieved chunks
      c. Implement relevance scoring for retrieved chunks
-     d. Integrate and test the complete query-to-response pipeline
+     d. Integrate and test the complete query-to-response pipeline 
    - Estimated time: 3-4 days
    - Impact: Critical (Core functionality of the RAG system)
 
