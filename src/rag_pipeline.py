@@ -3,8 +3,8 @@ import logging
 import sqlite3
 import time
 from typing import List, Dict, Any  
-from src.config import Document, ChunkMetrics  
-from src.knowledge_base import process_documents
+from .config import Document, ChunkMetrics  
+from .knowledge_base import process_documents
 from .document_chunker import chunk_document
 from .metrics_collector import MetricsCollector
 from .embedding_generator_factory import EmbeddingGeneratorFactory
@@ -19,25 +19,23 @@ logger = logging.getLogger(__name__)
 
 class RAGPipeline:
     def __init__(self, config: Dict):
-        self.config = config
+        self.config = ConfigSingleton( )    
         self.metrics_collector = MetricsCollector()
         self.embedding_generator = self._initialize_embedding_generator()
+        self.rag_system = RAGSystem( )  
+        self.generator = Generator( )  
+        logger.info("RAG Pipeline initialized with config: %s", config)
         
         # Use get() method with default values
         conn =  self.config.get('conn')
         index = self.config.get('index')
         faiss_index_path = self.config.get('faiss_index_path', './data/faiss_index.bin')
         
-        self.rag_system = RAGSystem(conn=conn, index=index, faiss_index_path=faiss_index_path)
-        self.generator = Generator(self.config.get('gpt', {}))
+        self.rag_system = RAGSystem( ) 
+        self.generator = Generator( )
         logger.info("RAG Pipeline initialized with config: %s", config)
 
-    def _initialize_embedding_generator(self):
-        return EmbeddingGeneratorFactory.create(
-            generator_type=self.config['pipeline']['embedding']['provider'],
-            **self.config['pipeline']
-        )
-        
+        ###############################################
         # Define paths relative to the project folder
         # Get the project root directory (one level up from the current file's directory)
         project_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -48,17 +46,31 @@ class RAGPipeline:
         sql_conn = sqlite3.connect(db_path)
 
         # Initialize FAISS index   
-        dimension = self.configS.get_active_embedding_config().dimension     # Set your vector dimension
+        dimension = self.config.get_active_embedding_config().dimension     # Set your vector dimension
         index = faiss.IndexIDMap(faiss.IndexFlatL2(dimension))        
         
         #  self.rag_system = RAGSystem(conn=conn, index=index, faiss_index_path=faiss_path)
         
         logger.info("RAG Pipeline initialized with config: %s", config)
 
+        ###############################################    
+
     def _initialize_embedding_generator(self):
         return EmbeddingGeneratorFactory.create(
             generator_type=self.config['pipeline']['embedding']['provider'],
             **self.config['pipeline']
+        )
+        
+
+    def _initialize_embedding_generator(self):
+        pipeline_config = self.config.get_pipeline_config()
+        active_embedding_config = self.config.get_active_embedding_config()
+    
+        return EmbeddingGeneratorFactory.create(
+            generator_type=pipeline_config.embedding.provider,
+            azure_endpoint=active_embedding_config.api_base,
+            api_version=active_embedding_config.api_version,
+            deployment=active_embedding_config.deployment_name
         )
 
     def process_document(self, file_path: str) -> Dict:
@@ -144,7 +156,6 @@ class RAGPipeline:
         except Exception as e:
             logger.error(f"Error processing query: {str(e)}")
             raise
-
 
     def run_pipeline(self, file_path: str) -> PipelineResult:
         document_name = os.path.basename(file_path)

@@ -29,7 +29,6 @@ pipeline:
         azure_tennant_id: "" 
         azure_client_id: "" 
         azure_client_secret: ""  
-
       huggingface:
         model_name: "sentence-transformers/all-MiniLM-L6-v2"
         dimension: 384
@@ -39,7 +38,15 @@ pipeline:
   raw_docs_dir: "./data/raw"
   processed_docs_dir: "./data/processed"
 
-faiss_index_dir: "./data/faiss_index"
-faiss_index_dimensions: 1536 
+vectors:
+  faiss:
+    faiss_index_dir: "./data/faiss_index"
+    faiss_index_dimensions: 1536 
+  azure_cogs:
+
+metadata:
+  sqlite:
+  azure_db: 
+
 
 # You can add more sections or settings as needed for your specific implementation

@@ -551,3 +551,14 @@ Biosafety_Guidance.txt,6214,15,414,500,214,0.05,0.02,2024-09-07T17:38:38.484012
 2024-09-24T11:45:26.902882,chunks,max_chunk_size,5148
 2024-09-24T11:45:26.902882,chunks,min_chunk_size,1730
 2024-09-24T11:45:26.902882,chunks,document,Biosafety_Guidance.txt
+2024-10-01T11:58:15.926785,embeddings,num_embeddings,10
+2024-10-01T11:58:15.926785,embeddings,embedding_dimension,1536
+2024-10-01T11:58:15.926785,embeddings,embedding_generation_start_time,1727798293.1174893
+2024-10-01T11:58:15.926785,embeddings,embedding_generation_end_time,1727798295.925787
+2024-10-01T11:58:15.926785,embeddings,embedding_generation_time,2.808297634124756
+2024-10-01T11:58:16.232957,chunks,total_words,4295
+2024-10-01T11:58:16.232957,chunks,num_chunks,10
+2024-10-01T11:58:16.232957,chunks,avg_chunk_size,3527.2
+2024-10-01T11:58:16.232957,chunks,max_chunk_size,5148
+2024-10-01T11:58:16.232957,chunks,min_chunk_size,1730
+2024-10-01T11:58:16.232957,chunks,document,Biosafety_Guidance.txt

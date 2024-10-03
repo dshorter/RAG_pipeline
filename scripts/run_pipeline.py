@@ -27,7 +27,8 @@ def main():
     pipeline = RAGPipeline(config.to_dict())
 
     # Process the Biosafety file
-    biosafety_file = os.path.join(config.get_pipeline_config().raw_docs_dir, 'Biosafety_Guidance.txt')
+    # biosafety_file = os.path.join(config.get_pipeline_config().raw_docs_dir, 'Biosafety_Guidance.txt')
+    biosafety_file = config.get_pipeline_config().raw_docs_dir 
     logger.info("Processing file: %s", biosafety_file)
     
     # Run the pipeline and get the result
