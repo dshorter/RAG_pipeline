@@ -1,10 +1,12 @@
 import os
 import re
+import dateutil
 from nltk.tokenize import PunktSentenceTokenizer, word_tokenize
 from nltk.corpus import stopwords
 import nltk   
 import magic 
-from tika import parser 
+from tika import parser  
+import datetime    
 from .singleton_config import ConfigSingleton 
 from .rag_system import RAGSystem  
 
@@ -19,8 +21,10 @@ nltk.download('stopwords', quiet=True)
 NLTK_DATA_PATH = os.path.join(os.path.dirname(__file__), '..', 'nltk_data')
 nltk.data.path.append(NLTK_DATA_PATH)
 
-logger = logging.getLogger(__name__)
-def prepare_document(text, title=""):
+logger = logging.getLogger(__name__)    
+
+def prepare_document(text, title=""):    
+    
     logger.info(f"Preparing document: {title}")
     logger.debug(f"Original text length: {len(text)}")
 
@@ -110,7 +114,6 @@ def read_text_file(file_path):
     except UnicodeDecodeError:
         with open(file_path, 'r', encoding='iso-8859-1') as file:
             return file.read()
-
 def process_single_document(file_path):
     try:
         file_type = magic.from_file(file_path, mime=True)
@@ -120,22 +123,24 @@ def process_single_document(file_path):
         metadata = parsed.get("metadata", {})
         filename = os.path.basename(file_path)
 
-        # Extract our standard metadata fields
+        # Clean and organize metadata
+        cleaned_metadata = clean_metadata(metadata)
+        
         document_metadata = {
-            "title": metadata.pop("title", filename),
-            "author": metadata.pop("Author", "Unknown"),
-            "publish_date": metadata.pop("Creation-Date", "Unknown"),
+            "title": cleaned_metadata.pop("title", filename),
+            "author": cleaned_metadata.pop("author", "Unknown"),
+            "publish_date": cleaned_metadata.pop("publish_date", "Unknown"),
             "file_type": file_type,
-            "content_type": metadata.pop("Content-Type", "Unknown"),
+            "content_type": cleaned_metadata.pop("content_type", file_type),
             "document_length": len(content.split())  # Word count
         }
 
+        # Add any remaining cleaned metadata as additional
+        if cleaned_metadata:
+            document_metadata["additional"] = cleaned_metadata
+
         # Clean the text
         cleaned_text = prepare_document(content, title=filename)
-
-        # Add any remaining metadata fields to an 'additional' field
-        if metadata:
-            document_metadata["additional"] = metadata
 
         return {
             "content": cleaned_text,
@@ -144,7 +149,8 @@ def process_single_document(file_path):
     except Exception as e:
         logger.error(f"Error processing document {file_path}: {str(e)}")
         raise  # Re-raise the exception after logging
-    
+
+        
 def process_documents(input_path):
     if os.path.isfile(input_path):
         return process_single_document(input_path)
@@ -158,6 +164,70 @@ def process_documents(input_path):
         return processed_docs
     else:
         raise ValueError(f"Invalid input path: {input_path}")
+
+########################################  
+def clean_metadata(metadata):
+    field_synonyms = {
+        'title': ['title', 'name', 'documenttitle'],
+        'author': ['author', 'creator', 'contributor', 'writer'],
+        'publish_date': ['createdate', 'modifydate', 'creationdate', 'publicationdate', 'date'],
+        'content_type': ['contenttype', 'mimetype', 'filetype'],
+    }
+
+    cleaned_metadata = {}
+    for key, value in metadata.items():
+        clean_key_name = clean_key(key)
+        if is_useful_value(value):
+            matched = False
+            for field, synonyms in field_synonyms.items():
+                if any(synonym in clean_key_name for synonym in synonyms):
+                    if field == 'publish_date':
+                        cleaned_metadata[field] = parse_date(value)
+                    else:
+                        cleaned_metadata[field] = value
+                    matched = True
+                    break
+            if not matched:
+                cleaned_metadata[clean_key_name] = value
+
+    return cleaned_metadata
+
+def clean_key(key):
+    # Strip prefixes and convert to lowercase
+    return re.sub(r'^.*?:', '', key).lower()
+
+def is_useful_value(value):
+    if value is None or value == '':
+        return False
+    if isinstance(value, str) and value.lower() in ['null', 'none', 'unknown']:
+        return False
+    return True
+
+from datetime import datetime
+import dateutil.parser
+
+def parse_date(date_input):
+    if not date_input:
+        return None
+    
+    # If date_input is a list, join it into a string
+    if isinstance(date_input, list):
+        date_string = ' '.join(date_input)
+    else:
+        date_string = str(date_input)
+    
+    try:
+        # First, try parsing with dateutil
+        return dateutil.parser.parse(date_string).isoformat()
+    except (ValueError, TypeError):
+        # If dateutil fails, try our custom formats
+        for fmt in ['%Y-%m-%d', '%Y-%m-%dT%H:%M:%S', '%Y:%m:%d %H:%M:%S']:
+            try:
+                return datetime.strptime(date_string, fmt).isoformat()
+            except ValueError:
+                continue
+    # If all parsing attempts fail, return the original string
+    return date_string    
 
 # Example usage (if run as a script)
 if __name__ == "__main__":
