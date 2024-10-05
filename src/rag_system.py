@@ -11,18 +11,14 @@ from  src.singleton_config import ConfigSingleton
 
 
 class RAGSystem:
-    def __init__(self, conn: sqlite3.Connection, index: faiss.IndexIDMap, 
-                 faiss_index_path: str): 
+    def __init__(self ): 
         self.config = ConfigSingleton( )
-        self.conn = conn     
-        self.index = index
-        self.faiss_index_path = faiss_index_path  # Path to save the FAISS index to disk
-        self.document_id = uuid.uuid4().hex
+        # self.document_id = uuid.uuid4().hex
 
-    def add_vector(self, chunk: str, vector: np.array, source: str, start_index: int, end_index: int, additional_metadata: Dict[str, Any] = {}):
+    def add_vector(self, chunk: str, vector: np.array, document_id:str,  source: str, start_index: int, end_index: int, additional_metadata: Dict[str, Any] = {}):
         chunk_id = self.generate_chunk_id()
         hashed_id = self.get_hashed_id(chunk_id)
-        document_id =  self.document_id    
+        document_id =  document_id    
 
         try:
             # Step 1: Handle SQLite transaction

@@ -25,7 +25,8 @@ class VectorMetrics:
     embedding_generation_time: float
 
 @dataclass
-class PipelineResult:
+class PipelineResult:     
+    document_id: str     
     document_name: str
     processed_text: str
     metadata: Dict[str, Any]
@@ -49,6 +50,7 @@ class PipelineResult:
     def prepare_for_indexing(self) -> List[Dict]:
         return [
             {
+                 "document_id": self.document_id,
                 "chunk": chunk.text,
                 "vector": embedding,
                 "source": chunk.metadata.get('source', ''),

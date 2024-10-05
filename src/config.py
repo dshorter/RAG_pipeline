@@ -105,7 +105,7 @@ class Configuration:
         self.config = Config(
             pipeline=pipeline,
             gpt=gpt, 
-            faiss_index_dir=config_data['faiss_index_dir'],
+            faiss_index_dir=config_data['vectors']['faiss']['faiss_index_dir'],
             additional_settings=config_data.get('additional_settings', {})
         )
     

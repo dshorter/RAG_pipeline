@@ -6,7 +6,7 @@ from src.singleton_config import ConfigSingleton
 
 
 class Generator:
-    def __init__(self, config: Dict[str, Any]):
+    def __init__(self ):
         self.config = ConfigSingleton( )
         self.client = self._initialize_client()
 
@@ -18,11 +18,29 @@ class Generator:
             azure_ad_token=credential.get_token("https://cognitiveservices.azure.com/.default").token
         )
 
-    def generate_response(self, query: str, retrieved_chunks: List[Dict[str, Any]]) -> str:
-        context = "\n".join([chunk['text'] for chunk in retrieved_chunks])
-        prompt = f"Based on the following context, answer the question: {query}\n\nContext: {context}\n\nAnswer:"
-
+def generate_response(self, query: str, search_results: List[Dict[str, Any]]) -> str:
         try:
+            context = "\n\n".join([f"Chunk {i+1}: {result['text']}" for i, result in enumerate(search_results)])
+            
+            prompt = f"""You are an AI assistant tasked with answering questions based on the provided context. 
+            Your goal is to provide accurate, relevant, and helpful answers.
+
+            Question: {query}
+
+            Context:
+            {context}
+
+            Instructions:
+            1. Analyze the question and the provided context carefully.
+            2. Synthesize information from the context to formulate your response, even if some chunks seem less relevant.
+            3. If the context doesn't contain enough information to fully answer the question, say so and provide the best partial answer you can based on the available information.
+            4. Do not make up information or use knowledge outside of the provided context.
+            5. If you directly quote or closely paraphrase specific parts of the context, indicate which chunk it came from (e.g., "According to Chunk 2...").
+            6. Provide a coherent and natural-sounding response that directly addresses the user's question.
+            7. If there are contradictions in the context, acknowledge them and explain the different viewpoints.
+
+            Answer:"""
+
             response = self.client.chat.completions.create(
                 model=self.config['model_name'],
                 messages=[
@@ -37,5 +55,5 @@ class Generator:
             )
             return response.choices[0].message.content.strip()
         except Exception as e:
-            print(f"Error in generate_response: {str(e)}")
-            return "I'm sorry, but I couldn't generate a response at this time."
+            self.logger.error(f"Error in generate_response: {str(e)}")
+            return "I'm sorry, but I couldn't generate a  response at this time."

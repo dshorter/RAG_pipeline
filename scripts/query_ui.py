@@ -2,7 +2,6 @@ import streamlit as st
 import sys
 import os
 from typing import Dict
-import sqlite3 
 
 # Add the project root to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -12,22 +11,7 @@ from src.singleton_config import ConfigSingleton
 
 def initialize_pipeline():
     config = ConfigSingleton()
-    config_dict = config.to_dict()
-
-    # Initialize SQLite connection
-    db_path = config_dict.get('database_path', './data/metadata.db')
-    conn = sqlite3.connect(db_path)
-    
-    # Add conn to config_dict
-    config_dict['conn'] = conn
-
-    # Ensure other necessary keys are present
-    if 'index' not in config_dict:
-        config_dict['index'] = None  # This should be properly initialized if you're using FAISS
-    if 'faiss_index_path' not in config_dict:
-        config_dict['faiss_index_path'] = './data/faiss_index.bin'
-
-    return RAGPipeline(config_dict)  # Return the initialized pipeline
+    return RAGPipeline(config.to_dict())
 
 def execute_query(pipeline: RAGPipeline, query: str) -> Dict[str, str]:
     return pipeline.query(query)
@@ -60,5 +44,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-    

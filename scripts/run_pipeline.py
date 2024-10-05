@@ -24,10 +24,11 @@ def main():
     logger.info("Configuration loaded: %s", json.dumps(config.to_dict(), indent=2))
 
     # Initialize RAGPipeline
-    pipeline = RAGPipeline(config.to_dict())
+    pipeline = RAGPipeline( )
 
     # Process the Biosafety file
-    biosafety_file = os.path.join(config.get_pipeline_config().raw_docs_dir, 'Biosafety_Guidance.txt')
+    # biosafety_file = os.path.join(config.get_pipeline_config().raw_docs_dir, 'Biosafety_Guidance.txt')
+    biosafety_file = config.get_pipeline_config().raw_docs_dir 
     logger.info("Processing file: %s", biosafety_file)
     
     # Run the pipeline and get the result
@@ -37,18 +38,18 @@ def main():
     logger.info("Pipeline execution completed. Summary:\n%s", result.summary())
 
     # Save the processed document (optional)
-    output_file = os.path.join(config.get_pipeline_config().processed_docs_dir, f'processed_{result.document_name}.json')
-    logger.info("Saving processed document to: %s", output_file)
-    os.makedirs(os.path.dirname(output_file), exist_ok=True)
-    with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump({
-            'document_name': result.document_name,
-            'processed_text': result.processed_text,
-            'metadata': result.metadata,
-            'chunks': [{'text': chunk.text, 'start_index': chunk.start_index, 'end_index': chunk.end_index} for chunk in result.chunks],
-            'chunk_metrics': result.chunk_metrics.__dict__,
-            'vector_metrics': result.vector_metrics.__dict__
-        }, f, indent=2)
+    # output_file = os.path.join(config.get_pipeline_config().processed_docs_dir, f'processed_{result.document_name}.json')
+    # logger.info("Saving processed document to: %s", output_file)
+    # os.makedirs(os.path.dirname(output_file), exist_ok=True)
+    # with open(output_file, 'w', encoding='utf-8') as f:
+    #     json.dump({
+    #         'document_name': result.document_name,
+    #         'processed_text': result.processed_text,
+    #         'metadata': result.metadata,
+    #         'chunks': [{'text': chunk.text, 'start_index': chunk.start_index, 'end_index': chunk.end_index} for chunk in result.chunks],
+    #         'chunk_metrics': result.chunk_metrics.__dict__,
+    #         'vector_metrics': result.vector_metrics.__dict__
+    #     }, f, indent=2)
 
     logger.info("Processed document saved successfully")
 
