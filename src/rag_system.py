@@ -13,12 +13,12 @@ from  src.singleton_config import ConfigSingleton
 class RAGSystem:
     def __init__(self ): 
         self.config = ConfigSingleton( )
-        self.document_id = uuid.uuid4().hex
+        # self.document_id = uuid.uuid4().hex
 
-    def add_vector(self, chunk: str, vector: np.array, source: str, start_index: int, end_index: int, additional_metadata: Dict[str, Any] = {}):
+    def add_vector(self, chunk: str, vector: np.array, document_id:str,  source: str, start_index: int, end_index: int, additional_metadata: Dict[str, Any] = {}):
         chunk_id = self.generate_chunk_id()
         hashed_id = self.get_hashed_id(chunk_id)
-        document_id =  self.document_id    
+        document_id =  document_id    
 
         try:
             # Step 1: Handle SQLite transaction
