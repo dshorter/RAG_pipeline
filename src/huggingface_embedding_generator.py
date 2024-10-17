@@ -5,8 +5,9 @@ from .embedding_generator_base_class   import EmbeddingGenerator
 
 class HuggingFaceEmbeddingGenerator(EmbeddingGenerator):
     def __init__(self, model_name="sentence-transformers/all-MiniLM-L6-v2"):
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
-        self.model = AutoModel.from_pretrained(model_name)
+        self.hmodel_name="sentence-transformers/all-MiniLM-L6-v2"
+        self.tokenizer = AutoTokenizer.from_pretrained(self.hmodel_name)
+        self.model = AutoModel.from_pretrained(self.hmodel_name)
         self._dimension = self.model.config.hidden_size
 
     def generate_embedding(self, text: str) -> List[float]:

@@ -12,26 +12,35 @@ from .pipeline_result import PipelineResult, ChunkInfo, ChunkMetrics, VectorMetr
 from .singleton_config import ConfigSingleton
 import faiss
 from .generation import Generator
-import shutil
+import shutil            
+from  .paths import  *             
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 class RAGPipeline:
-    def __init__(self):
-        self.config = ConfigSingleton()
+    def __init__(self):    
+
+        self.config = ConfigSingleton()  
+        self.doc_metadata = {}   
+        self.db_path =  get_db_path()
+        self.faiss_path = get_faiss_path()
+        self.raw_docs_dir = get_raw_docs_dir()
+        self.processed_docs_dir = get_processed_docs_dir()
+        
         self.metrics_collector = MetricsCollector()
         self.embedding_generator = self._initialize_embedding_generator()
         self.rag_system = RAGSystem()
-        self.generator = Generator()
+        self.generator = Generator()  
+
         logger.info("RAG Pipeline initialized with config: %s", self.config.to_dict())
 
         # Define paths relative to the project folder
         project_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-        self.db_path = os.path.join(project_folder, 'data', 'metadata.db')
-        self.faiss_path = os.path.join(project_folder, 'data', 'faiss_index.bin')
-        self.raw_docs_dir = self.config.get_pipeline_config().raw_docs_dir
-        self.processed_docs_dir = self.config.get_pipeline_config().processed_docs_dir
+        # self.db_path = os.path.join(project_folder, 'data', 'metadata.db')
+        # self.faiss_path = os.path.join(project_folder, 'data', 'faiss_index.bin')
+        # self.raw_docs_dir = self.config.get_pipeline_config().raw_docs_dir
+        # self.processed_docs_dir = self.config.get_pipeline_config().processed_docs_dir
 
         # Ensure processed_docs_dir exists
         os.makedirs(self.processed_docs_dir, exist_ok=True)
@@ -42,9 +51,7 @@ class RAGPipeline:
     
         return EmbeddingGeneratorFactory.create(
             generator_type=pipeline_config.embedding.provider,
-            azure_endpoint=active_embedding_config.api_base,
-            api_version=active_embedding_config.api_version,
-            deployment=active_embedding_config.deployment_name
+            endpoint=active_embedding_config
         )
 
     def process_document(self, file_path: str) -> List[Dict]:
@@ -99,8 +106,10 @@ class RAGPipeline:
             logger.error(f"Error generating embeddings: {str(e)}")
             raise
 
-    def index_documents(self, prepared_chunks: List[Dict], document_id: str):
+    def index_documents(self, prepared_chunks: List[Dict], document_id: str, doc_metadata: List[Dict]    ):    
+
         logger.info(f"Indexing {len(prepared_chunks)} chunks for document {document_id}")
+        self.doc_metadata = doc_metadata
         for chunk_data in prepared_chunks:
             self.rag_system.add_vector(
                 document_id=document_id,
@@ -109,7 +118,8 @@ class RAGPipeline:
                 source=chunk_data['source'],
                 start_index=chunk_data['start_index'],
                 end_index=chunk_data['end_index'],
-                additional_metadata=chunk_data.get('additional_metadata', {})
+                additional_metadata=chunk_data.get('additional_metadata', {}), 
+                doc_metadata=doc_metadata 
             )
         logger.info(f"Indexing completed for document {document_id}")    
 
@@ -200,7 +210,7 @@ class RAGPipeline:
                     vector_metrics=vector_metrics
                 )                    
 
-                self.index_documents(result.prepare_for_indexing(), document_id)
+                self.index_documents(result.prepare_for_indexing(), document_id, processed_doc['metadata']  )
                 successfully_processed.append(processed_doc['file_path'])
                 results.append(result)
                 

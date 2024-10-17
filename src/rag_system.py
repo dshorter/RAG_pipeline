@@ -5,31 +5,32 @@ import hashlib
 import json
 import numpy as np
 from datetime import datetime
-from typing import Dict, Any    
+from typing import Dict, Any, List    
 import os  
 from  src.singleton_config import ConfigSingleton  
-
+from  .paths import  *   
 
 class RAGSystem:
     def __init__(self ): 
         self.config = ConfigSingleton( )
-        # self.document_id = uuid.uuid4().hex
+        # self.document_id = uuid.uuid4().hex  
+        
+        self.db_path =  get_db_path()
+        self.faiss_path = get_faiss_path()  
+        
 
-    def add_vector(self, chunk: str, vector: np.array, document_id:str,  source: str, start_index: int, end_index: int, additional_metadata: Dict[str, Any] = {}):
+    def add_vector(self, chunk: str, vector: np.array, document_id:str,  
+        source: str, start_index: int, end_index: int, 
+        additional_metadata: Dict[str, Any] = {},  
+        doc_metadata:  List[Dict] = { }    ):  
+        
         chunk_id = self.generate_chunk_id()
         hashed_id = self.get_hashed_id(chunk_id)
         document_id =  document_id    
 
         try:
-            # Step 1: Handle SQLite transaction
-            # Define paths relative to the project folder
-            # Get the project root directory (one level up from the current file's directory)
-            project_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-            db_path = os.path.join(project_folder, 'data', 'metadata.db')
-            faiss_path = os.path.join(project_folder, 'data', 'faiss_index.bin')
-
             # Initialize SQLite connection
-            sql_conn = sqlite3.connect(db_path)
+            sql_conn = sqlite3.connect(self.db_path)
             self.conn = sql_conn  
 
             self.conn.execute('BEGIN')    
@@ -37,7 +38,9 @@ class RAGSystem:
             self.create_documents_table( )
             self.create_document_chunks_table( )  
 
-            self.insert_document_metadata(document_id, "Title", "Author", source, len(chunk), "Summary", "Tags", additional_metadata)
+            self.insert_document_metadata(document_id, "Title", "Author", source, len(chunk), "Summary", "Tags", additional_metadata)    
+            self.insert_document_metadata(document_id, 
+                                               "Title", "Author", source, len(chunk), "Summary", "Tags", additional_metadata)            
             self.insert_chunk_metadata(hashed_id, document_id, chunk, start_index, end_index, len(chunk), additional_metadata)
             self.conn.commit()
 
@@ -68,7 +71,7 @@ class RAGSystem:
                         
             index = faiss.IndexIDMap(faiss.IndexFlatL2(1536))
             index.add_with_ids(np.array([vector]).astype('float32'), np.array([hashed_id], dtype='int64'))
-            index_path = os.path.join(os.path.dirname(__file__), 'faiss_index.bin')            
+            index_path = self.faiss_path   
             faiss.write_index(index, index_path)
 
         except Exception as e:

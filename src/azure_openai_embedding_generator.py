@@ -1,3 +1,4 @@
+import numpy as np
 from openai import AzureOpenAI
 from azure.identity import ChainedTokenCredential, ManagedIdentityCredential, EnvironmentCredential, AzureCliCredential
 from typing import List
@@ -36,7 +37,18 @@ class AzureOpenAIEmbeddingGenerator(EmbeddingGenerator):
                 input=text,
                 model=self.model  
             )
+            
             return response.data[0].embedding
+
+            # # Generate a random vector of the correct dimension
+            # random_embedding = np.random.normal(0, 1, self._dimension).astype(float)
+            
+            # # Normalize the vector to unit length (optional, but often done for embeddings)
+            # random_embedding = random_embedding / np.linalg.norm(random_embedding)
+            
+            # # Convert to list and return
+            # return random_embedding.tolist()                 
+        
         except Exception as e:
             logging.error(f"Error generating embedding: {str(e)}")
             raise

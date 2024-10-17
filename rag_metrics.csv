@@ -1116,3 +1116,220 @@ Biosafety_Guidance.txt,6214,15,414,500,214,0.05,0.02,2024-09-07T17:38:38.484012
 2024-10-05T15:38:42.756413,chunks,max_chunk_size,8321
 2024-10-05T15:38:42.756413,chunks,min_chunk_size,323
 2024-10-05T15:38:42.756413,chunks,document,b'FSAP_Annual_Report_2022_508.pdf'
+2024-10-05T20:02:53.992112,embeddings,num_embeddings,21
+2024-10-05T20:02:53.992112,embeddings,embedding_dimension,1536
+2024-10-05T20:02:53.992112,embeddings,embedding_generation_start_time,1728172969.7142262
+2024-10-05T20:02:53.992112,embeddings,embedding_generation_end_time,1728172973.9921126
+2024-10-05T20:02:53.992112,embeddings,embedding_generation_time,4.277886390686035
+2024-10-05T20:02:54.177390,chunks,total_words,9038
+2024-10-05T20:02:54.177390,chunks,num_chunks,21
+2024-10-05T20:02:54.177390,chunks,avg_chunk_size,3464.3333333333335
+2024-10-05T20:02:54.177390,chunks,max_chunk_size,8321
+2024-10-05T20:02:54.177390,chunks,min_chunk_size,323
+2024-10-05T20:02:54.177390,chunks,document,b'FSAP_Annual_Report_2022_508.pdf'
+2024-10-05T20:02:59.565679,chunks,total_words,9038
+2024-10-05T20:02:59.565679,chunks,num_chunks,21
+2024-10-05T20:02:59.565679,chunks,avg_chunk_size,3464.3333333333335
+2024-10-05T20:02:59.565679,chunks,max_chunk_size,8321
+2024-10-05T20:02:59.565679,chunks,min_chunk_size,323
+2024-10-05T20:02:59.565679,chunks,document,b'FSAP_Annual_Report_2022_508.pdf'
+2024-10-05T20:03:04.165800,chunks,total_words,9038
+2024-10-05T20:03:04.165800,chunks,num_chunks,21
+2024-10-05T20:03:04.165800,chunks,avg_chunk_size,3464.3333333333335
+2024-10-05T20:03:04.165800,chunks,max_chunk_size,8321
+2024-10-05T20:03:04.165800,chunks,min_chunk_size,323
+2024-10-05T20:03:04.165800,chunks,document,b'FSAP_Annual_Report_2022_508.pdf'
+2024-10-05T21:56:09.883899,embeddings,num_embeddings,21
+2024-10-05T21:56:09.883899,embeddings,embedding_dimension,1536
+2024-10-05T21:56:09.883899,embeddings,embedding_generation_start_time,1728179712.6980565
+2024-10-05T21:56:09.883899,embeddings,embedding_generation_end_time,1728179769.8838992
+2024-10-05T21:56:09.883899,embeddings,embedding_generation_time,57.185842752456665
+2024-10-05T21:56:10.045190,chunks,total_words,9038
+2024-10-05T21:56:10.045190,chunks,num_chunks,21
+2024-10-05T21:56:10.045190,chunks,avg_chunk_size,3464.3333333333335
+2024-10-05T21:56:10.045190,chunks,max_chunk_size,8321
+2024-10-05T21:56:10.045190,chunks,min_chunk_size,323
+2024-10-05T21:56:10.045190,chunks,document,b'FSAP_Annual_Report_2022_508.pdf'
+2024-10-05T21:56:12.751647,chunks,total_words,9038
+2024-10-05T21:56:12.751647,chunks,num_chunks,21
+2024-10-05T21:56:12.751647,chunks,avg_chunk_size,3464.3333333333335
+2024-10-05T21:56:12.751647,chunks,max_chunk_size,8321
+2024-10-05T21:56:12.751647,chunks,min_chunk_size,323
+2024-10-05T21:56:12.751647,chunks,document,b'FSAP_Annual_Report_2022_508.pdf'
+2024-10-05T21:56:17.010608,chunks,total_words,9038
+2024-10-05T21:56:17.010608,chunks,num_chunks,21
+2024-10-05T21:56:17.010608,chunks,avg_chunk_size,3464.3333333333335
+2024-10-05T21:56:17.010608,chunks,max_chunk_size,8321
+2024-10-05T21:56:17.010608,chunks,min_chunk_size,323
+2024-10-05T21:56:17.010608,chunks,document,b'FSAP_Annual_Report_2022_508.pdf'
+2024-10-08T10:38:12.066659,embeddings,num_embeddings,2
+2024-10-08T10:38:12.066659,embeddings,embedding_dimension,1536
+2024-10-08T10:38:12.066659,embeddings,embedding_generation_start_time,1728398291.3525643
+2024-10-08T10:38:12.066659,embeddings,embedding_generation_end_time,1728398292.0656538
+2024-10-08T10:38:12.066659,embeddings,embedding_generation_time,0.7130894660949707
+2024-10-08T10:38:12.373022,chunks,total_words,538
+2024-10-08T10:38:12.373022,chunks,num_chunks,2
+2024-10-08T10:38:12.373022,chunks,avg_chunk_size,5249.5
+2024-10-08T10:38:12.373022,chunks,max_chunk_size,8877
+2024-10-08T10:38:12.373022,chunks,min_chunk_size,1622
+2024-10-08T10:38:12.373022,chunks,document,b'Application of Multi-Criteria Decision Analysis Techniques for Informing Select Agent Designation and Decision Making.pdf'
+2024-10-08T10:38:16.815508,chunks,total_words,538
+2024-10-08T10:38:16.815508,chunks,num_chunks,2
+2024-10-08T10:38:16.815508,chunks,avg_chunk_size,5249.5
+2024-10-08T10:38:16.815508,chunks,max_chunk_size,8877
+2024-10-08T10:38:16.815508,chunks,min_chunk_size,1622
+2024-10-08T10:38:16.815508,chunks,document,b'Application of Multi-Criteria Decision Analysis Techniques for Informing Select Agent Designation and Decision Making.pdf'
+2024-10-08T10:38:30.377413,chunks,total_words,538
+2024-10-08T10:38:30.377413,chunks,num_chunks,2
+2024-10-08T10:38:30.377413,chunks,avg_chunk_size,5249.5
+2024-10-08T10:38:30.377413,chunks,max_chunk_size,8877
+2024-10-08T10:38:30.377413,chunks,min_chunk_size,1622
+2024-10-08T10:38:30.377413,chunks,document,b'Application of Multi-Criteria Decision Analysis Techniques for Informing Select Agent Designation and Decision Making.pdf'
+2024-10-08T10:42:17.261330,embeddings,num_embeddings,2
+2024-10-08T10:42:17.261330,embeddings,embedding_dimension,1536
+2024-10-08T10:42:17.261330,embeddings,embedding_generation_start_time,1728398536.7261722
+2024-10-08T10:42:17.261330,embeddings,embedding_generation_end_time,1728398537.2613304
+2024-10-08T10:42:17.261330,embeddings,embedding_generation_time,0.5351581573486328
+2024-10-08T10:42:17.549300,chunks,total_words,538
+2024-10-08T10:42:17.549300,chunks,num_chunks,2
+2024-10-08T10:42:17.549300,chunks,avg_chunk_size,5249.5
+2024-10-08T10:42:17.549300,chunks,max_chunk_size,8877
+2024-10-08T10:42:17.549300,chunks,min_chunk_size,1622
+2024-10-08T10:42:17.549300,chunks,document,b'Application of Multi-Criteria Decision Analysis Techniques for Informing Select Agent Designation and Decision Making.pdf'
+2024-10-08T10:42:18.665920,chunks,total_words,538
+2024-10-08T10:42:18.665920,chunks,num_chunks,2
+2024-10-08T10:42:18.665920,chunks,avg_chunk_size,5249.5
+2024-10-08T10:42:18.665920,chunks,max_chunk_size,8877
+2024-10-08T10:42:18.665920,chunks,min_chunk_size,1622
+2024-10-08T10:42:18.665920,chunks,document,b'Application of Multi-Criteria Decision Analysis Techniques for Informing Select Agent Designation and Decision Making.pdf'
+2024-10-08T10:42:58.094717,chunks,total_words,538
+2024-10-08T10:42:58.094717,chunks,num_chunks,2
+2024-10-08T10:42:58.094717,chunks,avg_chunk_size,5249.5
+2024-10-08T10:42:58.094717,chunks,max_chunk_size,8877
+2024-10-08T10:42:58.094717,chunks,min_chunk_size,1622
+2024-10-08T10:42:58.094717,chunks,document,b'Application of Multi-Criteria Decision Analysis Techniques for Informing Select Agent Designation and Decision Making.pdf'
+2024-10-08T12:35:22.001650,embeddings,num_embeddings,2
+2024-10-08T12:35:22.001650,embeddings,embedding_dimension,1536
+2024-10-08T12:35:22.001650,embeddings,embedding_generation_start_time,1728405321.0304534
+2024-10-08T12:35:22.001650,embeddings,embedding_generation_end_time,1728405322.000662
+2024-10-08T12:35:22.001650,embeddings,embedding_generation_time,0.9702086448669434
+2024-10-08T12:35:22.232616,chunks,total_words,538
+2024-10-08T12:35:22.232616,chunks,num_chunks,2
+2024-10-08T12:35:22.232616,chunks,avg_chunk_size,5249.5
+2024-10-08T12:35:22.232616,chunks,max_chunk_size,8877
+2024-10-08T12:35:22.232616,chunks,min_chunk_size,1622
+2024-10-08T12:35:22.232616,chunks,document,b'Application of Multi-Criteria Decision Analysis Techniques for Informing Select Agent Designation and Decision Making.pdf'
+2024-10-08T12:35:25.382181,chunks,total_words,538
+2024-10-08T12:35:25.382181,chunks,num_chunks,2
+2024-10-08T12:35:25.382181,chunks,avg_chunk_size,5249.5
+2024-10-08T12:35:25.382181,chunks,max_chunk_size,8877
+2024-10-08T12:35:25.382181,chunks,min_chunk_size,1622
+2024-10-08T12:35:25.382181,chunks,document,b'Application of Multi-Criteria Decision Analysis Techniques for Informing Select Agent Designation and Decision Making.pdf'
+2024-10-08T12:35:35.719808,chunks,total_words,538
+2024-10-08T12:35:35.719808,chunks,num_chunks,2
+2024-10-08T12:35:35.719808,chunks,avg_chunk_size,5249.5
+2024-10-08T12:35:35.719808,chunks,max_chunk_size,8877
+2024-10-08T12:35:35.719808,chunks,min_chunk_size,1622
+2024-10-08T12:35:35.719808,chunks,document,b'Application of Multi-Criteria Decision Analysis Techniques for Informing Select Agent Designation and Decision Making.pdf'
+2024-10-08T15:17:07.446201,embeddings,num_embeddings,2
+2024-10-08T15:17:07.446201,embeddings,embedding_dimension,1536
+2024-10-08T15:17:07.446201,embeddings,embedding_generation_start_time,1728415026.7305226
+2024-10-08T15:17:07.446201,embeddings,embedding_generation_end_time,1728415027.4462016
+2024-10-08T15:17:07.446201,embeddings,embedding_generation_time,0.7156789302825928
+2024-10-08T15:17:07.650914,chunks,total_words,538
+2024-10-08T15:17:07.650914,chunks,num_chunks,2
+2024-10-08T15:17:07.650914,chunks,avg_chunk_size,5249.5
+2024-10-08T15:17:07.650914,chunks,max_chunk_size,8877
+2024-10-08T15:17:07.650914,chunks,min_chunk_size,1622
+2024-10-08T15:17:07.650914,chunks,document,b'Application of Multi-Criteria Decision Analysis Techniques for Informing Select Agent Designation and Decision Making.pdf'
+2024-10-08T15:17:09.898763,chunks,total_words,538
+2024-10-08T15:17:09.898763,chunks,num_chunks,2
+2024-10-08T15:17:09.898763,chunks,avg_chunk_size,5249.5
+2024-10-08T15:17:09.898763,chunks,max_chunk_size,8877
+2024-10-08T15:17:09.898763,chunks,min_chunk_size,1622
+2024-10-08T15:17:09.898763,chunks,document,b'Application of Multi-Criteria Decision Analysis Techniques for Informing Select Agent Designation and Decision Making.pdf'
+2024-10-08T15:25:25.753405,chunks,total_words,538
+2024-10-08T15:25:25.753405,chunks,num_chunks,2
+2024-10-08T15:25:25.753405,chunks,avg_chunk_size,5249.5
+2024-10-08T15:25:25.753405,chunks,max_chunk_size,8877
+2024-10-08T15:25:25.753405,chunks,min_chunk_size,1622
+2024-10-08T15:25:25.753405,chunks,document,b'Application of Multi-Criteria Decision Analysis Techniques for Informing Select Agent Designation and Decision Making.pdf'
+2024-10-08T15:28:54.193013,embeddings,num_embeddings,2
+2024-10-08T15:28:54.193013,embeddings,embedding_dimension,1536
+2024-10-08T15:28:54.193013,embeddings,embedding_generation_start_time,1728415733.2402637
+2024-10-08T15:28:54.193013,embeddings,embedding_generation_end_time,1728415734.1920078
+2024-10-08T15:28:54.193013,embeddings,embedding_generation_time,0.9517440795898438
+2024-10-08T15:28:54.400107,chunks,total_words,538
+2024-10-08T15:28:54.400107,chunks,num_chunks,2
+2024-10-08T15:28:54.400107,chunks,avg_chunk_size,5249.5
+2024-10-08T15:28:54.400107,chunks,max_chunk_size,8877
+2024-10-08T15:28:54.400107,chunks,min_chunk_size,1622
+2024-10-08T15:28:54.400107,chunks,document,b'Application of Multi-Criteria Decision Analysis Techniques for Informing Select Agent Designation and Decision Making.pdf'
+2024-10-08T15:28:58.351956,chunks,total_words,538
+2024-10-08T15:28:58.351956,chunks,num_chunks,2
+2024-10-08T15:28:58.351956,chunks,avg_chunk_size,5249.5
+2024-10-08T15:28:58.351956,chunks,max_chunk_size,8877
+2024-10-08T15:28:58.351956,chunks,min_chunk_size,1622
+2024-10-08T15:28:58.351956,chunks,document,b'Application of Multi-Criteria Decision Analysis Techniques for Informing Select Agent Designation and Decision Making.pdf'
+2024-10-08T15:29:17.459954,chunks,total_words,538
+2024-10-08T15:29:17.459954,chunks,num_chunks,2
+2024-10-08T15:29:17.459954,chunks,avg_chunk_size,5249.5
+2024-10-08T15:29:17.459954,chunks,max_chunk_size,8877
+2024-10-08T15:29:17.459954,chunks,min_chunk_size,1622
+2024-10-08T15:29:17.459954,chunks,document,b'Application of Multi-Criteria Decision Analysis Techniques for Informing Select Agent Designation and Decision Making.pdf'
+2024-10-08T17:37:29.801332,chunks,total_words,538
+2024-10-08T17:37:29.801332,chunks,num_chunks,2
+2024-10-08T17:37:29.801332,chunks,avg_chunk_size,5249.5
+2024-10-08T17:37:29.801332,chunks,max_chunk_size,8877
+2024-10-08T17:37:29.801332,chunks,min_chunk_size,1622
+2024-10-08T17:37:29.801332,chunks,document,b'Application of Multi-Criteria Decision Analysis Techniques for Informing Select Agent Designation and Decision Making.pdf'
+2024-10-08T17:37:48.423983,chunks,total_words,538
+2024-10-08T17:37:48.423983,chunks,num_chunks,2
+2024-10-08T17:37:48.423983,chunks,avg_chunk_size,5249.5
+2024-10-08T17:37:48.423983,chunks,max_chunk_size,8877
+2024-10-08T17:37:48.423983,chunks,min_chunk_size,1622
+2024-10-08T17:37:48.423983,chunks,document,b'Application of Multi-Criteria Decision Analysis Techniques for Informing Select Agent Designation and Decision Making.pdf'
+2024-10-08T17:38:48.873428,chunks,total_words,538
+2024-10-08T17:38:48.873428,chunks,num_chunks,2
+2024-10-08T17:38:48.873428,chunks,avg_chunk_size,5249.5
+2024-10-08T17:38:48.873428,chunks,max_chunk_size,8877
+2024-10-08T17:38:48.873428,chunks,min_chunk_size,1622
+2024-10-08T17:38:48.873428,chunks,document,b'Application of Multi-Criteria Decision Analysis Techniques for Informing Select Agent Designation and Decision Making.pdf'
+2024-10-08T17:50:54.511062,embeddings,num_embeddings,2
+2024-10-08T17:50:54.511062,embeddings,embedding_dimension,1536
+2024-10-08T17:50:54.511062,embeddings,embedding_generation_start_time,1728424253.4046767
+2024-10-08T17:50:54.511062,embeddings,embedding_generation_end_time,1728424254.5100439
+2024-10-08T17:50:54.511062,embeddings,embedding_generation_time,1.1053671836853027
+2024-10-08T17:50:54.657011,chunks,total_words,538
+2024-10-08T17:50:54.657011,chunks,num_chunks,2
+2024-10-08T17:50:54.657011,chunks,avg_chunk_size,5249.5
+2024-10-08T17:50:54.657011,chunks,max_chunk_size,8877
+2024-10-08T17:50:54.657011,chunks,min_chunk_size,1622
+2024-10-08T17:50:54.657011,chunks,document,b'Application of Multi-Criteria Decision Analysis Techniques for Informing Select Agent Designation and Decision Making.pdf'
+2024-10-08T17:51:16.293997,chunks,total_words,538
+2024-10-08T17:51:16.293997,chunks,num_chunks,2
+2024-10-08T17:51:16.293997,chunks,avg_chunk_size,5249.5
+2024-10-08T17:51:16.293997,chunks,max_chunk_size,8877
+2024-10-08T17:51:16.293997,chunks,min_chunk_size,1622
+2024-10-08T17:51:16.293997,chunks,document,b'Application of Multi-Criteria Decision Analysis Techniques for Informing Select Agent Designation and Decision Making.pdf'
+2024-10-10T12:52:29.516672,chunks,total_words,538
+2024-10-10T12:52:29.516672,chunks,num_chunks,2
+2024-10-10T12:52:29.516672,chunks,avg_chunk_size,5249.5
+2024-10-10T12:52:29.516672,chunks,max_chunk_size,8877
+2024-10-10T12:52:29.516672,chunks,min_chunk_size,1622
+2024-10-10T12:52:29.516672,chunks,document,b'Application of Multi-Criteria Decision Analysis Techniques for Informing Select Agent Designation and Decision Making.pdf'
+2024-10-10T14:24:45.979950,embeddings,num_embeddings,2
+2024-10-10T14:24:45.979950,embeddings,embedding_dimension,384
+2024-10-10T14:24:45.979950,embeddings,embedding_generation_start_time,1728584684.9938588
+2024-10-10T14:24:45.979950,embeddings,embedding_generation_end_time,1728584685.9799507
+2024-10-10T14:24:45.979950,embeddings,embedding_generation_time,0.9860918521881104
+2024-10-15T12:54:40.651455,embeddings,num_embeddings,10
+2024-10-15T12:54:40.651455,embeddings,embedding_dimension,1536
+2024-10-15T12:54:40.651455,embeddings,embedding_generation_start_time,1729011200.7351952
+2024-10-15T12:54:40.651455,embeddings,embedding_generation_end_time,1729011280.6514556
+2024-10-15T12:54:40.651455,embeddings,embedding_generation_time,79.91626048088074
+2024-10-15T14:28:47.785955,embeddings,num_embeddings,10
+2024-10-15T14:28:47.785955,embeddings,embedding_dimension,1536
+2024-10-15T14:28:47.785955,embeddings,embedding_generation_start_time,1729016865.482535
+2024-10-15T14:28:47.785955,embeddings,embedding_generation_end_time,1729016927.7859557
+2024-10-15T14:28:47.785955,embeddings,embedding_generation_time,62.30342078208923
