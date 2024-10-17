@@ -8,3 +8,8 @@ class ConfigSingleton:
         if cls._instance is None:
             cls._instance = Configuration(config_file)
         return cls._instance
+
+
+
+    def get_path_config(self, key, default=None):
+        return self.config.get('paths', {}).get(key, default)

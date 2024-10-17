@@ -124,7 +124,8 @@ class Configuration:
         if active_model == "azure_openai":
             return OpenAIEmbeddingConfig(**embedding_config.models["azure_openai"])
         elif active_model == "huggingface":
-            return HuggingFaceEmbeddingConfig(**embedding_config.models["huggingface"])
+            return HuggingFaceEmbeddingConfig(model_name="sentence-transformers/all-MiniLM-L6-v2", 
+                                              dimension=1536 )
         else:
             raise ValueError(f"Unknown embedding model provider: {active_model}")
     
