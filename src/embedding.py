@@ -33,6 +33,7 @@ class EmbeddingGenerator:
         try:
             response = self.client.embeddings.create(
                 input=text,
+                timeout=20,                 
                 model=self.model  
             )
             return response.data[0].embedding
