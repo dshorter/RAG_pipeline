@@ -35,7 +35,7 @@ def main():
     result = pipeline.run_pipeline(biosafety_file)
 
     # Log the summary of the pipeline result
-    logger.info("Pipeline execution completed. Summary:\n%s", result.summary())
+    logger.info("Pipeline execution completed! " )  # Summary:\n%s", result.summary())
 
     # Save the processed document (optional)
     # output_file = os.path.join(config.get_pipeline_config().processed_docs_dir, f'processed_{result.document_name}.json')
@@ -53,13 +53,10 @@ def main():
 
     logger.info("Processed document saved successfully")
 
-    # Example query (will just print a placeholder message for now)
-    user_query = "What are the main safety measures for handling select agents?"
-    logger.info("Executing example query: %s", user_query)
-    response = pipeline.query(user_query)
-    logger.info("Query response: %s", response)
 
-    # logger.info("RAG pipeline execution completed")
+
+
+
 
 if __name__ == "__main__":
     main()

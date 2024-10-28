@@ -1,353 +1,160 @@
-"""
-Enhanced AzureOpenAIEmbeddingGenerator with comprehensive error handling,
-rate limit management, and detailed logging.
-
-Features:
-- Rate limit tracking and management
-- Detailed performance monitoring
-- Memory usage tracking
-- Comprehensive error handling
-- Batch processing with status monitoring
-- Automatic retries with exponential backoff
-"""
-
 from openai import AzureOpenAI
 from azure.identity import ChainedTokenCredential, ManagedIdentityCredential, EnvironmentCredential, AzureCliCredential
-from typing import List, Dict, Any
-import requests
+from typing import List, Dict, Any, Optional
 import logging
 import time
-import random
-from datetime import datetime
-from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
-from src.logging_config import get_logger
+import numpy as np
 from src.embedding_generator_base_class import EmbeddingGenerator
-from src.singleton_config import ConfigSingleton
-import openai
+from src.rate_limiter import AzureRateLimiter, TokenizerModel    
+from src.singleton_config import ConfigSingleton      
 
 class AzureOpenAIEmbeddingGenerator(EmbeddingGenerator):
     def __init__(self, azure_endpoint: str, api_version: str, deployment: str):
-        self.logger = get_logger('embedding.azure')
-        self.logger.debug("Initializing Azure OpenAI Embedding Generator",
-                         extra={'operation': 'initialization'})
+        """
+        Initialize the Azure OpenAI Embedding Generator with rate limiting.
         
-        self.config = ConfigSingleton()
+        Args:
+            azure_endpoint: Azure OpenAI endpoint URL
+            api_version: API version to use
+            deployment: Deployment name for the embedding model
+        """
+        self.config =  ConfigSingleton(  ) 
+        self.azure_endpoint = azure_endpoint
+        self.api_version = api_version
+        self.deployment = deployment
+        self.model =  self.config.get_active_embedding_config( ).deployment_name  
+        self._dimension = 1536  # Known dimension for this model
         
-        # Configuration setup
-        self.azure_endpoint = self.config.get_active_embedding_config().api_base
-        self.api_version = self.config.get_active_embedding_config().api_version
-        self.deployment = "api-shared-text-embedding-ada-v002-nofilter"
-        self.model = "api-shared-text-embedding-ada-v002-nofilter"
-        self._dimension = self.config.get_active_embedding_config().dimension
+        # Initialize rate limiter
+        self.rate_limiter = AzureRateLimiter(
+            model_type=TokenizerModel.EMBEDDING,
+            requests_per_minute_limit=3500,
+            tokens_per_minute_limit=350000
+        )
         
-        # Retry and timeout configurations
-        self.request_timeout = 30  # seconds
-        self.max_retries = 3
+        # Set up logging
+        self.logger = logging.getLogger(__name__)
         
-        # Rate limit tracking
-        self.rate_limits = {
-            'requests': 0,
-            'last_reset': time.time(),
-            'rate_limit_hits': 0
-        }
-        
+        # Initialize client
         try:
             self.client = self._initialize_client()
-            self.logger.info("Azure OpenAI client initialized successfully",
-                           extra={
-                               'operation': 'initialization',
-                               'endpoint': self.azure_endpoint,
-                               'model': self.model
-                           })
+            self.logger.info("Azure OpenAI client initialized successfully")
         except Exception as e:
-            self.logger.error("Failed to initialize Azure OpenAI client",
-                            extra={
-                                'operation': 'initialization_error',
-                                'error': str(e),
-                                'error_type': type(e).__name__
-                            })
+            self.logger.error(f"Failed to initialize Azure OpenAI client: {str(e)}")
             raise
 
-    def _initialize_client(self):
-        """Initialize Azure OpenAI client with credential chain and testing."""
+    def _initialize_client(self) -> AzureOpenAI:
+        """Initialize the Azure OpenAI client with proper credentials."""
         try:
-            self.logger.debug("Creating credential chain",
-                            extra={'operation': 'client_init'})
-            
             credential = ChainedTokenCredential(
                 ManagedIdentityCredential(),
                 EnvironmentCredential(),
                 AzureCliCredential()
             )
+            access_token = credential.get_token("https://cognitiveservices.azure.com/.default")
             
-            token_start = time.time()
-            access_token = credential.get_token("https://cognitiveservices.azure.com/.default",
-                                              timeout=30)
-            token_duration = time.time() - token_start
-            
-            self.logger.debug("Token acquired",
-                            extra={
-                                'operation': 'token_acquisition',
-                                'duration': token_duration
-                            })
-            
-            client = AzureOpenAI(
+            return AzureOpenAI(
                 api_key=access_token.token,
-                azure_endpoint=self.azure_endpoint,
-                api_version=self.api_version
+                azure_endpoint=self.config.get_active_embedding_config(  ).api_base,    
+                api_version=self.config.get_active_embedding_config(  ).api_version        
             )
-            
-            # Test the client with a minimal request
-            test_start = time.time()
-            test_response = client.embeddings.create(
-                input="test",
-                model=self.model,
-                timeout=10
-            )
-            test_duration = time.time() - test_start
-            
-            self.logger.debug("Client test successful",
-                            extra={
-                                'operation': 'client_test',
-                                'duration': test_duration
-                            })
-            
-            return client
-            
         except Exception as e:
-            self.logger.error("Client initialization failed",
-                            extra={
-                                'operation': 'client_init_error',
-                                'error': str(e),
-                                'error_type': type(e).__name__
-                            })
+            self.logger.error(f"Failed to initialize Azure OpenAI client: {str(e)}")
             raise
 
-    def _track_request(self):
-        """Track API request counts and rate limits"""
-        current_time = time.time()
-        # Reset counter if it's been more than a minute
-        if current_time - self.rate_limits['last_reset'] > 60:
-            self.logger.debug("Resetting rate limit counter",
-                            extra={
-                                'operation': 'rate_limit_reset',
-                                'previous_count': self.rate_limits['requests'],
-                                'duration': current_time - self.rate_limits['last_reset']
-                            })
-            self.rate_limits['requests'] = 0
-            self.rate_limits['last_reset'] = current_time
-        
-        self.rate_limits['requests'] += 1
-
-    def _handle_rate_limit(self):
-        """Handle rate limit occurrence"""
-        self.rate_limits['rate_limit_hits'] += 1
-        self.logger.warning("Rate limit hit",
-                          extra={
-                              'operation': 'rate_limit',
-                              'total_hits': self.rate_limits['rate_limit_hits'],
-                              'requests_in_window': self.rate_limits['requests'],
-                              'window_duration': time.time() - self.rate_limits['last_reset']
-                          })
-
-    def get_rate_limit_status(self) -> Dict[str, Any]:
-        """Get current rate limit status and statistics"""
-        current_time = time.time()
-        window_duration = current_time - self.rate_limits['last_reset']
-        
-        status = {
-            'current_requests': self.rate_limits['requests'],
-            'total_rate_limit_hits': self.rate_limits['rate_limit_hits'],
-            'current_window_duration': round(window_duration, 2),
-            'requests_per_minute': round(self.rate_limits['requests'] / (window_duration / 60), 2) if window_duration > 0 else 0,
-            'window_start': datetime.fromtimestamp(self.rate_limits['last_reset']).isoformat(),
-            'is_likely_limited': self.rate_limits['requests'] >= 150  # Assuming 150 requests/min limit
-        }
-        
-        self.logger.debug("Rate limit status check",
-                         extra={
-                             'operation': 'rate_limit_status',
-                             'status': status
-                         })
-        
-        return status
-
-    @retry(
-        stop=stop_after_attempt(3),
-        wait=wait_exponential(multiplier=1, min=4, max=10),
-        retry=retry_if_exception_type(
-            (requests.exceptions.Timeout,
-             requests.exceptions.ConnectionError,
-             requests.exceptions.RequestException)
-        ),
-        before_sleep=lambda retry_state: logging.getLogger('embedding.azure').warning(
-            f"Retry attempt {retry_state.attempt_number} after error: {retry_state.outcome.exception()}",
-            extra={
-                'operation': 'retry_attempt',
-                'attempt_number': retry_state.attempt_number,
-                'error': str(retry_state.outcome.exception())
-            }
-        )
-    )
     def generate_embedding(self, text: str) -> List[float]:
-        """Generate embedding for a single text string with comprehensive error handling."""
-        start_time = time.time()
+        """
+        Generate embedding for a single text chunk with rate limiting.
         
-        self.logger.debug("Starting embedding generation",
-                         extra={
-                             'operation': 'embedding_start',
-                             'text_length': len(text),
-                             'timeout': self.request_timeout,
-                             'current_requests': self.rate_limits['requests']
-                         })
-        
-        try:
-            self._track_request()
-            response = self.client.embeddings.create(
-                input=text,
-                model=self.model,
-                timeout=self.request_timeout
-            )
+        Args:
+            text: Text to generate embedding for
             
-            duration = time.time() - start_time
-            self.logger.info("Embedding generated successfully",
-                           extra={
-                               'operation': 'embedding_success',
-                               'duration': duration,
-                               'text_length': len(text),
-                               'requests_in_minute': self.rate_limits['requests']
-                           })
-            
-            return response.data[0].embedding
+        Returns:
+            List[float]: Embedding vector
+        """
+        # Check rate limits and text size
+        should_throttle, wait_time = self.rate_limiter.should_throttle(text)
+        if should_throttle:
+            if wait_time > 0:
+                self.logger.info(f"Rate limit prevention: waiting {wait_time:.2f}s")
+                time.sleep(wait_time)
+            else:
+                # Text is too large, needs to be handled by chunking system
+                raise ValueError(f"Text too large: {self.rate_limiter.count_tokens(text)} tokens")
 
-        except openai.RateLimitError as e:
-            duration = time.time() - start_time
-            self._handle_rate_limit()
-            self.logger.warning("Rate limit exceeded",
-                              extra={
-                                  'operation': 'rate_limit_error',
-                                  'duration': duration,
-                                  'error': str(e),
-                                  'requests_in_minute': self.rate_limits['requests']
-                              })
-            raise
-
-        except (requests.exceptions.Timeout,
-                requests.exceptions.ConnectTimeout,
-                requests.exceptions.ReadTimeout) as e:
-            duration = time.time() - start_time
-            self.logger.warning("Timeout during embedding generation",
-                              extra={
-                                  'operation': 'embedding_timeout',
-                                  'duration': duration,
-                                  'error': str(e),
-                                  'text_length': len(text)
-                              })
-            raise
-
-        except requests.exceptions.RequestException as e:
-            duration = time.time() - start_time
-            self.logger.error("Request error during embedding generation",
-                            extra={
-                                'operation': 'embedding_request_error',
-                                'duration': duration,
-                                'error': str(e),
-                                'error_type': type(e).__name__
-                            })
-            raise
-
-        except Exception as e:
-            duration = time.time() - start_time
-            self.logger.error("Unexpected error during embedding generation",
-                            extra={
-                                'operation': 'embedding_error',
-                                'duration': duration,
-                                'error': str(e),
-                                'error_type': type(e).__name__
-                            })
-            raise
-
-    def generate_embeddings(self, chunks: List[str]) -> List[List[float]]:
-        """Generate embeddings for a batch of text chunks with rate limit awareness."""
-        start_time = time.time()
-        total_chunks = len(chunks)
+        retry_count = 0
+        max_retries = 3
         
-        # Check rate limit status before starting batch
-        rate_status = self.get_rate_limit_status()
-        self.logger.debug(f"Starting batch embedding generation",
-                         extra={
-                             'operation': 'batch_start',
-                             'chunk_count': total_chunks,
-                             'total_text_length': sum(len(chunk) for chunk in chunks),
-                             'rate_limit_status': rate_status
-                         })
-        
-        embeddings = []
-        failed_chunks = 0
-        rate_limited_chunks = 0
-        
-        for i, chunk in enumerate(chunks, 1):
-            chunk_start = time.time()
+        while retry_count <= max_retries:
             try:
-                embedding = self.generate_embedding(chunk)
-                embeddings.append(embedding)
+                response = self.client.embeddings.create(
+                    input=text,
+                    model=self.model
+                )
                 
-                chunk_duration = time.time() - chunk_start
-                self.logger.debug(f"Chunk {i}/{total_chunks} embedded",
-                                extra={
-                                    'operation': 'chunk_success',
-                                    'chunk_number': i,
-                                    'total_chunks': total_chunks,
-                                    'duration': chunk_duration,
-                                    'chunk_length': len(chunk),
-                                    'requests_in_minute': self.rate_limits['requests']
-                                })
+                # Record successful request
+                self.rate_limiter.record_request(text, success=True)
                 
-            except openai.RateLimitError:
-                rate_limited_chunks += 1
-                # Get current status after rate limit hit
-                current_status = self.get_rate_limit_status()
-                self.logger.warning(f"Rate limit hit during batch processing",
-                                  extra={
-                                      'operation': 'batch_rate_limit',
-                                      'chunk_number': i,
-                                      'rate_limited_chunks': rate_limited_chunks,
-                                      'status': current_status
-                                  })
-                raise
+                return response.data[0].embedding
                 
             except Exception as e:
-                failed_chunks += 1
-                self.logger.error(f"Failed to generate embedding for chunk {i}",
-                                extra={
-                                    'operation': 'chunk_error',
-                                    'chunk_number': i,
-                                    'total_chunks': total_chunks,
-                                    'error': str(e),
-                                    'error_type': type(e).__name__,
-                                    'duration': time.time() - chunk_start
-                                })
-                raise
+                error_str = str(e)
+                self.rate_limiter.record_request(text, success=False, error=error_str)
+                
+                if "rate_limit" in error_str.lower():
+                    retry_count += 1
+                    if retry_count > max_retries:
+                        self.logger.error(f"Max retries ({max_retries}) exceeded for rate limit")
+                        raise
+                    wait_time = self.rate_limiter.handle_rate_limit(retry_count)
+                    self.logger.warning(f"Rate limit hit, attempt {retry_count}/{max_retries}, waiting {wait_time}s")
+                    time.sleep(wait_time)
+                else:
+                    self.logger.error(f"Error generating embedding: {error_str}")
+                    raise
+
+    def generate_embeddings(self, chunks: List[str]) -> List[List[float]]:
+        """
+        Generate embeddings for multiple text chunks with rate limiting.
         
-        total_duration = time.time() - start_time
-        final_status = self.get_rate_limit_status()
+        Args:
+            chunks: List of text chunks to generate embeddings for
+            
+        Returns:
+            List[List[float]]: List of embedding vectors
+        """
+        self.logger.info(f"Generating embeddings for {len(chunks)} chunks")
+        results = []
+        failed_chunks = []
         
-        self.logger.info("Batch embedding completed",
-                        extra={
-                            'operation': 'batch_complete',
-                            'total_chunks': total_chunks,
-                            'successful_chunks': len(embeddings),
-                            'failed_chunks': failed_chunks,
-                            'rate_limited_chunks': rate_limited_chunks,
-                            'total_duration': total_duration,
-                            'average_time_per_chunk': total_duration / total_chunks if total_chunks > 0 else 0,
-                            'final_rate_status': final_status
-                        })
+        for i, chunk in enumerate(chunks, 1):
+            try:
+                # Get current usage metrics for logging
+                usage = self.rate_limiter.get_current_metrics()
+                self.logger.debug(
+                    f"Processing chunk {i}/{len(chunks)}. "
+                    f"Current usage: {usage['requests_per_minute']}/min, "
+                    f"tokens: {usage['tokens_per_minute']}/min"
+                )
+                
+                embedding = self.generate_embedding(chunk)
+                results.append(embedding)
+                
+            except Exception as e:
+                self.logger.error(f"Failed to process chunk {i}: {str(e)}")
+                failed_chunks.append(i)
+                results.append(None)  # Maintain index alignment
         
-        return embeddings
+        if failed_chunks:
+            self.logger.warning(f"Failed to process chunks: {failed_chunks}")
+        
+        return results
+
+    def get_rate_limit_metrics(self) -> Dict[str, Any]:
+        """Get current rate limit metrics."""
+        return self.rate_limiter.get_current_metrics()
 
     @property
     def dimension(self) -> int:
+        """Get the dimension of the embeddings."""
         return self._dimension
-
-
