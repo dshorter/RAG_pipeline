@@ -1,0 +1,615 @@
+2024-10-28 15:08:51,206 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:51,433 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:51,554 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:51,689 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:51,819 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:51,945 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:52,056 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:52,185 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:52,303 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:52,436 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:52,558 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:52,691 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:52,811 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:52,940 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:53,070 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:53,204 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:53,326 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:53,450 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:53,523 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:08:53,524 - INFO - Retrying request to /embeddings in 1.000000 seconds
+2024-10-28 15:08:54,662 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:54,832 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:54,965 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:55,106 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:55,217 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:55,337 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:55,462 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:55,581 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:55,701 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:55,818 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:55,969 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:08:56,038 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:08:56,040 - INFO - Retrying request to /embeddings in 35.000000 seconds
+2024-10-28 15:09:31,247 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:31,315 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:09:31,317 - INFO - Retrying request to /embeddings in 1.000000 seconds
+2024-10-28 15:09:32,431 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:32,512 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:09:32,514 - INFO - Retrying request to /embeddings in 7.000000 seconds
+2024-10-28 15:09:39,730 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:39,866 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:40,031 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:40,156 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:40,302 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:40,431 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:40,568 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:40,693 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:40,833 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:40,952 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:41,074 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:41,192 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:41,317 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:41,447 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:41,572 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:41,709 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:41,852 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:42,031 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:42,195 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:42,326 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:42,455 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:42,587 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:42,759 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:42,893 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:43,039 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:43,194 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:43,271 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:09:43,273 - INFO - Retrying request to /embeddings in 7.000000 seconds
+2024-10-28 15:09:50,569 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:50,698 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:50,834 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:50,969 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:51,125 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:51,251 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:51,381 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:51,579 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:51,699 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:51,826 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:51,956 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:52,076 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:52,207 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:52,327 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:52,452 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:52,568 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:52,686 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:52,815 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:52,947 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:53,135 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:53,308 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:53,538 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:53,659 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:53,810 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:53,941 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:54,067 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:54,233 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:54,360 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:54,490 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:54,573 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:09:54,573 - INFO - Retrying request to /embeddings in 1.000000 seconds
+2024-10-28 15:09:55,700 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:55,827 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:55,981 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:56,106 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:56,250 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:56,389 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:56,518 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:56,671 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:56,804 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:56,955 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:57,108 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:09:57,176 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:09:57,177 - INFO - Retrying request to /embeddings in 35.000000 seconds
+2024-10-28 15:10:32,364 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:10:32,366 - INFO - Retrying request to /embeddings in 1.000000 seconds
+2024-10-28 15:10:33,485 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:33,564 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:10:33,567 - INFO - Retrying request to /embeddings in 7.000000 seconds
+2024-10-28 15:10:40,794 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:40,915 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:10:40,917 - INFO - Retrying request to /embeddings in 1.000000 seconds
+2024-10-28 15:10:42,085 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 400 model_error"
+2024-10-28 15:10:42,087 - ERROR - Error generating embedding: Error code: 400 - {'error': {'message': "This model's maximum context length is 8192 tokens, however you requested 11977 tokens (11977 in your prompt; 0 for the completion). Please reduce your prompt; or completion length.", 'type': 'invalid_request_error', 'param': None, 'code': None}}
+2024-10-28 15:10:42,088 - ERROR - Failed to process chunk 378: Error code: 400 - {'error': {'message': "This model's maximum context length is 8192 tokens, however you requested 11977 tokens (11977 in your prompt; 0 for the completion). Please reduce your prompt; or completion length.", 'type': 'invalid_request_error', 'param': None, 'code': None}}
+2024-10-28 15:10:42,295 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 400 model_error"
+2024-10-28 15:10:42,296 - ERROR - Error generating embedding: Error code: 400 - {'error': {'message': "This model's maximum context length is 8192 tokens, however you requested 17619 tokens (17619 in your prompt; 0 for the completion). Please reduce your prompt; or completion length.", 'type': 'invalid_request_error', 'param': None, 'code': None}}
+2024-10-28 15:10:42,296 - ERROR - Failed to process chunk 379: Error code: 400 - {'error': {'message': "This model's maximum context length is 8192 tokens, however you requested 17619 tokens (17619 in your prompt; 0 for the completion). Please reduce your prompt; or completion length.", 'type': 'invalid_request_error', 'param': None, 'code': None}}
+2024-10-28 15:10:42,367 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:10:42,368 - INFO - Retrying request to /embeddings in 1.000000 seconds
+2024-10-28 15:10:43,572 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:43,745 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:43,894 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:44,027 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:44,260 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:44,389 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:44,523 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:44,664 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:44,735 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:10:44,736 - INFO - Retrying request to /embeddings in 6.000000 seconds
+2024-10-28 15:10:50,973 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:51,100 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:51,218 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:51,343 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:51,459 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:51,594 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:51,716 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:51,838 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:51,962 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:52,085 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:52,222 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:52,357 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:52,478 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:52,656 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:52,765 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:52,915 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:53,096 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:53,239 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:53,379 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:53,495 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:53,610 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:53,723 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:53,841 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:53,961 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:54,078 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:54,198 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:54,350 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:54,480 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:54,603 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:54,670 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:10:54,672 - INFO - Retrying request to /embeddings in 2.000000 seconds
+2024-10-28 15:10:56,798 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:56,947 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:57,068 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:57,186 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:57,302 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:57,415 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:57,535 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:57,667 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:57,819 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:57,951 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:58,229 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:10:58,617 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:10:58,619 - INFO - Retrying request to /embeddings in 34.000000 seconds
+2024-10-28 15:11:32,976 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:33,100 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:33,175 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:11:33,177 - INFO - Retrying request to /embeddings in 1.000000 seconds
+2024-10-28 15:11:34,353 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:34,443 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:11:34,445 - INFO - Retrying request to /embeddings in 6.000000 seconds
+2024-10-28 15:11:40,696 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:40,764 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:11:40,764 - INFO - Retrying request to /embeddings in 1.000000 seconds
+2024-10-28 15:11:41,911 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:41,986 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:11:41,988 - INFO - Retrying request to /embeddings in 1.000000 seconds
+2024-10-28 15:11:43,143 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:43,279 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:43,409 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:43,523 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:43,637 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:43,755 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:43,890 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:44,015 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:44,134 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:44,268 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:44,392 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:44,514 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:44,850 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:45,032 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:45,148 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:45,273 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:45,393 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:45,507 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:45,624 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:45,742 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:45,916 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:46,174 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:46,249 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:11:46,250 - INFO - Retrying request to /embeddings in 5.000000 seconds
+2024-10-28 15:11:51,469 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:51,595 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:51,722 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:51,861 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:52,007 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:52,134 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:52,257 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:52,389 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:52,529 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:52,757 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:52,894 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:53,035 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:53,165 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:53,304 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:53,453 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:53,598 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:53,722 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:53,864 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:54,025 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:54,164 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:54,290 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:54,438 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:54,582 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:54,712 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:54,864 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:55,061 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:55,217 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:55,348 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:55,508 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:55,587 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:11:55,589 - INFO - Retrying request to /embeddings in 2.000000 seconds
+2024-10-28 15:11:57,769 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:57,912 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:58,062 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:58,203 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:58,343 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:58,506 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:11:58,606 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:11:58,608 - INFO - Retrying request to /embeddings in 35.000000 seconds
+2024-10-28 15:12:34,106 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:34,175 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:12:34,176 - INFO - Retrying request to /embeddings in 1.000000 seconds
+2024-10-28 15:12:35,331 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:35,419 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:12:35,421 - INFO - Retrying request to /embeddings in 6.000000 seconds
+2024-10-28 15:12:41,622 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:41,691 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:12:41,694 - INFO - Retrying request to /embeddings in 1.000000 seconds
+2024-10-28 15:12:42,819 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:42,927 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:12:42,929 - INFO - Retrying request to /embeddings in 1.000000 seconds
+2024-10-28 15:12:44,045 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:44,167 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:44,288 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:44,417 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:44,596 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:44,814 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:44,958 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:45,089 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:45,227 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:45,387 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:45,534 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:45,666 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:45,790 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:45,911 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:46,040 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:46,164 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:46,304 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:46,459 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:46,581 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:46,703 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:46,797 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:12:46,799 - INFO - Retrying request to /embeddings in 5.000000 seconds
+2024-10-28 15:12:52,035 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:52,165 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:52,286 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:52,436 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:52,544 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:52,662 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:52,788 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:52,915 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:53,038 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:53,165 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:53,289 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:53,411 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:53,525 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:53,643 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:53,766 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:53,890 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:54,010 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:54,130 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:54,237 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:54,362 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:54,478 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:54,633 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:54,763 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:54,912 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:55,034 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:55,145 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:55,210 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:12:55,212 - INFO - Retrying request to /embeddings in 1.000000 seconds
+2024-10-28 15:12:56,342 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:56,463 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:56,595 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:56,727 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:56,846 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:56,919 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:12:56,919 - INFO - Retrying request to /embeddings in 1.000000 seconds
+2024-10-28 15:12:58,065 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:58,194 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:58,317 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:58,445 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:58,569 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:58,689 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:58,912 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:59,035 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:59,151 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:59,272 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:59,398 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:12:59,500 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:12:59,501 - INFO - Retrying request to /embeddings in 35.000000 seconds
+2024-10-28 15:13:34,727 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:34,856 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:34,958 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:13:34,959 - INFO - Retrying request to /embeddings in 1.000000 seconds
+2024-10-28 15:13:36,175 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:36,244 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:13:36,246 - INFO - Retrying request to /embeddings in 6.000000 seconds
+2024-10-28 15:13:42,472 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:42,559 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:13:42,561 - INFO - Retrying request to /embeddings in 1.000000 seconds
+2024-10-28 15:13:43,760 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:43,846 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:13:43,848 - INFO - Retrying request to /embeddings in 1.000000 seconds
+2024-10-28 15:13:45,002 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:45,120 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:45,334 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:45,459 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:45,575 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:45,686 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:45,813 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:45,934 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:46,046 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:46,160 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:46,279 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:46,391 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:46,499 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:46,605 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:46,730 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:46,839 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:46,973 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:47,103 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:47,219 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:47,544 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:47,686 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:47,806 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:47,946 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:48,131 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:48,255 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:48,403 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:48,551 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:48,728 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:48,807 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:13:48,808 - INFO - Retrying request to /embeddings in 4.000000 seconds
+2024-10-28 15:13:52,934 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:53,052 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:53,176 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:53,302 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:53,411 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:53,543 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:53,658 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:53,800 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:54,024 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:54,026 - WARNING - Failed to process chunks: [378, 379]
+2024-10-28 15:13:54,027 - INFO - Generated 595 embeddings in 504.77 seconds
+2024-10-28 15:13:54,028 - INFO - Indexing 595 chunks for document c84da06b6b4547b0ab4dcac3d41d98b8
+2024-10-28 15:13:54,029 - ERROR - Failed to insert document metadata
+2024-10-28 15:13:54,029 - ERROR - Database operation failed
+2024-10-28 15:13:54,029 - ERROR - Failed to process document ['deflate', 'deflate', 'deflate'] (ID: c84da06b6b4547b0ab4dcac3d41d98b8): Error binding parameter 1 - probably unsupported type.
+2024-10-28 15:13:54,030 - INFO - Pipeline execution completed for all documents. Total documents processed: 0
+2024-10-28 15:13:54,037 - INFO - Completed processing: Establishing a National Biological Laboratory Safety and Security Monitoring Program _ Biosecurity and Bioterrorism_ Biodefense Strategy, Practice, and Science.mhtml
+2024-10-28 15:13:54,038 - INFO - Processing file: ./data/raw\FSAP-Strategic-Plan-2017_508_1.pdf
+2024-10-28 15:13:54,038 - INFO - Processing document(s): ./data/raw\FSAP-Strategic-Plan-2017_508_1.pdf
+2024-10-28 15:13:54,187 - INFO - Preparing document: FSAP-Strategic-Plan-2017_508_1.pdf
+2024-10-28 15:13:54,217 - INFO - Number of sentences: 1884
+2024-10-28 15:13:54,282 - INFO - Number of tokens: 6550
+2024-10-28 15:13:54,284 - INFO - Number of tokens after stop word removal: 5240
+2024-10-28 15:13:54,284 - INFO - Final cleaned text length: 28531
+2024-10-28 15:13:54,285 - INFO - Processing document: b'FSAP-Strategic-Plan-2017_508_1.pdf' (ID: 0f615047eb48479cb265994a5f74a487)
+2024-10-28 15:13:54,285 - INFO - Chunking document
+2024-10-28 15:13:54,285 - INFO - Document chunked into 12 parts
+2024-10-28 15:13:54,286 - INFO - Generating embeddings for 12 chunks
+2024-10-28 15:13:54,286 - INFO - Generating embeddings for 12 chunks
+2024-10-28 15:13:54,424 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:54,562 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:54,774 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:54,917 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:55,073 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:55,183 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:55,333 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:55,450 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:55,567 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:55,699 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:55,815 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:55,955 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:55,961 - INFO - Generated 12 embeddings in 1.67 seconds
+2024-10-28 15:13:55,961 - INFO - Indexing 12 chunks for document 0f615047eb48479cb265994a5f74a487
+2024-10-28 15:13:55,964 - ERROR - Failed to insert document metadata
+2024-10-28 15:13:55,964 - ERROR - Database operation failed
+2024-10-28 15:13:55,965 - ERROR - Failed to process document b'FSAP-Strategic-Plan-2017_508_1.pdf' (ID: 0f615047eb48479cb265994a5f74a487): Error binding parameter 2 - probably unsupported 
+type.
+2024-10-28 15:13:55,966 - INFO - Pipeline execution completed for all documents. Total documents processed: 0
+2024-10-28 15:13:55,967 - INFO - Completed processing: FSAP-Strategic-Plan-2017_508_1.pdf
+2024-10-28 15:13:55,967 - INFO - Processing file: ./data/raw\FSAP_Annual_Report_2022_508.pdf
+2024-10-28 15:13:55,968 - INFO - Processing document(s): ./data/raw\FSAP_Annual_Report_2022_508.pdf
+2024-10-28 15:13:56,210 - INFO - Preparing document: FSAP_Annual_Report_2022_508.pdf
+2024-10-28 15:13:56,225 - INFO - Number of sentences: 352
+2024-10-28 15:13:56,267 - INFO - Number of tokens: 12691
+2024-10-28 15:13:56,269 - INFO - Number of tokens after stop word removal: 9038
+2024-10-28 15:13:56,269 - INFO - Final cleaned text length: 66041
+2024-10-28 15:13:56,270 - INFO - Processing document: b'FSAP_Annual_Report_2022_508.pdf' (ID: 3f1bb85bddb44569afde25fc11b8d190)
+2024-10-28 15:13:56,270 - INFO - Chunking document
+2024-10-28 15:13:56,271 - INFO - Document chunked into 21 parts
+2024-10-28 15:13:56,271 - INFO - Generating embeddings for 21 chunks
+2024-10-28 15:13:56,272 - INFO - Generating embeddings for 21 chunks
+2024-10-28 15:13:56,435 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:56,569 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:56,733 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:56,868 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:57,008 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:57,138 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:57,209 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:13:57,209 - INFO - Retrying request to /embeddings in 1.000000 seconds
+2024-10-28 15:13:58,346 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:58,490 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:58,672 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:58,790 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:58,923 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:59,033 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:59,164 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:59,367 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:59,498 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:13:59,562 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:13:59,564 - INFO - Retrying request to /embeddings in 36.000000 seconds
+2024-10-28 15:14:35,818 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:14:36,059 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:14:36,235 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:14:36,360 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:14:36,362 - INFO - Retrying request to /embeddings in 7.000000 seconds
+2024-10-28 15:14:43,624 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:14:43,765 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:14:43,891 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:14:43,896 - INFO - Generated 21 embeddings in 47.62 seconds
+2024-10-28 15:14:43,897 - INFO - Indexing 21 chunks for document 3f1bb85bddb44569afde25fc11b8d190
+2024-10-28 15:14:43,903 - INFO - Document metadata inserted
+2024-10-28 15:14:43,904 - INFO - Chunk metadata inserted
+2024-10-28 15:14:43,914 - INFO - Metadata inserted successfully
+2024-10-28 15:14:43,922 - INFO - FAISS index updated successfully
+2024-10-28 15:14:43,924 - INFO - Vector added successfully
+2024-10-28 15:14:43,936 - WARNING - Document metadata already exists
+2024-10-28 15:14:43,943 - INFO - Chunk metadata inserted
+2024-10-28 15:14:43,952 - INFO - Metadata inserted successfully
+2024-10-28 15:14:43,958 - INFO - FAISS index updated successfully
+2024-10-28 15:14:43,959 - INFO - Vector added successfully
+2024-10-28 15:14:43,965 - WARNING - Document metadata already exists
+2024-10-28 15:14:43,968 - INFO - Chunk metadata inserted
+2024-10-28 15:14:43,977 - INFO - Metadata inserted successfully
+2024-10-28 15:14:43,982 - INFO - FAISS index updated successfully
+2024-10-28 15:14:43,983 - INFO - Vector added successfully
+2024-10-28 15:14:43,992 - WARNING - Document metadata already exists
+2024-10-28 15:14:43,996 - INFO - Chunk metadata inserted
+2024-10-28 15:14:44,000 - INFO - Metadata inserted successfully
+2024-10-28 15:14:44,001 - INFO - FAISS index updated successfully
+2024-10-28 15:14:44,002 - INFO - Vector added successfully
+2024-10-28 15:14:44,005 - WARNING - Document metadata already exists
+2024-10-28 15:14:44,007 - INFO - Chunk metadata inserted
+2024-10-28 15:14:44,012 - INFO - Metadata inserted successfully
+2024-10-28 15:14:44,013 - INFO - FAISS index updated successfully
+2024-10-28 15:14:44,014 - INFO - Vector added successfully
+2024-10-28 15:14:44,017 - WARNING - Document metadata already exists
+2024-10-28 15:14:44,018 - INFO - Chunk metadata inserted
+2024-10-28 15:14:44,022 - INFO - Metadata inserted successfully
+2024-10-28 15:14:44,024 - INFO - FAISS index updated successfully
+2024-10-28 15:14:44,024 - INFO - Vector added successfully
+2024-10-28 15:14:44,027 - WARNING - Document metadata already exists
+2024-10-28 15:14:44,029 - INFO - Chunk metadata inserted
+2024-10-28 15:14:44,033 - INFO - Metadata inserted successfully
+2024-10-28 15:14:44,034 - INFO - FAISS index updated successfully
+2024-10-28 15:14:44,034 - INFO - Vector added successfully
+2024-10-28 15:14:44,037 - WARNING - Document metadata already exists
+2024-10-28 15:14:44,038 - INFO - Chunk metadata inserted
+2024-10-28 15:14:44,041 - INFO - Metadata inserted successfully
+2024-10-28 15:14:44,042 - INFO - FAISS index updated successfully
+2024-10-28 15:14:44,043 - INFO - Vector added successfully
+2024-10-28 15:14:44,046 - WARNING - Document metadata already exists
+2024-10-28 15:14:44,048 - INFO - Chunk metadata inserted
+2024-10-28 15:14:44,053 - INFO - Metadata inserted successfully
+2024-10-28 15:14:44,055 - INFO - FAISS index updated successfully
+2024-10-28 15:14:44,055 - INFO - Vector added successfully
+2024-10-28 15:14:44,059 - WARNING - Document metadata already exists
+2024-10-28 15:14:44,061 - INFO - Chunk metadata inserted
+2024-10-28 15:14:44,066 - INFO - Metadata inserted successfully
+2024-10-28 15:14:44,068 - INFO - FAISS index updated successfully
+2024-10-28 15:14:44,069 - INFO - Vector added successfully
+2024-10-28 15:14:44,073 - WARNING - Document metadata already exists
+2024-10-28 15:14:44,075 - INFO - Chunk metadata inserted
+2024-10-28 15:14:44,079 - INFO - Metadata inserted successfully
+2024-10-28 15:14:44,081 - INFO - FAISS index updated successfully
+2024-10-28 15:14:44,082 - INFO - Vector added successfully
+2024-10-28 15:14:44,086 - WARNING - Document metadata already exists
+2024-10-28 15:14:44,089 - INFO - Chunk metadata inserted
+2024-10-28 15:14:44,093 - INFO - Metadata inserted successfully
+2024-10-28 15:14:44,096 - INFO - FAISS index updated successfully
+2024-10-28 15:14:44,096 - INFO - Vector added successfully
+2024-10-28 15:14:44,100 - WARNING - Document metadata already exists
+2024-10-28 15:14:44,102 - INFO - Chunk metadata inserted
+2024-10-28 15:14:44,108 - INFO - Metadata inserted successfully
+2024-10-28 15:14:44,110 - INFO - FAISS index updated successfully
+2024-10-28 15:14:44,110 - INFO - Vector added successfully
+2024-10-28 15:14:44,114 - WARNING - Document metadata already exists
+2024-10-28 15:14:44,115 - INFO - Chunk metadata inserted
+2024-10-28 15:14:44,120 - INFO - Metadata inserted successfully
+2024-10-28 15:14:44,121 - INFO - FAISS index updated successfully
+2024-10-28 15:14:44,121 - INFO - Vector added successfully
+2024-10-28 15:14:44,124 - WARNING - Document metadata already exists
+2024-10-28 15:14:44,126 - INFO - Chunk metadata inserted
+2024-10-28 15:14:44,130 - INFO - Metadata inserted successfully
+2024-10-28 15:14:44,132 - INFO - FAISS index updated successfully
+2024-10-28 15:14:44,132 - INFO - Vector added successfully
+2024-10-28 15:14:44,135 - WARNING - Document metadata already exists
+2024-10-28 15:14:44,137 - INFO - Chunk metadata inserted
+2024-10-28 15:14:44,141 - INFO - Metadata inserted successfully
+2024-10-28 15:14:44,143 - INFO - FAISS index updated successfully
+2024-10-28 15:14:44,144 - INFO - Vector added successfully
+2024-10-28 15:14:44,146 - WARNING - Document metadata already exists
+2024-10-28 15:14:44,147 - INFO - Chunk metadata inserted
+2024-10-28 15:14:44,150 - INFO - Metadata inserted successfully
+2024-10-28 15:14:44,151 - INFO - FAISS index updated successfully
+2024-10-28 15:14:44,152 - INFO - Vector added successfully
+2024-10-28 15:14:44,154 - WARNING - Document metadata already exists
+2024-10-28 15:14:44,156 - INFO - Chunk metadata inserted
+2024-10-28 15:14:44,159 - INFO - Metadata inserted successfully
+2024-10-28 15:14:44,161 - INFO - FAISS index updated successfully
+2024-10-28 15:14:44,161 - INFO - Vector added successfully
+2024-10-28 15:14:44,164 - WARNING - Document metadata already exists
+2024-10-28 15:14:44,165 - INFO - Chunk metadata inserted
+2024-10-28 15:14:44,168 - INFO - Metadata inserted successfully
+2024-10-28 15:14:44,170 - INFO - FAISS index updated successfully
+2024-10-28 15:14:44,171 - INFO - Vector added successfully
+2024-10-28 15:14:44,173 - WARNING - Document metadata already exists
+2024-10-28 15:14:44,175 - INFO - Chunk metadata inserted
+2024-10-28 15:14:44,178 - INFO - Metadata inserted successfully
+2024-10-28 15:14:44,179 - INFO - FAISS index updated successfully
+2024-10-28 15:14:44,180 - INFO - Vector added successfully
+2024-10-28 15:14:44,182 - WARNING - Document metadata already exists
+2024-10-28 15:14:44,183 - INFO - Chunk metadata inserted
+2024-10-28 15:14:44,186 - INFO - Metadata inserted successfully
+2024-10-28 15:14:44,187 - INFO - FAISS index updated successfully
+2024-10-28 15:14:44,187 - INFO - Vector added successfully
+2024-10-28 15:14:44,188 - INFO - Indexing completed for document 3f1bb85bddb44569afde25fc11b8d190
+2024-10-28 15:14:44,188 - ERROR - Failed to process document b'FSAP_Annual_Report_2022_508.pdf' (ID: 3f1bb85bddb44569afde25fc11b8d190): 'file_path'
+2024-10-28 15:14:44,188 - INFO - Pipeline execution completed for all documents. Total documents processed: 0
+2024-10-28 15:14:44,188 - INFO - Completed processing: FSAP_Annual_Report_2022_508.pdf
+2024-10-28 15:14:44,189 - INFO - Processing file: ./data/raw\Select Agent Designation and Decision Making.pdf
+2024-10-28 15:14:44,189 - INFO - Processing document(s): ./data/raw\Select Agent Designation and Decision Making.pdf
+2024-10-28 15:14:44,476 - INFO - Preparing document: Select Agent Designation and Decision Making.pdf
+2024-10-28 15:14:44,476 - INFO - Number of sentences: 1
+2024-10-28 15:14:44,481 - INFO - Number of tokens: 538
+2024-10-28 15:14:44,483 - INFO - Number of tokens after stop word removal: 538
+2024-10-28 15:14:44,483 - INFO - Final cleaned text length: 9615
+2024-10-28 15:14:44,483 - INFO - Processing document: b'Select Agent Designation and Decision Making.pdf' (ID: 326fe64fe13943ac85425fe43f534b91)
+2024-10-28 15:14:44,484 - INFO - Chunking document
+2024-10-28 15:14:44,484 - INFO - Document chunked into 2 parts
+2024-10-28 15:14:44,484 - INFO - Generating embeddings for 2 chunks
+2024-10-28 15:14:44,485 - INFO - Generating embeddings for 2 chunks
+2024-10-28 15:14:44,561 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 429 Too Many Requests"
+2024-10-28 15:14:44,562 - INFO - Retrying request to /embeddings in 1.000000 seconds
+2024-10-28 15:14:45,764 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:14:45,963 - INFO - HTTP Request: POST https://edav-dev-openai-eastus2-shared.openai.azure.com/openai/deployments/api-shared-text-embedding-ada-v002-nofilter/embeddings?api-version=2023-05-15 "HTTP/1.1 200 OK"
+2024-10-28 15:14:45,966 - INFO - Generated 2 embeddings in 1.48 seconds
+2024-10-28 15:14:45,966 - INFO - Indexing 2 chunks for document 326fe64fe13943ac85425fe43f534b91
+2024-10-28 15:14:45,972 - INFO - Document metadata inserted
+2024-10-28 15:14:45,973 - INFO - Chunk metadata inserted
+2024-10-28 15:14:45,977 - INFO - Metadata inserted successfully
+2024-10-28 15:14:45,979 - INFO - FAISS index updated successfully
+2024-10-28 15:14:45,979 - INFO - Vector added successfully
+2024-10-28 15:14:45,982 - WARNING - Document metadata already exists
+2024-10-28 15:14:45,983 - INFO - Chunk metadata inserted
+2024-10-28 15:14:45,987 - INFO - Metadata inserted successfully
+2024-10-28 15:14:45,988 - INFO - FAISS index updated successfully
+2024-10-28 15:14:45,988 - INFO - Vector added successfully
+2024-10-28 15:14:45,988 - INFO - Indexing completed for document 326fe64fe13943ac85425fe43f534b91
+2024-10-28 15:14:45,988 - ERROR - Failed to process document b'Select Agent Designation and Decision Making.pdf' (ID: 326fe64fe13943ac85425fe43f534b91): 'file_path'
+2024-10-28 15:14:45,989 - INFO - Pipeline execution completed for all documents. Total documents processed: 0
+2024-10-28 15:14:45,989 - INFO - Completed processing: Select Agent Designation and Decision Making.pdf
+2024-10-28 15:14:45,989 - INFO - RAG pipeline execution completed!
+PS C:\Users\zpq4\dev\vscode\rag_pipeline> 

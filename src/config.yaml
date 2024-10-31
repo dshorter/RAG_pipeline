@@ -1,5 +1,12 @@
 # RAG Pipeline Configuration
 
+paths:
+  data_dir: data
+  db_name: metadata.db
+  faiss_index_name: faiss_index.bin
+  raw_docs_dir: raw
+  processed_docs_dir: processed       
+
 gpt:
   provider: "azure_openai"
   model_name: "api-shared-gpt-4-turbo-nofilter"
@@ -31,7 +38,7 @@ pipeline:
         azure_client_secret: ""  
       huggingface:
         model_name: "sentence-transformers/all-MiniLM-L6-v2" 
-        deployment_name: "sentence-transformers/all-MiniLM-L6-v2"         
+        api_base: "sentence-transformers/all-MiniLM-L6-v2"         
         dimension: 384
     active_model: "azure_openai"  # Specifies which model configuration to use
   chunk_size: 500

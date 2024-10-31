@@ -1,0 +1,29 @@
+
+Use of the tika library for content extraction from various file types.
+Extraction of metadata fields like title, author, creation date, and content type.    
+Purges "garbage" fileds      
+Cleaning and normalization of extracted metadata.
+Handling of different date formats using dateutil.parser.
+Use of magic library for MIME type detection.
+Fallback mechanisms for handling unexpected or missing metadata fields.
+Synonyms for key metadata fields to capture variations across different document types.
+Storage of unexpected metadata fields in an "additional" category.
+Basic text cleaning and normalization (e.g., lowercase conversion, whitespace normalization).
+Potential use of NLTK for tokenization and stop word removal.
+
+Considering these features, I would describe the metadata extraction in knowledge_base.py as:
+"Advanced Basic" or "Intermediate" metadata extraction.
+Here's why:
+
+It goes beyond simple key-value pair extraction by incorporating multiple libraries (tika, magic) for robust file handling and metadata extraction.
+The system can handle various file types and adapt to different metadata structures.
+It includes data cleaning and normalization steps, which are more advanced than basic extraction.
+The use of synonyms for metadata fields and fallback mechanisms shows a more sophisticated approach to metadata handling.
+The inclusion of text processing steps (like NLTK integration) goes beyond just metadata and starts to touch on content analysis.
+
+However, it's not quite at an "advanced" level yet, which might include features like:
+
+Machine learning-based metadata extraction or enhancement
+Advanced natural language processing for content categorization or entity recognition
+Integration with external knowledge bases for metadata enrichment
+Handling of complex, nested document structures or very large docu

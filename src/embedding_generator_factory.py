@@ -7,9 +7,9 @@ class EmbeddingGeneratorFactory:
     def create(generator_type: str, **kwargs) -> EmbeddingGenerator:
         if generator_type == "azure_openai":
             return AzureOpenAIEmbeddingGenerator(
-                azure_endpoint=kwargs.get("azure_endpoint"),
-                api_version=kwargs.get("api_version"),
-                deployment=kwargs.get("deployment")
+                azure_endpoint=kwargs.get("endpoint.api_base"),
+                api_version=kwargs.get("endpoint.api_version"),
+                deployment=kwargs.get("endpoint.deployment")
             )
         elif generator_type == "huggingface":
             return HuggingFaceEmbeddingGenerator(
