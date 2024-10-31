@@ -48,15 +48,32 @@ class RAGPipeline:
         )
 
     def process_document(self, file_path: str) -> List[Dict]:
+        """
+        Process a document and return a list of processed document dictionaries.
+        
+        Args:
+            file_path: Path to the document to process
+            
+        Returns:
+            List of processed document dictionaries
+        """
         logger.info(f"Processing document(s): {file_path}")
         try:
-            processed_docs = process_documents(file_path)
-            
+            # Ensure we always have a list of dictionaries
+            result = process_documents(file_path)
+            if not isinstance(result, list):
+                result = [result]
+                
             # Add unique document ID to each processed document
-            for doc in processed_docs:
-                doc['document_id'] = uuid.uuid4().hex
+            for doc in result:
+                if isinstance(doc, dict):
+                    doc['document_id'] = uuid.uuid4().hex
+                else:
+                    logger.error(f"Invalid document format: {type(doc)}")
+                    raise ValueError(f"Expected dictionary but got {type(doc)}")
             
-            return processed_docs
+            return result
+        
         except Exception as e:
             logger.error(f"Error processing document: {str(e)}")
             raise
@@ -214,7 +231,7 @@ class RAGPipeline:
                 logger.error(f"Failed to process document {document_name} (ID: {document_id}): {str(e)}")
 
         # Cleanup after processing all documents
-        self.cleanup_processed_documents(successfully_processed)
+        #  self.cleanup_processed_documents(successfully_processed)
         
         logger.info(f"Pipeline execution completed for all documents. Total documents processed: {len(results)}")    
         

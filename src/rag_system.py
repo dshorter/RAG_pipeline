@@ -1,320 +1,424 @@
+from datetime import datetime
 import sqlite3
 import faiss
 import uuid
 import hashlib
 import json
 import numpy as np
-from datetime import datetime
-from typing import Dict, Any, List    
-import os  
-from src.singleton_config import ConfigSingleton  
-from src.paths import *   
+from typing import Dict, Any, List, Tuple, Union
+import os
+from src.singleton_config import ConfigSingleton
+from src.paths import *
 from src.logging_config import get_logger
 
 class RAGSystem:
     def __init__(self):
         self.logger = get_logger('system')
         self.logger.debug("Initializing RAG System", 
-                         extra={'operation': 'initialization'})
+                         extra={
+                             'component': 'rag_system',
+                             'operation': 'initialization',
+                             'module_line': 'rag_system:init'
+                         })
         
         self.config = ConfigSingleton()
         self.db_path = get_db_path()
         self.faiss_path = get_faiss_path()
         
+        # Initialize storage
+        self._initialize_storage()
+        
         self.logger.info("System initialized", 
                         extra={
-                            'operation': 'initialization',
-                            'db_path': self.db_path,
-                            'faiss_path': self.faiss_path
+                            'component': 'rag_system',
+                            'operation': 'initialization_complete',
+                            'module_line': 'rag_system:init'
                         })
 
-    def add_vector(self, chunk: str, vector: np.array, document_id: str,
-                  source: str, start_index: int, end_index: int,
-                  additional_metadata: Dict[str, Any] = {},
-                  doc_metadata: List[Dict] = {}):
+    def _generate_faiss_id(self, chunk_id: str) -> int:
+        """
+        Generate deterministic FAISS ID from chunk ID using the last 63 bits of SHA-256 hash.
         
-        self.logger.debug("Processing vector addition", 
-                         extra={
-                             'operation': 'vector_addition',
-                             'document_id': document_id,
-                             'chunk_size': len(chunk)
-                         })
-
-        chunk_id = self.generate_chunk_id()
-        hashed_id = self.get_hashed_id(chunk_id)
-
-        try:
-            # Initialize SQLite connection
-            sql_conn = sqlite3.connect(self.db_path)
-            self.conn = sql_conn
-            self.conn.execute('BEGIN')
-
-            self.logger.debug("Database connection established", 
-                            extra={'operation': 'db_connection'})
-
-            self.create_documents_table()
-            self.create_document_chunks_table()
-
-            self.insert_document_metadata(
-                document_id, 
-                doc_metadata["title"], 
-                doc_metadata["author"],
-                source, len(chunk), 
-                "Summary", "Tags", 
-                additional_metadata
-            )
-
-            self.insert_chunk_metadata(
-                hashed_id, document_id, chunk,
-                start_index, end_index, len(chunk),
-                additional_metadata
-            )
+        Args:
+            chunk_id: The chunk ID to generate FAISS ID from
             
-            self.conn.commit()
-            self.logger.info("Metadata inserted successfully", 
-                           extra={
-                               'operation': 'metadata_insertion',
-                               'document_id': document_id
-                           })
+        Returns:
+            A positive integer suitable for FAISS indexing
+        """
+        return int(hashlib.sha256(chunk_id.encode()).hexdigest(), 16) % (2**63 - 1)  
+    
+    
+    def _initialize_storage(self):
+        """Initialize SQLite and FAISS storage."""
+        try:
+            # Create directories if they don't exist
+            os.makedirs(os.path.dirname(self.db_path), exist_ok=True)
+            os.makedirs(os.path.dirname(self.faiss_path), exist_ok=True)
+            
+            # Initialize SQLite
+            conn = sqlite3.connect(self.db_path)
+            self._create_tables(conn)
+            conn.close()
 
-            # Handle FAISS vector addition
-            self.add_vector_to_faiss(vector, hashed_id)
-            self.logger.info("Vector added successfully", 
-                           extra={
-                               'operation': 'faiss_addition',
-                               'hashed_id': hashed_id
-                           })
+            # Initialize FAISS if needed
+            if not os.path.exists(self.faiss_path):
+                dimension = 1536
+                index = faiss.IndexIDMap2(faiss.IndexFlatL2(dimension))
+                faiss.write_index(index, self.faiss_path)
+                
+                self.logger.info("Created new FAISS index", 
+                               extra={
+                                   'component': 'rag_system',
+                                   'operation': 'faiss_initialization',
+                                   'module_line': 'rag_system:_initialize_storage'
+                               })
+                
+        except Exception as e:
+            self.logger.error("Storage initialization failed", 
+                            extra={
+                                'component': 'rag_system',
+                                'operation': 'storage_initialization',
+                                'module_line': 'rag_system:_initialize_storage',
+                                'error_id': str(uuid.uuid4())[:8],
+                                'function_name': '_initialize_storage'
+                            })
+            raise
+#####################
+    def _create_tables(self, conn):
+        """Create necessary SQLite tables with hash ID support."""
+        try:
+            self.logger.debug("Starting table creation", 
+                            extra={
+                                'component': 'rag_system',
+                                'operation': 'table_creation',
+                                'module_line': 'rag_system:_create_tables'
+                            })
+            
+            cursor = conn.cursor()
+            
+            # Documents table remains unchanged
+            cursor.execute('''
+            CREATE TABLE IF NOT EXISTS documents_metadata (
+                document_id TEXT PRIMARY KEY NOT NULL,
+                title TEXT NOT NULL DEFAULT '',
+                author TEXT NOT NULL DEFAULT '',
+                source TEXT NOT NULL DEFAULT '',
+                date_added TEXT NOT NULL,
+                document_length INTEGER NOT NULL DEFAULT 0,
+                summary TEXT NOT NULL DEFAULT '',
+                tags TEXT NOT NULL DEFAULT '',
+                metadata TEXT NOT NULL DEFAULT '{}',
+                CONSTRAINT valid_document_id CHECK(document_id != ''),
+                CONSTRAINT valid_date_format CHECK(date_added IS strftime('%Y-%m-%d %H:%M:%S', date_added))
+            )
+            ''')
+
+            # Updated chunks table with hash ID support
+            cursor.execute('''
+            CREATE TABLE IF NOT EXISTS document_chunks_metadata (
+                chunk_id TEXT PRIMARY KEY NOT NULL,
+                faiss_id INTEGER NOT NULL UNIQUE,  -- New field for hash-based ID
+                document_id TEXT NOT NULL,
+                chunk_text TEXT NOT NULL,
+                start_index INTEGER NOT NULL,
+                end_index INTEGER NOT NULL,
+                chunk_length INTEGER NOT NULL,
+                metadata TEXT NOT NULL DEFAULT '{}',
+                date_added TEXT NOT NULL,
+                relevance_score REAL,              -- New field for relevance tracking
+                vector_stats TEXT,                 -- New field for vector statistics
+                FOREIGN KEY (document_id) REFERENCES documents_metadata(document_id) ON DELETE CASCADE,
+                CONSTRAINT valid_chunk_id CHECK(chunk_id != ''),
+                CONSTRAINT valid_indices CHECK(end_index > start_index),
+                CONSTRAINT valid_length CHECK(chunk_length > 0),
+                CONSTRAINT valid_date_format CHECK(date_added IS strftime('%Y-%m-%d %H:%M:%S', date_added))
+            )
+            ''')
+            
+            # Update indices
+            cursor.execute('''
+            CREATE INDEX IF NOT EXISTS idx_document_chunks_faiss_id 
+            ON document_chunks_metadata(faiss_id)
+            ''')
+            
+            cursor.execute('''
+            CREATE INDEX IF NOT EXISTS idx_document_chunks_document_id 
+            ON document_chunks_metadata(document_id)
+            ''')
+
+            conn.commit()
+            
+            self.logger.info("Tables created successfully", 
+                        extra={
+                            'component': 'rag_system',
+                            'operation': 'table_creation',
+                            'module_line': 'rag_system:_create_tables'
+                        })
 
         except sqlite3.Error as e:
-            self.conn.rollback()
-            self.logger.error("Database operation failed", 
+            error_id = str(uuid.uuid4())[:8]
+            self.logger.error("Failed to create tables", 
                             extra={
-                                'operation': 'db_operation',
-                                'error': str(e),
-                                'document_id': document_id
+                                'component': 'rag_system',
+                                'operation': 'table_creation',
+                                'module_line': 'rag_system:_create_tables',
+                                'error_id': error_id,
+                                'function_name': '_create_tables',
+                                'error': str(e)
                             })
-            raise e
-        except Exception as e:
-            if hasattr(self, 'conn'):
-                self.conn.rollback()
-            self.logger.error("Vector addition failed", 
-                            extra={
-                                'operation': 'vector_addition',
-                                'error': str(e),
-                                'document_id': document_id
-                            })
-            raise e
+            raise
 
-    def add_vector_to_faiss(self, vector: np.array, hashed_id: int):
-        try:
-            self.logger.debug("Adding vector to FAISS", 
-                            extra={
-                                'operation': 'faiss_operation',
-                                'vector_shape': np.array([vector]).shape
-                            })
-            
-            index = faiss.IndexIDMap(faiss.IndexFlatL2(1536))
-            index.add_with_ids(
-                np.array([vector]).astype('float32'),
-                np.array([hashed_id], dtype='int64')
-            )
-            
-            index_path = self.faiss_path
-            faiss.write_index(index, index_path)
-            
-            self.logger.info("FAISS index updated successfully", 
-                           extra={
-                               'operation': 'faiss_operation',
-                               'index_path': index_path
-                           })
 
-        except Exception as e:
-            self.logger.error("FAISS operation failed", 
-                            extra={
-                                'operation': 'faiss_operation',
-                                'error': str(e),
-                                'hashed_id': hashed_id
-                            })
-            raise e
-
-    def insert_document_metadata(self, document_id: str, title: str, 
-                               author: str, source: str, document_length: int,
-                               summary: str, tags: str, 
-                               metadata: Dict[str, Any]):
-        cursor = self.conn.cursor()
+##################### 
+    def _insert_document_metadata(self, conn, document_id: str, title: str, 
+                                author: str, source: str, document_length: int,
+                                summary: str, tags: str, metadata: Dict[str, Any]):
+        """Insert document metadata with type validation."""
         try:
             self.logger.debug("Inserting document metadata", 
                             extra={
-                                'operation': 'metadata_insertion',
+                                'component': 'rag_system',
+                                'operation': 'document_metadata_insertion',
+                                'module_line': 'rag_system:_insert_document_metadata',
                                 'document_id': document_id
                             })
             
+            cursor = conn.cursor()
             cursor.execute('''
-                INSERT INTO documents_metadata (
-                    document_id, title, author, source, date_added,
-                    document_length, summary, tags, metadata
-                )
+                INSERT OR REPLACE INTO documents_metadata 
+                (document_id, title, author, source, date_added, document_length, 
+                 summary, tags, metadata)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-                ''', (
-                document_id,
-                title,
-                author,
-                source,
+            ''', (
+                str(document_id),
+                str(title),
+                str(author),
+                str(source),
                 datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-                document_length,
-                summary,
-                tags,
+                int(document_length),
+                str(summary),
+                str(tags),
                 json.dumps(metadata)
             ))
             
-            self.logger.info("Document metadata inserted", 
+            self.logger.info("Document metadata inserted successfully", 
                            extra={
-                               'operation': 'metadata_insertion',
+                               'component': 'rag_system',
+                               'operation': 'document_metadata_insertion',
+                               'module_line': 'rag_system:_insert_document_metadata',
                                'document_id': document_id
                            })
 
-        except sqlite3.IntegrityError as e:
-            self.logger.warning("Document metadata already exists", 
-                              extra={
-                                  'operation': 'metadata_insertion',
-                                  'document_id': document_id,
-                                  'error': str(e)
-                              })
         except sqlite3.Error as e:
+            error_id = str(uuid.uuid4())[:8]
             self.logger.error("Failed to insert document metadata", 
                             extra={
-                                'operation': 'metadata_insertion',
+                                'component': 'rag_system',
+                                'operation': 'document_metadata_insertion',
+                                'module_line': 'rag_system:_insert_document_metadata',
+                                'error_id': error_id,
+                                'function_name': '_insert_document_metadata',
                                 'document_id': document_id,
                                 'error': str(e)
                             })
-            raise e
+            raise sqlite3.Error(f"Failed to insert document metadata: {str(e)}")
 
-    def insert_chunk_metadata(self, chunk_id: int, document_id: str,
-                            chunk_text: str, start_index: int,
-                            end_index: int, chunk_length: int,
-                            additional_metadata: Dict[str, Any]):
-        cursor = self.conn.cursor()
+    def _insert_chunk_metadata(self, conn, chunk_id: str, document_id: str,
+                             chunk_text: str, start_index: int, end_index: int,
+                             embedding_id: int, metadata: Dict[str, Any]):
+        """Insert chunk metadata with type validation."""
         try:
             self.logger.debug("Inserting chunk metadata", 
                             extra={
-                                'operation': 'chunk_insertion',
+                                'component': 'rag_system',
+                                'operation': 'chunk_metadata_insertion',
+                                'module_line': 'rag_system:_insert_chunk_metadata',
                                 'chunk_id': chunk_id,
                                 'document_id': document_id
                             })
             
+            cursor = conn.cursor()
             cursor.execute('''
-                INSERT INTO document_chunks_metadata (
-                    chunk_id, document_id, chunk_text, start_index,
-                    end_index, chunk_length, metadata, date_added
-                )
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                ''', (
-                chunk_id,
-                document_id,
-                chunk_text,
-                start_index,
-                end_index,
-                chunk_length,
-                json.dumps(additional_metadata),
-                datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                INSERT OR REPLACE INTO document_chunks_metadata 
+                (chunk_id, document_id, chunk_text, start_index, end_index, 
+                 chunk_length, metadata, date_added, embedding_id)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (
+                str(chunk_id),
+                str(document_id),
+                str(chunk_text),
+                int(start_index),
+                int(end_index),
+                int(len(chunk_text)),
+                str(metadata),
+                datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                int(embedding_id)
             ))
             
-            self.logger.info("Chunk metadata inserted", 
+            self.logger.info("Chunk metadata inserted successfully", 
                            extra={
-                               'operation': 'chunk_insertion',
+                               'component': 'rag_system',
+                               'operation': 'chunk_metadata_insertion',
+                               'module_line': 'rag_system:_insert_chunk_metadata',
                                'chunk_id': chunk_id,
                                'document_id': document_id
                            })
-                           
+
         except sqlite3.Error as e:
+            error_id = str(uuid.uuid4())[:8]
             self.logger.error("Failed to insert chunk metadata", 
                             extra={
-                                'operation': 'chunk_insertion',
+                                'component': 'rag_system',
+                                'operation': 'chunk_metadata_insertion',
+                                'module_line': 'rag_system:_insert_chunk_metadata',
+                                'error_id': error_id,
+                                'function_name': '_insert_chunk_metadata',
                                 'chunk_id': chunk_id,
+                                'document_id': document_id,
                                 'error': str(e)
                             })
-            raise e
+            raise sqlite3.Error(f"Failed to insert chunk metadata: {str(e)}")
 
-    def create_documents_table(self):
-        cursor = self.conn.cursor()
+#########################
+    def add_vector(self, document_id: str, chunk: str, vector: Union[np.ndarray, List[float]], 
+              source: str, start_index: int, end_index: int,
+              additional_metadata: Dict[str, Any] = None, 
+              doc_metadata: Dict[str, Any] = None) -> Tuple[str, int]:
+        """Add vector and metadata with new hash ID system."""
         try:
-            self.logger.debug("Creating documents table", 
-                            extra={'operation': 'table_creation'})
-            
-            cursor.execute('''
-            CREATE TABLE IF NOT EXISTS documents_metadata (
-                document_id TEXT PRIMARY KEY,
-                title TEXT,
-                author TEXT,
-                source TEXT,
-                date_added TEXT,
-                document_length INTEGER,
-                summary TEXT,
-                tags TEXT,
-                metadata TEXT
-            )
-            ''')
-            
-            self.conn.commit()
-            self.logger.debug("Documents table created/verified", 
-                            extra={'operation': 'table_creation'})
-                            
-        except sqlite3.Error as e:
-            self.logger.error("Failed to create documents table", 
+            self.logger.debug("Starting vector addition", 
                             extra={
-                                'operation': 'table_creation',
-                                'error': str(e)
+                                'component': 'rag_system',
+                                'operation': 'vector_addition',
+                                'module_line': 'rag_system:add_vector'
                             })
-            raise e
+            
+            # Initialize default values
+            additional_metadata = additional_metadata or {}
+            doc_metadata = doc_metadata or {}
+            
+            # Ensure vector is numpy array with correct type
+            if isinstance(vector, list):
+                vector = np.array(vector, dtype=np.float32)
+            vector = vector.astype(np.float32)
+            if len(vector.shape) == 1:
+                vector = vector.reshape(1, -1)
 
-    def create_document_chunks_table(self):
-        cursor = self.conn.cursor()
-        try:
-            self.logger.debug("Creating chunks table", 
-                            extra={'operation': 'table_creation'})
-            
-            cursor.execute('''
-            CREATE TABLE IF NOT EXISTS document_chunks_metadata (
-                chunk_id INTEGER PRIMARY KEY,
-                document_id TEXT,
-                chunk_text TEXT,
-                start_index INTEGER,
-                end_index INTEGER,
-                chunk_length INTEGER,
-                metadata TEXT,
-                date_added TEXT,
-                FOREIGN KEY (document_id) 
-                    REFERENCES documents_metadata(document_id)
-            )
-            ''')
-            
-            self.conn.commit()
-            self.logger.debug("Chunks table created/verified", 
-                            extra={'operation': 'table_creation'})
-                            
-        except sqlite3.Error as e:
-            self.logger.error("Failed to create chunks table", 
+            # Generate IDs
+            chunk_id = str(uuid.uuid4())
+            faiss_id = self._generate_faiss_id(chunk_id)
+
+            # Calculate vector statistics
+            vector_stats = {
+                "norm": float(np.linalg.norm(vector)),
+                "mean": float(np.mean(vector)),
+                "std": float(np.std(vector)),
+                "min": float(np.min(vector)),
+                "max": float(np.max(vector))
+            }
+
+            # Initialize SQLite connection
+            conn = sqlite3.connect(self.db_path)
+            try:
+                # Start transaction
+                conn.execute('BEGIN')
+                
+                self._insert_document_metadata(
+                    conn,
+                    document_id=document_id,
+                    title=doc_metadata.get('title', ''),
+                    author=doc_metadata.get('author', ''),
+                    source=source,
+                    document_length=len(chunk),
+                    summary=doc_metadata.get('summary', ''),
+                    tags=doc_metadata.get('tags', ''),
+                    metadata=additional_metadata
+                )
+
+                # Insert chunk with new fields
+                cursor = conn.cursor()
+                cursor.execute('''
+                    INSERT INTO document_chunks_metadata 
+                    (chunk_id, faiss_id, document_id, chunk_text, start_index, end_index, 
+                    chunk_length, metadata, date_added, vector_stats)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ''', (
+                    chunk_id,
+                    faiss_id,
+                    document_id,
+                    chunk,
+                    start_index,
+                    end_index,
+                    len(chunk),
+                    json.dumps(additional_metadata),
+                    datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                    json.dumps(vector_stats)
+                ))
+
+                conn.commit()
+                
+                self.logger.info("Database operations completed", 
                             extra={
-                                'operation': 'table_creation',
-                                'error': str(e)
+                                'component': 'rag_system',
+                                'operation': 'db_insert',
+                                'module_line': 'rag_system:add_vector'
                             })
-            raise e
 
-    def generate_chunk_id(self) -> str:
-        chunk_id = uuid.uuid4().hex
-        self.logger.debug("Generated chunk ID", 
-                         extra={
-                             'operation': 'id_generation',
-                             'chunk_id': chunk_id
-                         })
-        return chunk_id
+            except sqlite3.Error as e:
+                conn.rollback()
+                error_id = str(uuid.uuid4())[:8]
+                self.logger.error(f"Database operation failed: {str(e)}", 
+                                extra={
+                                    'component': 'rag_system',
+                                    'operation': 'db_insert',
+                                    'module_line': 'rag_system:add_vector',
+                                    'error_id': error_id,
+                                    'function_name': 'add_vector'
+                                })
+                raise
+            finally:
+                conn.close()
 
-    def get_hashed_id(self, chunk_id: str) -> int:
-        hashed = int(hashlib.sha256(chunk_id.encode()).hexdigest(), 16) % (2**63 - 1)
-        self.logger.debug("Generated hashed ID", 
-                         extra={
-                             'operation': 'id_generation',
-                             'chunk_id': chunk_id,
-                             'hashed_id': hashed
-                         })
-        return hashed
+            # Handle FAISS operations
+            try:
+                if os.path.exists(self.faiss_path):
+                    index = faiss.read_index(self.faiss_path)
+                else:
+                    index = faiss.IndexIDMap2(faiss.IndexFlatL2(vector.shape[1]))
+
+                index.add_with_ids(vector, np.array([faiss_id], dtype=np.int64))
+                faiss.write_index(index, self.faiss_path)
+                
+                self.logger.info("FAISS operations completed", 
+                            extra={
+                                'component': 'rag_system',
+                                'operation': 'faiss_insert',
+                                'module_line': 'rag_system:add_vector'
+                            })
+                
+                return chunk_id, faiss_id
+
+            except Exception as e:
+                error_id = str(uuid.uuid4())[:8]
+                self.logger.error(f"FAISS operation failed: {str(e)}", 
+                                extra={
+                                    'component': 'rag_system',
+                                    'operation': 'faiss_insert',
+                                    'module_line': 'rag_system:add_vector',
+                                    'error_id': error_id,
+                                    'function_name': 'add_vector'
+                                })
+                self._cleanup_failed_insert(chunk_id, document_id)
+                raise
+
+        except Exception as e:
+            error_id = str(uuid.uuid4())[:8]
+            self.logger.error(f"Vector addition failed: {str(e)}", 
+                            extra={
+                                'component': 'rag_system',
+                                'operation': 'vector_addition',
+                                'module_line': 'rag_system:add_vector',
+                                'error_id': error_id,
+                                'function_name': 'add_vector'
+                            })
+            raise
