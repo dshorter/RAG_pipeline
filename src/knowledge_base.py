@@ -114,6 +114,7 @@ def read_text_file(file_path):
     except UnicodeDecodeError:
         with open(file_path, 'r', encoding='iso-8859-1') as file:
             return file.read()
+
 def process_single_document(file_path):
     try:
         file_type = magic.from_file(file_path, mime=True)

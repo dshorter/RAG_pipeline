@@ -31,16 +31,9 @@ class RAGPipeline:
         self.metrics_collector = MetricsCollector()
         self.embedding_generator = self._initialize_embedding_generator()
         self.rag_system = RAGSystem()
-        self.generator = Generator()  
+        # self.generator = Generator()  
 
         logger.info("RAG Pipeline initialized with config: %s", self.config.to_dict())
-
-        # Define paths relative to the project folder
-        project_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-        # self.db_path = os.path.join(project_folder, 'data', 'metadata.db')
-        # self.faiss_path = os.path.join(project_folder, 'data', 'faiss_index.bin')
-        # self.raw_docs_dir = self.config.get_pipeline_config().raw_docs_dir
-        # self.processed_docs_dir = self.config.get_pipeline_config().processed_docs_dir
 
         # Ensure processed_docs_dir exists
         os.makedirs(self.processed_docs_dir, exist_ok=True)
@@ -55,15 +48,32 @@ class RAGPipeline:
         )
 
     def process_document(self, file_path: str) -> List[Dict]:
+        """
+        Process a document and return a list of processed document dictionaries.
+        
+        Args:
+            file_path: Path to the document to process
+            
+        Returns:
+            List of processed document dictionaries
+        """
         logger.info(f"Processing document(s): {file_path}")
         try:
-            processed_docs = process_documents(file_path)
-            
+            # Ensure we always have a list of dictionaries
+            result = process_documents(file_path)
+            if not isinstance(result, list):
+                result = [result]
+                
             # Add unique document ID to each processed document
-            for doc in processed_docs:
-                doc['document_id'] = uuid.uuid4().hex
+            for doc in result:
+                if isinstance(doc, dict):
+                    doc['document_id'] = uuid.uuid4().hex
+                else:
+                    logger.error(f"Invalid document format: {type(doc)}")
+                    raise ValueError(f"Expected dictionary but got {type(doc)}")
             
-            return processed_docs
+            return result
+        
         except Exception as e:
             logger.error(f"Error processing document: {str(e)}")
             raise
@@ -123,23 +133,23 @@ class RAGPipeline:
             )
         logger.info(f"Indexing completed for document {document_id}")    
 
-    def query(self, user_query: str) -> Dict[str, Any]:
-        try:
-            logger.info(f"Received user query: {user_query}")
-            query_embedding = self.embedding_generator.generate_embedding(user_query)
+    # def query(self, user_query: str) -> Dict[str, Any]:
+    #     try:
+    #         logger.info(f"Received user query: {user_query}")
+    #         query_embedding = self.embedding_generator.generate_embedding(user_query)
             
-            search_results = self.rag_system.search(query_embedding, k=10)
+    #         search_results = self.rag_system.search(query_embedding, k=10)
             
-            response = self.generator.generate_response(user_query, search_results)
+    #         response = self.generator.generate_response(user_query, search_results)
             
-            return {
-                "query": user_query,
-                "response": response,
-                "search_results": search_results
-            }
-        except Exception as e:
-            logger.error(f"Error processing query: {str(e)}")
-            raise
+    #         return {
+    #             "query": user_query,
+    #             "response": response,
+    #             "search_results": search_results
+    #         }
+    #     except Exception as e:
+    #         logger.error(f"Error processing query: {str(e)}")
+    #         raise
 
     def cleanup_processed_documents(self, processed_docs: List[str]):
         for doc_path in processed_docs:
@@ -221,7 +231,7 @@ class RAGPipeline:
                 logger.error(f"Failed to process document {document_name} (ID: {document_id}): {str(e)}")
 
         # Cleanup after processing all documents
-        self.cleanup_processed_documents(successfully_processed)
+        #  self.cleanup_processed_documents(successfully_processed)
         
         logger.info(f"Pipeline execution completed for all documents. Total documents processed: {len(results)}")    
         

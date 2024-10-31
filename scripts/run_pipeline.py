@@ -2,6 +2,7 @@ import os
 import sys
 import json
 import logging
+import time
 from typing import List    
 
 # Add the project root to the Python path
@@ -11,55 +12,48 @@ from src.rag_pipeline import RAGPipeline
 from src.document_chunker import chunk_document
 from src.config import Configuration  # Assuming you have a Configuration class
 from src.singleton_config import ConfigSingleton      
+from src.logging_config import get_logger, setup_rag_logging  
+
 
 # Set up logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s' )
+setup_rag_logging(log_dir='logs', unified_log=True)
 logger = logging.getLogger(__name__)
 
-def main():
-    logger.info("Starting RAG pipeline execution")
 
-    # Load configuration
-    config  = ConfigSingleton()          
+def main():
+    start_time = time.time()
+    logger.info("=== Starting RAG Pipeline Execution ===")
+
+    config = ConfigSingleton()          
     logger.info("Configuration loaded: %s", json.dumps(config.to_dict(), indent=2))
 
-    # Initialize RAGPipeline
-    pipeline = RAGPipeline( )
-
-    # Process the Biosafety file
-    # biosafety_file = os.path.join(config.get_pipeline_config().raw_docs_dir, 'Biosafety_Guidance.txt')
-    biosafety_file = config.get_pipeline_config().raw_docs_dir 
-    logger.info("Processing file: %s", biosafety_file)
+    pipeline = RAGPipeline()
+    raw_docs_dir = config.get_pipeline_config().raw_docs_dir
     
-    # Run the pipeline and get the result
-    result = pipeline.run_pipeline(biosafety_file)
+    if os.path.isdir(raw_docs_dir):
+        files = [f for f in os.listdir(raw_docs_dir) if os.path.isfile(os.path.join(raw_docs_dir, f))]
+        logger.info(f"Found {len(files)} files to process: {', '.join(files)}")
+        
+        for i, filename in enumerate(files, 1):
+            file_path = os.path.join(raw_docs_dir, filename)
+            logger.info(f"\n=== Processing File {i}/{len(files)}: {filename} ===")
+            file_start_time = time.time()
+            
+            try:
+                result = pipeline.run_pipeline(file_path)
+                file_duration = time.time() - file_start_time
+                logger.info(f"Completed processing {filename} in {file_duration:.2f} seconds")
+            except Exception as e:
+                logger.error(f"Failed to process {filename}: {str(e)}")
+                continue
+    else:
+        logger.error(f"Directory not found: {raw_docs_dir}")
 
-    # Log the summary of the pipeline result
-    logger.info("Pipeline execution completed. Summary:\n%s", result.summary())
+    total_duration = time.time() - start_time
+    logger.info(f"\n=== RAG Pipeline Execution Completed in {total_duration:.2f} seconds ===")
 
-    # Save the processed document (optional)
-    # output_file = os.path.join(config.get_pipeline_config().processed_docs_dir, f'processed_{result.document_name}.json')
-    # logger.info("Saving processed document to: %s", output_file)
-    # os.makedirs(os.path.dirname(output_file), exist_ok=True)
-    # with open(output_file, 'w', encoding='utf-8') as f:
-    #     json.dump({
-    #         'document_name': result.document_name,
-    #         'processed_text': result.processed_text,
-    #         'metadata': result.metadata,
-    #         'chunks': [{'text': chunk.text, 'start_index': chunk.start_index, 'end_index': chunk.end_index} for chunk in result.chunks],
-    #         'chunk_metrics': result.chunk_metrics.__dict__,
-    #         'vector_metrics': result.vector_metrics.__dict__
-    #     }, f, indent=2)
-
-    logger.info("Processed document saved successfully")
-
-    # Example query (will just print a placeholder message for now)
-    user_query = "What are the main safety measures for handling select agents?"
-    logger.info("Executing example query: %s", user_query)
-    response = pipeline.query(user_query)
-    logger.info("Query response: %s", response)
-
-    # logger.info("RAG pipeline execution completed")
-
+   
 if __name__ == "__main__":
     main()
+    
