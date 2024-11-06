@@ -16,11 +16,11 @@ class GPTConfig:
     presence_penalty: float
     api_key: Optional[str] = None
     api_base: Optional[str] = None
-    api_version: Optional[str] = None 
+    api_version: Optional[str] = None
     azure_tennant_id: Optional[str] = None
     azure_client_id: Optional[str] = None
-    azure_client_secret: Optional[str] = None 
-
+    azure_client_secret: Optional[str] = None    
+    
 @dataclass
 class OpenAIEmbeddingConfig:
     model_name: str
