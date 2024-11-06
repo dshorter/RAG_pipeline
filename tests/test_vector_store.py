@@ -3,6 +3,13 @@ from unittest.mock import MagicMock, patch
 import numpy as np
 import sqlite3
 import faiss
+
+import os  
+import sys
+
+# Add the project root to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from src.rag_system import RAGSystem
 
 # python -m unittest discover -s tests 
