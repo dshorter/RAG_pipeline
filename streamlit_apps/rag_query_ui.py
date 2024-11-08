@@ -1,290 +1,380 @@
 import streamlit as st
-from typing import Dict, List
-import time    
-import os, sys 
+import sys
+import os
+from typing import Dict, List, Any
+import time
+from pathlib import Path
+import pandas as pd
+import numpy as np
 
 # Add the project root to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+
 from src.singleton_config import ConfigSingleton
 from src.paths import get_db_path, get_faiss_path
 from src.embedding_generator_factory import EmbeddingGeneratorFactory
+from src.query_analyzer import QueryAnalyzer
+from src.reranker_factory import ReRankerFactory
 from src.generation import Generator
-from src.rag_search_client import RAGSearchClient    
+from src.rag_search_client import RAGSearchClient
+from src.logging_config import get_logger
 
 class RAGQueryUI:
     def __init__(self):
+        """Initialize the RAG Query UI with all required components."""
         self.config = ConfigSingleton()
-        # Initialize core components
-        self.rag_search_client = RAGSearchClient()
-        self.generatorX = Generator()
-        self.embedding_generator = EmbeddingGeneratorFactory.create(
-            generator_type=self.config.get_pipeline_config().embedding.provider,
-            **self.config.get_active_embedding_config().__dict__
-        )
+        self.logger = get_logger('ui')
+        
+        try:
+            # Initialize core components
+            self.query_analyzer = QueryAnalyzer()
+            self.reranker = ReRankerFactory.create()
+            self.search_client = RAGSearchClient()
+            self.embedding_generator = EmbeddingGeneratorFactory.create(
+                generator_type=self.config.get_pipeline_config().embedding.provider,
+                **self.config.get_active_embedding_config().__dict__
+            )
+            self.generator = Generator()
+            
+            self.logger.info("RAG Query UI initialized successfully")
+            
+        except Exception as e:
+            self.logger.error(f"Failed to initialize RAG Query UI: {str(e)}")
+            raise
 
     def setup_page(self):
-        """Initialize page configuration."""
+        """Configure the Streamlit page layout."""
         st.set_page_config(
             page_title="RAG Query System",
             layout="wide",
-            initial_sidebar_state="collapsed"
+            initial_sidebar_state="expanded"  # Changed to expanded
         )
 
-        # Add custom CSS to align the logo with the title
-        st.markdown("""
-            <style>
-            .stMarkdown svg {
-                margin-top: 1rem;
-                vertical-align: middle;
-            }
-            </style>
-        """, unsafe_allow_html=True)
-
-    def render_query_input(self) -> Dict:
-        """Render query input section with mode selection."""
-        # Logo and title
-        logo_col, title_col = st.columns([1, 4])
-        
-        with logo_col:
-            st.markdown("""
-            <svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <style>
-                    .node { fill: #6ba4ff; }
-                    .central-node { fill: #4285f4; }
-                    .line { stroke: #a8c1ff; stroke-width: 2; }
-                    .highlight { stroke: #4285f4; stroke-width: 3; }
-                </style>
-                <line class="line" x1="100" y1="50" x2="50" y2="150" />
-                <line class="line" x1="100" y1="50" x2="150" y2="150" />
-                <line class="line" x1="50" y1="150" x2="150" y2="150" />
-                <line class="highlight" x1="100" y1="50" x2="100" y2="100" />
-                <circle class="node" cx="50" cy="150" r="10" />
-                <circle class="node" cx="150" cy="150" r="10" />
-                <circle class="central-node" cx="100" cy="50" r="15" />
-                <g transform="translate(150, 50)">
-                    <circle cx="0" cy="0" r="5" fill="none" stroke="#6ba4ff" stroke-width="2"/>
-                    <line x1="4" y1="4" x2="10" y2="10" stroke="#6ba4ff" stroke-width="2"/>
-                </g>
-            </svg>
-            """, unsafe_allow_html=True)
-        
-        with title_col:
-            st.title("RAG Query System")
-        
-        # Mode selection with explanation
-        mode_container = st.container()
-        with mode_container:
-            st.write("### Response Mode")
-            mode_col1, mode_col2 = st.columns([3, 1])
+        # Add logo and controls in sidebar
+        with st.sidebar:
+            st.image("../src/static/logo.png", width=100)
+            st.markdown("---")
             
-            with mode_col1:
-                allow_training_data = st.checkbox(
-                    "Allow AI to supplement with its knowledge",
-                    help="When enabled, AI can add relevant information from its training data when context is insufficient"
+            # Configuration options
+            st.subheader("Search Settings")
+            show_analysis = st.checkbox("Show Query Analysis", value=True)  # Default to True
+            show_reranking = st.checkbox("Show Re-ranking Impact", value=True)  # Default to True
+            context_only = st.checkbox("Context Only Mode", value=False)
+            
+            st.markdown("---")
+            st.markdown("### About")
+            st.markdown("RAG Query System v1.0")
+
+        return {
+            "show_analysis": show_analysis,
+            "show_reranking": show_reranking,
+            "context_only": context_only
+        }
+
+###############################
+    def render_query_input(self, settings: Dict[str, bool]) -> Dict:
+            """Render the query input section."""
+            st.title("RAG Query System")
+            
+            query_col, param_col, button_col = st.columns([3, 1, 1])
+            
+            with query_col:
+                query = st.text_input("Enter your query:", key="main_query")
+                
+                # Show query analysis if enabled
+                if query and settings["show_analysis"]:
+                    with st.expander("Query Analysis", expanded=True):
+                        analysis = self.query_analyzer.analyze_query(query)
+                        st.info(f"Query Complexity Score: {analysis.complexity_score:.2f}")
+                        
+                        # Display explanation
+                        for exp in analysis.explanation:
+                            st.write(f"- {exp}")
+                        
+                        # Display features with normalized progress bars
+                        st.write("Feature Breakdown:")
+                        max_feature_value = max(analysis.features.values())
+                        for feature, value in analysis.features.items():
+                            # Normalize to 0-1 range
+                            normalized_value = value / (max_feature_value * 1.2)  # Add 20% headroom
+                            st.progress(min(normalized_value, 1.0), text=f"{feature}: {value:.2f}")
+            
+            with param_col:
+                num_chunks = st.number_input(
+                    "Results to show:",
+                    min_value=1,
+                    max_value=10,
+                    value=3
                 )
             
-            # Show current mode explanation
-            with mode_col2:
-                if allow_training_data:
-                    st.info("📚 Using context + AI knowledge")
-                else:
-                    st.info("📄 Using context only")
+            with button_col:
+                search_clicked = st.button("Search")
             
-            # Mode description
-            if allow_training_data:
-                st.markdown("""
-                > In this mode, the AI will:
-                > - Primarily use information from the provided documents
-                > - Supplement with additional knowledge when relevant
-                > - Clearly mark any information from its training data
-                """)
-            else:
-                st.markdown("""
-                > In this mode, the AI will:
-                > - Use only information from the provided documents
-                > - Indicate when information is not available in the context
-                > - Not supplement with additional knowledge
-                """)
-        
-        st.markdown("---")
-        
-        # Query input section
-        query_col, param_col, button_col = st.columns([3, 1, 1])
-        
-        with query_col:
-            query = st.text_input("Enter your query:", key="main_query")
-        
-        with param_col:
-            num_chunks = st.number_input(
-                "Chunks to retrieve:",
-                min_value=1,
-                max_value=10,
-                value=3
-            )
-        
-        with button_col:
-            search_clicked = st.button("Search")
-            
-        return {
-            "query": query,
-            "num_chunks": num_chunks,
-            "search_triggered": search_clicked,
-            "allow_training_data": allow_training_data
-        }
-    def render_process_flow(self, active_stage: str = None):
-        """Render process flow section with status indicators."""
+            return {
+                "query": query,
+                "num_chunks": num_chunks,
+                "search_triggered": search_clicked
+            }
+###############################
+
+    def render_process_flow(self, stage: str = None):
+        """Render process flow section."""
         st.subheader("Process Flow")
         
-        stages = {
-            "query": ("Query", "🔵"),
-            "vector_search": ("Vector Search", "🔵"),
-            "chunks": ("Chunks", "🔵"),
-            "response": ("Response", "🔵")
-        }
+        # Simple flow display
+        flow_col1, flow_col2, flow_col3, flow_col4 = st.columns(4)
         
-        if active_stage:
-            stages[active_stage] = (stages[active_stage][0], "🔄")
-        
-        flow_cols = st.columns(4)
-        for i, (stage, (name, icon)) in enumerate(stages.items()):
-            with flow_cols[i]:
-                st.write(f"{icon} {name}")
+        with flow_col1:
+            st.write("Query")
+            if stage == "query":
+                st.markdown("🔄")
+            elif stage and stage > "query":
+                st.markdown("✅")
+                
+        with flow_col2:
+            st.write("Vector Search")
+            if stage == "search":
+                st.markdown("🔄")
+            elif stage and stage > "search":
+                st.markdown("✅")
+                
+        with flow_col3:
+            st.write("Chunks")
+            if stage == "chunks":
+                st.markdown("🔄")
+            elif stage and stage > "chunks":
+                st.markdown("✅")
+                
+        with flow_col4:
+            st.write("Response")
+            if stage == "response":
+                st.markdown("🔄")
+            elif stage and stage > "response":
+                st.markdown("✅")
 
-    def render_results_panel(self, chunks: List[Dict] = None, response: str = None):
-        """Render results panel with chunks and response."""
-        chunks_tab, response_tab = st.tabs(["Retrieved Chunks", "Final Response"])
-        
-        with chunks_tab:
-            if chunks:
-                for i, chunk in enumerate(chunks, 1):
-                    with st.expander(f"Chunk {i}", expanded=True):
-                        st.write(chunk['chunk_text'])
-                        col1, col2 = st.columns(2)
-                        with col1:
-                            st.write(f"Source: {chunk.get('source_info', {}).get('title', 'Unknown')}")
-                            st.write(f"Author: {chunk.get('source_info', {}).get('author', 'Unknown')}")
-                        with col2:
-                            st.write(f"Relevance Score: {chunk.get('relevance_score', 0.0):.3f}")
-                            if 'citation' in chunk:
-                                st.write("Citation:", chunk['citation'])
-            else:
-                st.info("No chunks retrieved yet")
-
-        with response_tab:
-            if response:
-                st.markdown(response)
-                st.divider()
-                st.caption("""
-                Note: When enabled, information from AI's training data is marked with [AI Knowledge: ...].
-                All other information comes directly from the provided documents.
-                """)
-            else:
-                st.info("No response generated yet")
-
-    def render_metrics_display(self, metrics: Dict = None):
-        """Render metrics display section."""
-        st.subheader("Performance Metrics")
-        
-        if metrics:
-            col1, col2, col3, col4 = st.columns(4)
+    def _display_reranking_impact(
+            self,
+            initial_results: List[Dict],
+            reranked_results: List
+        ):
+            """Display a visualization of re-ranking impact."""
+            st.subheader("Re-ranking Impact Analysis")
+            
+            # Create a before/after comparison
+            before_after = {
+                'Position': list(range(1, len(initial_results) + 1)),
+                'Before Re-ranking': [r['relevance_score'] for r in initial_results],
+                'After Re-ranking': [r.reranked_score for r in reranked_results]
+            }
+            
+            df = pd.DataFrame(before_after)
+            
+            # Display metrics
+            col1, col2 = st.columns(2)
             
             with col1:
-                st.metric("Embedding Time", f"{metrics.get('embedding_time', 0):.3f}s")
+                st.write("Score Distribution")
+                st.bar_chart(df.melt('Position', var_name='Stage', value_name='Score'))
+                
             with col2:
-                st.metric("Search Time", f"{metrics.get('search_time', 0):.3f}s")
-            with col3:
-                st.metric("Response Time", f"{metrics.get('response_time', 0):.3f}s")
-            with col4:
-                st.metric("Total Time", f"{metrics.get('total_time', 0):.3f}s")
+                st.write("Position Changes")
+                # Create a mapping of chunk_ids to their positions in both lists
+                initial_positions = {chunk['chunk_id']: i for i, chunk in enumerate(initial_results)}
+                reranked_positions = {r.chunk_id: i for i, r in enumerate(reranked_results)}
+                
+                # Show position changes
+                for chunk_id in initial_positions:
+                    if chunk_id in reranked_positions:
+                        old_pos = initial_positions[chunk_id] + 1  # 1-based position
+                        new_pos = reranked_positions[chunk_id] + 1  # 1-based position
+                        if old_pos != new_pos:
+                            st.write(f"🔄 Chunk moved: Position {old_pos} → {new_pos}")
 
-            st.metric("Chunks Retrieved", metrics.get('num_chunks', 0))
-        else:
-            st.info("No metrics available yet")
 
-    def process_query(self, query: str, num_chunks: int, allow_training_data: bool = False) -> Dict:
-        """Process query through the RAG pipeline."""
+    def display_results(
+        self,
+        results: Dict[str, Any],
+        settings: Dict[str, bool]
+    ):
+        """Display search results and generated response with search metrics."""
+        if not results:
+            return
+
+        # Display processing information
+        st.info(f"Processing time: {results['processing_time']:.2f} seconds")
+
+        # Add Search Strategy and Metrics section
+        with st.expander("🔍 Search Analysis", expanded=True):
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.subheader("Search Strategy")
+                analysis = results['analysis']
+                
+                # Show whether re-ranking was used
+                if analysis.needs_reranking:
+                    st.success("🔄 Re-ranking was applied")
+                    st.write(f"- Complexity Score: {analysis.complexity_score:.2f}")
+                    st.write(f"- Initial candidates retrieved: {analysis.recommended_candidates}")
+                    st.write(f"- Final results shown: {len(results['results'])}")
+                else:
+                    st.info("📍 Vector search only")
+                    st.write(f"- Complexity Score: {analysis.complexity_score:.2f}")
+                    st.write("- Re-ranking not needed for this query")
+            
+            with col2:
+                st.subheader("Relevance Metrics")
+                if analysis.needs_reranking:
+                    # Show before/after stats
+                    scores_before = [r['initial_score'] for r in results['results']]
+                    scores_after = [r['relevance_score'] for r in results['results']]
+                    
+                    metrics_df = pd.DataFrame({
+                        'Metric': ['Average Score', 'Highest Score', 'Lowest Score'],
+                        'Before Re-ranking': [
+                            f"{sum(scores_before) / len(scores_before):.3f}",
+                            f"{max(scores_before):.3f}",
+                            f"{min(scores_before):.3f}"
+                        ],
+                        'After Re-ranking': [
+                            f"{sum(scores_after) / len(scores_after):.3f}",
+                            f"{max(scores_after):.3f}",
+                            f"{min(scores_after):.3f}"
+                        ]
+                    })
+                    st.table(metrics_df)
+                else:
+                    # Show vector search stats only
+                    scores = [r['relevance_score'] for r in results['results']]
+                    st.write(f"- Average relevance: {sum(scores) / len(scores):.3f}")
+                    st.write(f"- Highest score: {max(scores):.3f}")
+                    st.write(f"- Lowest score: {min(scores):.3f}")
+                    st.write(f"- Score spread: {max(scores) - min(scores):.3f}")
+
+        # Tabs for results
+        chunks_tab, response_tab = st.tabs(["Retrieved Chunks", "Generated Response"])
+        
+        with chunks_tab:
+            # Display chunks with enhanced score information
+            for i, chunk in enumerate(results['results'], 1):
+                score_display = f"{chunk['relevance_score']:.3f}"
+                if analysis.needs_reranking:
+                    score_display += f" (Initial: {chunk.get('initial_score', 0):.3f})"
+                    
+                with st.expander(
+                    f"Chunk {i} (Score: {score_display})",
+                    expanded=(i == 1)
+                ):
+                    st.write(chunk['chunk_text'])
+                    if chunk.get('metadata'):
+                        st.markdown("---")
+                        st.write("Source Information:")
+                        for key, value in chunk['metadata'].items():
+                            st.write(f"- {key}: {value}")
+        
+        with response_tab:
+            if not settings["context_only"] and results.get('response'):
+                st.write(results['response'])
+            else:
+                st.info("Context-only mode enabled - no response generated")
+
+    def process_query(self, query: str, num_chunks: int, settings: Dict[str, bool]):
+        """Process the query and return results."""
         try:
-            results = {}
+            self.render_process_flow("query")
+            start_time = time.time()
+            
+            # Analyze query
+            analysis = self.query_analyzer.analyze_query(query)
             
             # Generate query embedding
-            with st.spinner("Generating query embedding..."):
-                start_time = time.time()
-                query_vector = self.embedding_generator.generate_embedding(query)
-                embedding_time = time.time() - start_time
-                results['embedding_time'] = embedding_time
-
-            # Search for relevant chunks
-            with st.spinner("Searching for relevant chunks..."):
-                start_time = time.time()
-                search_results = self.rag_search_client.search(query_vector, k=num_chunks)
-                search_time = time.time() - start_time
-                results['search_time'] = search_time
-                results['chunks'] = search_results
-
-            # Generate response using chunks
-            with st.spinner("Generating response..."):
-                start_time = time.time()
-                generated_response = self.generatorX.generate_response(
-                    query, 
-                    search_results,
-                    allow_training_data=allow_training_data
+            self.render_process_flow("search")
+            query_vector = self.embedding_generator.generate_embedding(query)
+            
+            # Get initial results
+            initial_k = analysis.recommended_candidates if analysis.needs_reranking else num_chunks
+            initial_results = self.search_client.search(
+                query_vector=query_vector,
+                k=initial_k
+            )
+            
+            self.render_process_flow("chunks")
+            
+            # Apply re-ranking if needed
+            if analysis.needs_reranking:
+                reranked_results = self.reranker.rerank(
+                    query=query,
+                    candidates=initial_results,
+                    top_k=num_chunks
                 )
-                response_time = time.time() - start_time
-                results['response_time'] = response_time
-                results['response'] = generated_response
-
-            # Collect metrics
-            results['total_time'] = embedding_time + search_time + response_time
-            results['num_chunks'] = len(search_results)
-
-            return results
-
+                
+                if settings["show_reranking"]:
+                    self._display_reranking_impact(
+                        initial_results[:num_chunks],
+                        reranked_results
+                    )
+                
+                final_results = [
+                    {
+                        'chunk_id': r.chunk_id,
+                        'chunk_text': r.chunk_text,
+                        'relevance_score': r.reranked_score,
+                        'metadata': r.metadata,
+                        'initial_score': r.initial_score
+                    }
+                    for r in reranked_results
+                ]
+            else:
+                final_results = initial_results[:num_chunks]
+            
+            self.render_process_flow("response")
+            
+            # Generate response if not in context-only mode
+            if not settings["context_only"]:
+                response = self.generator.generate_response(
+                    query=query,
+                    search_results=final_results,
+                    allow_training_data=False
+                )
+            else:
+                response = None
+            
+            processing_time = time.time() - start_time
+            
+            self.render_process_flow("complete")
+            
+            return {
+                'results': final_results,
+                'response': response,
+                'processing_time': processing_time,
+                'analysis': analysis
+            }
+            
         except Exception as e:
-            st.error(f"Error processing query: {str(e)}")
-            raise
+            self.logger.error(f"Query processing failed: {str(e)}")
+            st.error(f"An error occurred: {str(e)}")
+            return None
 
     def run(self):
-        """Main UI execution flow."""
-        self.setup_page()
+        """Main execution flow for the UI."""
+        # Setup page and get settings
+        settings = self.setup_page()
         
-        # 1. Query Input Section with mode selection
-        input_state = self.render_query_input()
+        # Get query input
+        input_state = self.render_query_input(settings)
         
-        # 2. Process Flow Section
-        flow_container = st.empty()
-        flow_container.container()
-        self.render_process_flow()
-        
-        # Handle search if triggered
+        # Process query if triggered
         if input_state["search_triggered"] and input_state["query"]:
-            try:
-                flow_container.container()
-                self.render_process_flow("query")
-                
-                # Execute search with mode selection
+            with st.spinner("Processing query..."):
                 results = self.process_query(
                     input_state["query"],
                     input_state["num_chunks"],
-                    input_state["allow_training_data"]
+                    settings
                 )
                 
                 if results:
-                    # 3. Results Panel
-                    self.render_results_panel(
-                        chunks=results.get('chunks'),
-                        response=results.get('response')
-                    )
-                    
-                    # 4. Metrics Display
-                    self.render_metrics_display(results)
-                    
-                    # Final flow status
-                    flow_container.container()
-                    self.render_process_flow("response")
-                
-            except Exception as e:
-                st.error(f"An error occurred: {str(e)}")
+                    self.display_results(results, settings)
 
 def main():
     ui = RAGQueryUI()

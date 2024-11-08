@@ -1,6 +1,18 @@
 
 from src.config import Configuration
+from src.data_classes import dataclass
+from typing import Dict, Any  
 
+
+# @dataclass
+# class RerankingConfig:
+#     enabled: bool
+#     provider: str
+#     models: Dict[str, Any]
+#     thresholds: Dict[str, float]
+#     active_model: str
+
+    
 class ConfigSingleton:
     _instance = None
 

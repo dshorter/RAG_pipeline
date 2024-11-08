@@ -22,6 +22,35 @@ gpt:
   api_base: "https://edav-dev-openai-eastus2-shared.openai.azure.com/"
   api_version: "2024-02-01"  
 
+reranking:
+  enabled: true
+  provider: "huggingface"
+  models:
+    huggingface:
+      model_name: "cross-encoder/ms-marco-MiniLM-L-6-v2"
+      batch_size: 32
+      max_length: 512
+  thresholds:
+    complexity_threshold: 1.2  # When to apply re-ranking
+    min_score: 0.6  # Minimum relevance score
+    max_candidates: 20  # Max initial results to re-rank
+  active_model: "huggingface"
+
+query_analysis:
+  enabled: true
+  thresholds:
+    simple_query: 0.8       # Below this is a simple query
+    complex_query: 1.2      # Above this is a complex query
+    max_chunks_simple: 3    # Default chunks for simple queries
+    max_chunks_complex: 5   # Default chunks for complex queries
+    max_candidates: 15      # Max candidates for re-ranking
+  weights:
+    word_count: 0.3
+    entity_count: 0.2
+    dependency_depth: 0.2
+    keyword_complexity: 0.2
+    question_complexity: 0.1
+  
 pipeline:
   embedding:
     provider: "azure_openai"  # Can be "azure_openai" or "huggingface"
