@@ -4,11 +4,14 @@ __pycache__/
 *.py[cod]
 *.so
 
+*.exe
+
 # Environments
 .env
 .venv
 env/
 venv/
+ragenv/
 
 # IDEs
 .vscode/
