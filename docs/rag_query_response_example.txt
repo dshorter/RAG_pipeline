@@ -1,0 +1,24 @@
+Question asked:  
+==============
+what challenges come during an inspection 
+
+Answer from system:  
+===================    
+The challenges that come during an inspection, as gleaned from the provided context, include the need for different inspection protocols due to varying levels of risk and observation opportunities across different types of entities [1]. For instance, commercial and private entities have a higher frequency of observations per inspection and risk per inspection compared to non-federal government entities. This suggests that inspection efforts, such as duration and frequency, might be better weighted based on the entity type rather than applied equally across all registered entities [1].
+
+Another challenge mentioned is that entities not possessing biological select agents and toxins have substantially fewer observations and lower risk. Since these nonpossessing entities do not have biological select agents and toxins in storage or use, inspections in these facilities offer less opportunity for departure findings compared to inspections at active facilities. This implies that alternative inspection protocols might be considered for entities that do not perform work with biological select agents and toxins [1].
+
+Furthermore, the entity complexity score was found to have a low predictive value for biosafety risk in the study and an even lower predictive value for security risk. The complexity score is an attempt by DSAT inspectors to quantify and standardize the opportunity for regulatory departures based on the scope of an entity's biological select agent and toxin work. However, greater precision in weighting entities' risk could likely be possible by exploring underlying factors of risk beyond those assessed in the study [1].
+
+Tier 1 entities are required to have additional security protections, and although there were no observed differences in the median number of risk and security observations between tier 1 and non-tier 1 inspections, this suggests that tier 1 entities have successfully stepped up security to meet enhanced requirements [1].
+
+Unannounced inspections also pose challenges as they can be challenging to arrange and disruptive for regulated entities. However, they are seen as an important component of a risk-based oversight program because unannounced inspections identify greater numbers of biosafety observations and higher-risk findings compared to announced inspections, suggesting they provide a more realistic view of routine practice and greater opportunities for improvement [1].
+
+Lastly, the regulatory departures identified in actual inspection reports were altered to categorize and score relative severity, which may not reflect the exact number or characterization of inspection findings. This adjustment for severity scoring differentiates relative levels of risk, but findings should be interpreted in a comparative rather than absolute sense. This hints at the challenge of maintaining consistency in coding departure narratives and observation categories and levels of risk [1].
+
+In summary, inspections face challenges related to the variability in entity types and associated risks, the need for alternative protocols for nonpossessing entities, the refinement of risk assessment methods, the disruptive nature of unannounced inspections, and the consistency in coding and interpreting regulatory departures [1].
+
+Sources: 
+[1] 'Characterization of Departures from Regulatory Requirements Identified During Inspections from FSAP.txr' | section 5400-5900 | (Relevance: -7.53) 
+[2] 'FSAP_Annual_Report_2022_508' | by Centers for Disease Control and Prevention | section 4950-5450 | (Relevance: -8.48) 
+[3] 'FSAP_Annual_Report_2022_508' | by Centers for Disease Control and Prevention | section 5400-5900 | (Relevance: -8.51)

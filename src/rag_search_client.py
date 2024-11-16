@@ -57,19 +57,12 @@ class RAGSearchClient:
             self.logger.warning(f"Citation formatting failed: {str(e)}")
             return "Citation unavailable"
 
+
     def search(self, query_vector: Union[np.ndarray, List[float]], k: int = 5) -> List[Dict[str, Any]]:
-        """
-        Search for similar vectors and return results with metadata.
-        
-        Args:
-            query_vector: Vector to search for (numpy array or list)
-            k: Number of results to return (default: 5)
-            
-        Returns:
-            List of dictionaries containing search results with metadata
-        """
+        """Search for similar vectors and fetch corresponding metadata."""
         try:
-            self.logger.debug("Starting vector search")
+            self.logger.debug("Starting vector search", 
+                            extra={'operation': 'vector_search'})
 
             # Ensure query vector is in correct format
             if isinstance(query_vector, list):
@@ -77,26 +70,35 @@ class RAGSearchClient:
             if len(query_vector.shape) == 1:
                 query_vector = query_vector.reshape(1, -1)
 
-            # Load FAISS index and perform search
+            # 1. FAISS Search
             index = faiss.read_index(self.faiss_path)
             distances, faiss_ids = index.search(query_vector, k)
             
-            self.logger.debug(f"Found {len(faiss_ids[0])} matches")
+            self.logger.debug(f"Found {len(faiss_ids[0])} matches", 
+                            extra={'operation': 'vector_search'})
 
-            # Retrieve corresponding chunk data
+            # 2. Fetch Metadata from SQLite
             results = []
-            conn = sqlite3.connect(self.db_path)
-            try:
+            with sqlite3.connect(self.db_path) as conn:
                 cursor = conn.cursor()
                 
                 for i, faiss_id in enumerate(faiss_ids[0]):
                     if faiss_id == -1:  # FAISS returns -1 for no match
                         continue
                         
+                    # Get chunk metadata and document metadata in one query
                     cursor.execute('''
-                        SELECT c.chunk_id, c.chunk_text, c.document_id, c.metadata,
-                               c.vector_stats, c.start_index, c.end_index,
-                               d.title, d.author, d.source
+                        SELECT 
+                            c.chunk_id,
+                            c.chunk_text,
+                            c.document_id,
+                            c.start_index,
+                            c.end_index,
+                            c.metadata as chunk_metadata,
+                            d.title,
+                            d.author,
+                            d.source,
+                            d.metadata as doc_metadata
                         FROM document_chunks_metadata c
                         LEFT JOIN documents_metadata d ON c.document_id = d.document_id
                         WHERE c.faiss_id = ?
@@ -104,48 +106,49 @@ class RAGSearchClient:
                     
                     row = cursor.fetchone()
                     if row:
-                        chunk_id, chunk_text, doc_id, metadata_str, vector_stats_str, \
-                        start_index, end_index, title, author, source = row
+                        chunk_id, chunk_text, doc_id, start_index, end_index, \
+                        chunk_metadata, title, author, source, doc_metadata = row
                         
                         # Calculate relevance score (1 / (1 + distance))
-                        relevance_score = 1 / (1 + distances[0][i])
+                        relevance_score = float(1 / (1 + distances[0][i]))
                         
-                        # Create citation
-                        citation = self._format_citation({
-                            'title': title,
-                            'author': author,
-                            'source': source,
-                            'start_index': start_index,
-                            'end_index': end_index
-                        })
-
+                        # Combine into a result with all metadata
                         results.append({
                             "chunk_id": chunk_id,
                             "chunk_text": chunk_text,
                             "document_id": doc_id,
-                            "metadata": json.loads(metadata_str),
-                            "vector_stats": json.loads(vector_stats_str) if vector_stats_str else {},
                             "relevance_score": relevance_score,
                             "distance": float(distances[0][i]),
-                            "citation": citation,
+                            "metadata": json.loads(chunk_metadata) if chunk_metadata else {},
                             "source_info": {
-                                "title": title,
-                                "author": author,
-                                "source": source,
+                                "title": title or "Unknown Document",
+                                "author": author or "Unknown Author",
+                                "source": source or "Unknown Source",
                                 "start_index": start_index,
                                 "end_index": end_index
-                            }
+                            },
+                            "document_metadata": json.loads(doc_metadata) if doc_metadata else {}
                         })
-                
-            finally:
-                conn.close()
 
-            self.logger.info(f"Search completed, found {len(results)} results")
+                        print("\nDEBUG: Search Results: ==============================")
+                        for i, result in enumerate(results):
+                            print(f"\nResult {i+1}:")
+                            print(f"Keys: {result.keys()}")
+                            print(f"Source Info: {result.get('source_info', {})}")
+                            print(f"Metadata: {result.get('metadata', {})}")
+                            print(f"Title: {result.get('source_info', {}).get('title', 'No title')}")
+                            print(f"Author: {result.get('source_info', {}).get('author', 'No author')}")
+                            print(f"Relevance: {result.get('relevance_score', 'No score')}")
+
+            self.logger.info(f"Search completed, found {len(results)} results", 
+                            extra={'operation': 'search_complete'})
             return results
 
         except Exception as e:
             self.logger.error(f"Search operation failed: {str(e)}")
             raise
+
+
 
     def get_document_metadata(self, document_id: str) -> Dict[str, Any]:
         """Retrieve metadata for a specific document."""
