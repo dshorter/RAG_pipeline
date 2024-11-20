@@ -1,0 +1,84 @@
+---
+title: Biosafety Level 4 (BSL‑4)/Animal BSL‑4 (ABSL‑4) Laboratory Facility Verification Requirements
+author: DRSC 
+date: 2023-02-09  
+category: Policy Statement 
+---
+
+Policy Statement: Biosafety Level 4 (BSL‑4)/Animal BSL‑4 (ABSL‑4) Laboratory Facility Verification Requirements
+Print
+Date: February 9, 2023
+
+Subject: Biosafety Level 4 (BSL-4)/Animal BSL-4 (ABSL-4) Laboratory Facility Verification
+
+Biosafety Level 4 (BSL-4) and Animal BSL-4 (ABSL-4) facility design parameters and operational procedures are used when working with dangerous and exotic biological agents that are easily transmitted by the aerosol route, cause severe to fatal disease in humans, and typically do not have available vaccines or treatments. These laboratories must establish and exercise the highest level of biosafety precautions to ensure facility containment is maintained.
+
+Entities that possess, use, or transfer select agents and toxins must comply with the federal select agent and toxin regulations found in 42 CFR Part 73, 7 CFR Part 331, and 9 CFR Part 121. To meet the biosafety sufficiency requirement in Section 12(b) of the federal select agent and toxin regulations, it is the policy of the Federal Select Agent Program (FSAP) that entities that store or use select agents and toxins in BSL-4 and/or ABSL-4 laboratories verify that the facility parameters and operational procedures, including heating, ventilation, and air conditioning (HVAC) systems, are functioning as intended. To verify these systems are functioning properly in laboratories, entities need to ensure:
+
+HVAC operational verification is conducted initially, annually [1], and after any major changes or after resolving major problems.
+HVAC operational verification is performed and documented prior to initial operation of the BSL-4/ABSL-4 containment areas (suit and cabinet), annually, and after major changes to ensure operational parameters are maintained. The HVAC design verification process provides evidence that secondary containment will be maintained during both normal operating conditions and during failure conditions to prevent air-flow reversals into non-containment areas or positive pressurization events (e.g., outside the containment boundary, hallways).
+HVAC operational verification includes “under failure conditions” (e.g., failure of primary supply air fan, failure of primary exhaust fan, or failure of parallel fans depending on facility configuration).
+Potential failure conditions are tested and documented. The results of the tests demonstrate that after fan failure conditions, during normal power transfer to an automatically activated backup power supply, and during transition back to normal power, there is no positive pressurization event that originates within the BSL-4/ABSL-4 containment areas (suit and cabinet) that escape the containment boundary.
+The tested failure conditions for verification of HVAC performance include:
+Mechanical failure of the supply and exhaust fans systems: The ability to transition to the redundant fan without airflow reversals from the BSL-4/ABSL-4 laboratory (suit and cabinet) that escapes the containment boundary.
+Transfer to an automatically activated backup power supply: The ability to transition from normal power to the automatically activated backup, emergency power supply without airflow reversal from the BSL-4/ABSL-4 laboratory (suit and cabinet) that escapes the containment boundary. Room air pressure trend lines captured from the Building Automation System (BAS) records can be used to demonstrate the absence of air reversal.
+Return from emergency power status to normal power status: The ability to transition from automatically activated backup, emergency power to normal power without positive pressurization events from the BSL-4/ABSL-4 containment areas (suit and cabinet) to non-containment areas.
+HVAC operational verification addresses major changes or major problems.
+HVAC operation is verified and documented again after major changes have been made to, or after resolving major problems noted with, the HVAC system.
+Examples of major changes to the HVAC system include, but are not limited to:
+Replacement or repairs of exhaust and supply fans serving the BSL-4/ABSL-4 containment areas;
+Replacement, repairs, or modifications of ductwork valves or dampers that serve BSL-4/ABSL-4 containment areas;
+Replacement, repairs, or modifications of HVAC control system(s) that serve BSL-4/ABSL-4 containment areas;
+BAS logic programming changes;
+Structural changes to the BSL-4/ABSL-4 containment areas;
+Addition or removal of hard-ducted biological safety cabinets (BSCs), Class III cabinets, or decontamination systems; or
+Events that compromise the containment envelope.
+Examples of major problems with HVAC system performance include, but are not limited to:
+Recurring failures of the HVAC system;
+Observation or evidence that HVAC alarms are not working properly;
+Observation or evidence that BSCs with an HVAC connection (hard duct or thimble) are not working as designed; or
+Supply or exhaust interlocking system failures.
+BSL-4/ABSL-4 facility verification is conducted initially, annually, and after any major changes or after resolving major problems. The entity performs and documents initially for a BSL-4 or ABSL-4 laboratory and again at least annually:
+Recalibration of components that monitor containment parameters (e.g., differential pressure gauges, pressure transducers, BAS);
+Verification of BAS-programmed alarm communication;
+Confirmation that decontamination systems are operating as designed (e.g., autoclave, room decontamination systems, tissue digesters, liquid effluent systems, and chemical showers);
+Effluent, tissue, autoclave, and decontamination systems:
+Annual verification that system operational parameters have not changed from biologically validated conditions (e.g., volume, pressure, temperature settings);
+Biological validation is performed at least annually or more often, if required by institutional policy and/or risk assessment;
+Annual certification testing of associated high-efficiency particulate air (HEPA) filters, if applicable (e.g., operating vent, pressure relief vent, chamber effluent/vent);
+Annual verification that system failure, emergency communication systems are operating as designed (e.g., alarms, leak detection);
+Verify appropriate filter media is selected and maintained annually (e.g., HEPA, polytetrafluoroethylene [PTFE]); and
+Implementation of risk-based preventative maintenance for other equipment that is critical to containment components, but is not specifically included above (e.g., cook tanks, etc.);
+Annual verification that chemical shower delivery systems are operating as designed (e.g., system delivery components and conductivity and alarm monitoring;
+Annual verification that room decontamination systems are operating as designed and tested using biological indicators (e.g., biological indicator strips);
+Verification of laboratory HVAC, plumbing vent line, and decontamination system filters by appropriate means and appropriate acceptance criteria to ensure integrity (e.g., HEPA, PTFE);
+Assessment of breathing air quality for both main and backup breathing air supply;
+Certification of biological safety cabinets;
+Verification of primary containment integrity (e.g., centrifuges, Class III cabinets, animal caging, Air Pressure Resistant [APR] door gaskets) with component replacement if defective; and
+Confirmation that all alarms (e.g., air supply, exhaust, life support, BAS alarms, fire, airflow, security, access systems, water supply backflow prevention devices) have been checked and are functioning according to approved design specifications.
+The entity performs and documents on an ongoing, routine basis:
+
+Surveillance and implementation of routine maintenance programs and backup power systems for HVAC supply and exhaust fans, main and backup breathing air systems, and decontamination systems;
+Surveillance of containment envelope for penetrations, cracks, breaks, and performance or related repairs. Identifying and confirming proper operation of various BSL-4/ABSL-4 containment boundary points of failure (such as penetrations, cracks, breaks, etc.) may be successfully tested through proper pressure decay testing;
+Surveillance and verification of secondary containment envelope integrity (e.g., APR door gaskets, HVAC dampers). A pressure decay testing may be used to confirm operation of BSL-4/ABSL-4 containment boundary points of failure (e.g., APR doors, HEPA isolation dampers, etc.); and
+Confirmation and testing of critical interlocks and manual overrides (e.g., between exhaust fans and air handling units, between laboratory exhaust fan airflows and supply airflows, and between mechanical and electronic door interlocks).
+Note: Entities may need to perform additional facility verifications for these and other systems due to the entity’s facility design, operation, work objectives, etc., to ensure containment of select agents and toxins.
+
+Authority:
+
+The possession, use, and transfer of select agents and toxins are regulated in accordance with the federal select agent and toxin regulations found in 42 CFR Part 73, 7 CFR Part 331, and 9 CFR Part 121.
+
+The select agent and toxin regulations require that, for entities that possess select agents and toxins, their biosafety and containment procedures (e.g., physical structure and features of the entity, and operational and procedural safeguards) must be sufficient to contain the select agent or toxin. See Section 12(b) of the federal select agent and toxin regulations.
+
+The select agent and toxin regulations require an entity to develop and implement a written biosafety plan that is commensurate with the risk of the agent or toxin, given its intended use. See Section 12(a) the federal select agent and toxin regulations. In developing the biosafety plan, the regulations state that the entity should consider following standards found in the Biosafety in Microbiological and Biomedical Laboratories, current edition.
+
+FSAP based this policy statement on the following standards found in the 6th edition of the Biosafety in Microbiological and Biomedical Laboratories.:
+
+BSL-4 Section IV D16(a): Cabinet laboratory: Gas discharged from the autoclave chamber is HEPA-filtered or decontaminated. Autoclave decontamination processes are designed so that unfiltered air or steam exposed to infectious material cannot be released to the environment. Suit laboratory: The ventilation system is designed to maintain the laboratory at negative pressure to surrounding areas and to provide differential pressure or directional airflow, as appropriate, between adjacent areas within the laboratory.
+ABSL-4 Section V D16(a): Cabinet facility: Gas discharged from the autoclave chamber is HEPA-filtered or decontaminated. Autoclave decontamination processes are designed so that unfiltered air or steam exposed to infectious material cannot be released to the environment. Suit facility: The supply and exhaust components of the ventilation system are designed to maintain the ABSL-4 facility at negative pressure to surrounding areas and to provide differential pressure or directional airflow as appropriate between adjacent areas within the facility.
+BSL-4 Section IV (Cabinet laboratory D17; Suit laboratory D20): The facility design parameters and operational procedures are documented. The facility is tested to verify that the design and opera­tional parameters have been met prior to operation. Facilities are also re-tested annually or after significant modification to ensure operational parameters are maintained. Verification criteria are modified, as necessary, by operational experience.
+ABSL-4 Section V Cabinet facility D18: The animal facility design parameters and operational procedures are documented. The facility is tested to verify that the design and operational parameters have been met prior to operation. Facilities are also re-tested annually or after significant modification to ensure operational parameters are maintained. Verification criteria are modified, as necessary, by operational experience. Suit facility D21: The ABSL-4 facility design parameters and operational procedures are documented. The facility is tested to verify that the design and operational parameters have been met prior to operation. Facilities are also re-tested annually or after significant modification to ensure operational parameters are maintained. Verification criteria are modified, as necessary, by operational experience.
+[1] For the purposes of the Biosafety Level 4 (BSL-4)/Animal BSL-4 (ABSL-4) Laboratory Facility Verification Policy, the term annual is defined as every 365 days.
+
+Last Reviewed: August 22, 2024, 04:00 PM
+Source: Division of Regulatory Science and Compliance

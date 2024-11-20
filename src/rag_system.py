@@ -1,10 +1,11 @@
 from datetime import datetime
 import sqlite3
+import numpy as np
 import faiss
 import uuid
 import hashlib
 import json
-import numpy as np
+
 from typing import Dict, Any, List, Tuple, Union
 import os
 from src.singleton_config import ConfigSingleton

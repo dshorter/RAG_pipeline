@@ -1,0 +1,80 @@
+---
+title: BSL-3/ABSL-3 Verification  
+author: DRSC 
+date: 2014-11-20
+category: Policy Statement 
+---
+
+Policy Statement: BSL-3/ABSL-3 Verification
+Date: November 20, 2014
+
+Subject: BSL-3/ABSL-3 Verification
+
+The Federal Select Agent Program (FSAP) is a collaboration between the Center for Disease Control and Prevention (CDC), Division of Select Agents and Toxins (DSAT) and the Animal and Plant Health Inspection Service (APHIS) Division of Agricultural Select Agents and Toxins (DASAT) to regulate the possession, use, and transfer of biological agents listed in 7 C.F.R. Part 331, 9 C.F.R. Part 121, and 42 C.F.R. Part 73 (select agents and toxins). The FSAP administers the select agents and toxins regulations in close coordination with the Federal Bureau of Investigation’s Criminal Justice Information Services (CJIS).
+
+Authority:
+For biological agents and toxins determined by HHS to have the potential to pose a severe threat to public health and safety (select agents and toxins), the Public Health Security and Bioterrorism Preparedness and Response Act of 2002 (42 U.S.C. 262a) directs the promulgation of regulations to establish and enforce safety procedures for the possession and use of select agents and toxins, including measures to ensure proper training and appropriate skills to handle such agents and toxins.  42 U.S.C. § 262a(c)
+
+For biological agents and toxins determined by USDA to have the potential to pose a severe threat to animal health or animal products (select agents and toxins), the Agricultural Bioterrorism Act of 2002 (7 U.S.C. 8401) directs the promulgation of regulations to establish and enforce safety procedures for the possession and use of such select agents and toxins, including measures to ensure proper training and appropriate skills to handle such select agents and toxins.  (7 U.S.C. 8401(c))
+
+Zoonotic select agents and toxins are regulated by both HHS and USDA.  See 42 CFR 73.4 and 9 CFR 121.4.
+Federal regulations require that for entities that possess select agents and toxins their “biosafety and containment procedures must be sufficient to contain the select agent or toxin (e.g., physical structure and features of the entity, and operational and procedural safeguards).”  See 42 CFR 73.12(b), 9 CFR 121.12(b).
+
+Policy Statement, BSL-3/ABSL-3 HVAC Verification:
+Initial HVAC design verification must be performed and documented by someone with experience and expertise with the HVAC system prior to operation. This initial HVAC design verification ensures that secondary containment is maintained under failure conditions to prevent possible exposure of personnel outside the containment boundary. After HVAC verification is initially documented, the testing need not be repeated, providing no major changes have been made to, or major problems noted with, the HVAC system.
+
+Examples of major changes to the HVAC system include:
+
+Replacement of exhaust or supply fans that serve the BSL-3/ABSL-3 containment areas,
+Replacement of ductwork valves or dampers that serve these areas,
+Replacement or repair of HVAC system control wiring,
+Building automation system logic programming changes,
+Structural changes to the BSL-3/ABSL-3 rooms, or
+Addition or removal of hard-ducted BSCs or fume hoods.
+Examples of major problems with HVAC performance include:
+
+Frequent failures of the HVAC system,
+Supply-exhaust interlocking system failure,
+Observation that directional air flow is reversed under normal conditions,
+Observation that HVAC alarms are not working, or
+Observation that any BSCs with an HVAC connection are not working properly.
+Documentation provided to FSAP of verification of HVAC design functionality under failure conditions must demonstrate that under exhaust fan or normal power failure conditions, or during normal power start-up, there is no reversal of air which originates within the BSL-3/ABSL-3 laboratory or vivarium room that travels all of the way outside the containment boundary.  The failure conditions for HVAC verification include:
+
+Mechanical failure of exhaust fan or fan component(s):
+If redundant fans are present, the ability to transition to the alternate fan without reversal of air flow from potentially contaminated laboratory space into “clean” areas surrounding the laboratory must be verified.
+If no redundancy is present in the laboratory HVAC system, the capacity to transition from sustained inward air flow into the laboratory to a “static” condition i.e., no air flow out of the laboratory, must be verified.
+Simultaneous power failure supporting supply and exhaust fan components:
+If emergency power supply is available for the laboratory HVAC system, the ability to transition from “normal” power to the backup system without a reversal of air flow from the laboratory should be verified.
+If no backup power supply is available, the ability of the HVAC system to transition to a “static” condition, i.e., no outward air flow, should be verified.
+Return from power failure to “normal” operating conditions:
+If emergency power supply is available, it should be verified that the ability exists to transition from backup power to normal power without a reversal of air flow from the laboratory.
+If no backup power supply is available, the ability of the HVAC system to return to normal operating conditions, without a reversal of air flow from laboratory spaces to clean areas surrounding the laboratory should be verified.
+Note:  A facility may be considered to pass the HVAC verification tests as long as laboratory air does not exit the containment barrier of the facility. The BSL-3 anteroom is considered to be within the containment envelope. A positive pressure excursion is not necessarily an airflow reversal; if a brief, weak positive pressure excursion is noted, a repeat test may be performed with airflow observation using an airflow indicator such as a smoke stick, or dry ice in a container of water, at the base of the closed laboratory door to confirm whether airflow reversal is occurring.
+
+The FSAP based this policy statement on the following 5th edition of the Biosafety in Microbiological and Biomedical Laboratories (BMBL) Standards:
+
+BSL-3 D9: “The laboratory shall be designed such that under failure conditions the airflow will not be reversed.”
+ABSL-3 D6: “The ABSL-3 animal facility shall be designed such that under failure conditions the airflow will not be reversed.”
+ 
+Policy Statement, BSL-3/ABSL-3 Facility Verification:
+
+In addition to initial HVAC verification and re-verification as described above, the following are the minimum facility verification requirements that an entity is expected to perform and document initially for a BSL-3 or ABSL-3 laboratory and again at least annually.
+
+The means of detecting air flow (tell tale, magnehelic or digital gauge, Baulin-Tube®, etc.) has been confirmed to accurately reflect observed air flow. It is recommended, but not required, that digital or magnehelic gauges be calibrated annually.
+Inward directional airflow has been confirmed by observation for the laboratory.
+Decontamination systems (autoclave, room decontamination systems, digesters, liquid effluent systems, etc.) have been confirmed to be operating correctly.
+If a Building Automation System (BAS) has the capacity to monitor and record performance measurements e.g., differential pressures, the entity is encouraged to capture and store data from potential failure events, drills, etc.  This information may provide verification of system performance. In addition, any programmed BAS alarms should be verified for proper functioning.
+All alarms (fire, air flow, security, etc.) have been checked and are functioning according to established specifications.
+Laboratory HVAC HEPA filters, if present, have been certified annually.
+Exhaust fan motors have been checked and routine maintenance conducted.
+The laboratory has been checked for unsealed penetrations, cracks, breaks, etc. and these have been repaired if present.
+All biological safety cabinets have been certified annually.
+Seals on centrifuges, Class III cabinets, gloves on Class III cabinets, etc. have been checked and replaced if required.
+Drench showers, eye wash stations, and hands free sinks have been confirmed to be operating properly.
+Note: Entities may choose to perform additional facility verification beside what is listed above.
+
+The FSAP based this policy statement on the following 5th edition of the Biosafety in Microbiological and Biomedical Laboratories (BMBL) Standards:
+
+BSL-3 D15: “The BSL-3 facility design, operational parameters and procedures must be verified and documented prior to operation. Facilities must be re-verified and documented at least annually.”
+ABSL-3 D14: “The ABSL-3 facility design and operational procedures must be documented. The facility must be tested to verify that the design and operational parameters have been met prior to use. Facilities should be re-verified at least annually against these procedures as modified by operational experience.”
+These policy statements are effective August 5, 2011.

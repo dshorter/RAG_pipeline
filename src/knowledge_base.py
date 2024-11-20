@@ -1,12 +1,15 @@
 import os
 import re
+from typing import Dict, Tuple
 import dateutil
 from nltk.tokenize import PunktSentenceTokenizer, word_tokenize
 from nltk.corpus import stopwords
 import nltk   
 import magic 
 from tika import parser  
-import datetime    
+import datetime
+
+import yaml    
 from .singleton_config import ConfigSingleton 
 from .rag_system import RAGSystem  
 
@@ -124,6 +127,14 @@ def process_single_document(file_path):
         metadata = parsed.get("metadata", {})
         filename = os.path.basename(file_path)
 
+
+        # For text files, try to extract embedded metadata
+        if file_type == "text/plain":
+            embedded_metadata, content = extract_embedded_metadata(content)
+            # Merge embedded metadata with any metadata from Tika
+            metadata.update(embedded_metadata)    
+
+
         # Clean and organize metadata
         cleaned_metadata = clean_metadata(metadata)
         
@@ -229,6 +240,42 @@ def parse_date(date_input):
                 continue
     # If all parsing attempts fail, return the original string
     return date_string    
+
+def extract_embedded_metadata(content: str) -> Tuple[Dict[str, str], str]:
+    """
+    Extract metadata from text content using various formats.
+    Returns tuple of (metadata_dict, remaining_content)
+    """
+    # Try YAML-style header
+    yaml_match = re.match(r'^---\n(.*?)\n---\n(.*)', content, re.DOTALL)
+    if yaml_match:
+        try:
+            metadata = yaml.safe_load(yaml_match.group(1))
+            return metadata, yaml_match.group(2).strip()
+        except yaml.YAMLError:
+            pass
+
+    # Try XML-style metadata
+    xml_match = re.match(r'<\?xml:metadata\s+(.*?)\s*\?>\s*(.*)', content, re.DOTALL)
+    if xml_match:
+        metadata = {}
+        for pair in re.finditer(r'(\w+)="([^"]*)"', xml_match.group(1)):
+            metadata[pair.group(1)] = pair.group(2)
+        return metadata, xml_match.group(2).strip()
+
+    # Try comment block metadata
+    comment_match = re.match(r'/\*@metadata\n(.*?)\n@end\*/\s*(.*)', content, re.DOTALL)
+    if comment_match:
+        metadata = {}
+        meta_lines = comment_match.group(1).strip().split('\n')
+        for line in meta_lines:
+            if ':' in line:
+                key, value = line.split(':', 1)
+                metadata[key.strip()] = value.strip()
+        return metadata, comment_match.group(2).strip()
+
+    # No metadata found
+    return {}, content    
 
 # Example usage (if run as a script)
 if __name__ == "__main__":

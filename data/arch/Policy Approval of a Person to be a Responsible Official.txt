@@ -1,0 +1,36 @@
+---
+title: Approval of a Person to be a Responsible Official
+author: DRSC 
+date: 2017-08-21
+category: Policy Statement 
+---
+
+Policy Statement: Approval of a Person to be a Responsible Official
+Date: August 21, 2017
+
+Subject: FSAP Policy Statement: Approval of a person to be a Responsible Official at only one entity
+
+The Federal Select Agent Program (FSAP) is a collaboration between the Centers for Disease Control and Prevention (CDC), Division of Select Agents and Toxins (DSAT) and the Animal and Plant Health Inspection Service (APHIS) Division of Agricultural Select Agents and Toxins (DASAT) to regulate the possession, use, and transfer of biological agents listed in 7 C.F.R. Part 331, 9 C.F.R. Part 121, and 42 C.F.R. Part 73 (select agents and toxins).  The FSAP administers the select agents and toxins regulations in close coordination with the Federal Bureau of Investigation’s Criminal Justice Information Services Division (CJIS).
+
+Authority:
+
+For biological agents and toxins determined by HHS to have the potential to pose a severe threat to public health and safety (select agents and toxins), the Public Health Security and Bioterrorism Preparedness and Response Act of 2002 (42 U.S.C. 262a) directs the promulgation of regulations to establish and enforce biosafety and security requirements for the possession and use of select agents and toxins, including measures to ensure proper oversight of such agents and toxins.
+
+For biological agents and toxins determined by USDA to have the potential to pose a severe threat to animal health or animal products (select agents and toxins), the Agricultural Bioterrorism Protection Act of 2002 (7 U.S.C. 8401) directs the promulgation of regulations to establish and enforce biosafety/containment and security requirements for the possession and use of such select agents and toxins, including measures to ensure proper oversight of such select agents and toxins.
+
+Zoonotic select agents and toxins are regulated by both HHS and USDA.  See 42 C.F.R. § 73.4 and 9 C.F.R. § 121.4.
+
+The duties and responsibilities of a RO are found in section 9 of the select agents and toxins regulations. See 42 C.F.R. § 73.9, 9 C.F.R. § 121.9, 7 C.F.R. §331.9.  Federal regulations specify that the RO must “have a physical (and not merely a telephonic or audio/visual) presence at the registered entity to ensure that the entity is in compliance with the select agent regulations and be able to respond in a timely manner to onsite incidents involving select agents and toxins in accordance with the entity’s incident response plan.”  See 42 C.F.R. § 73.9(a)(5), 9 C.F.R. § 121.9(a)(5), 7 C.F.R. §331.9(a)(5).
+
+Policy Statement:
+
+It is the policy of the FSAP that an individual will not be approved by the FSAP to be a RO at more than one entity.
+It is the policy of the FSAP that an individual who has been approved to be an RO will not be approved by the FSAP to be an alternate Responsible Official (ARO) at another registered entity.
+
+It is the policy of the FSAP that an individual who has been approved by the FSAP to be an ARO at one entity can be approved by the FSAP to be an ARO at another registered entity as long as when they serve as RO, they can meet the provisions outlined in Section 9 of the select agent regulations.
+
+This policy statement is effective August 21, 2017.
+
+This policy statement will be provided to the Responsible Official via SA Gram for each registered entity on or before the effective date; and to the Responsible Official for each newly registered entity during the registration process.
+
+Any questions concerning this policy may be addressed by contacting the Federal Select Agent Program at lrsat@cdc.gov or DASAT@usda.gov.

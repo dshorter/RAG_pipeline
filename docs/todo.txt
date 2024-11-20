@@ -1,0 +1,3 @@
+
+folloe up on project set up scripts  
+use title from metadata if there    
