@@ -1,61 +1,32 @@
-import csv
+# Add to metrics_collector.py
+
 import sqlite3
+import os 
+import sys  
 from datetime import datetime
-import os
+from typing import Dict, Any, List, Optional
 import json
-from typing import Dict, List, Any, Optional
+
+# Add the project root to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from src.logging_config import setup_rag_logging, get_logger
-
-# Set up logging
-setup_rag_logging(log_dir='logs', unified_log=True)
-logger = get_logger(__name__)
-
-class MetricsCollector:
-    def __init__(self, csv_file='rag_metrics.csv'):
-        self.csv_file = csv_file
-        self.metrics = {}
-        self.ensure_csv_exists()
-
-    def ensure_csv_exists(self):
-        if not os.path.exists(self.csv_file):
-            with open(self.csv_file, 'w', newline='') as file:
-                writer = csv.writer(file)
-                writer.writerow(['timestamp', 'metric_type', 'metric_name', 'metric_value'])
-
-    def log_metrics(self, metric_type: str, metrics: Dict[str, Any]):
-        timestamp = datetime.now().isoformat()
-        
-        # Store metrics in memory
-        if metric_type not in self.metrics:
-            self.metrics[metric_type] = {}
-        self.metrics[metric_type].update(metrics)
-        
-        # Log metrics to CSV
-        with open(self.csv_file, 'a', newline='') as file:
-            writer = csv.writer(file)
-            for metric_name, metric_value in metrics.items():
-                writer.writerow([timestamp, metric_type, metric_name, metric_value])
-
-    def get_metrics(self, metric_type: str) -> Dict[str, Any]:
-        """Retrieve metrics for a specific metric type."""
-        if metric_type not in self.metrics:
-            return {}
-        return self.metrics[metric_type]
-
-    def get_all_metrics(self) -> Dict[str, Dict[str, Any]]:
-        """Retrieve all collected metrics."""
-        return self.metrics
+from src.data_classes import QueryAnalysisResult
 
 class ChatHistoryStore:
     def __init__(self, db_path: str = 'rag_history.db'):
-        self.db_path = db_path
+        
+        if db_path is None:
+        # Use data directory from paths.py
+            from src.paths import get_data_dir
+            self.db_path = os.path.join(get_data_dir(), 'rag_history.db')
+        else:
+            self.db_path = db_path    
+
         self.ensure_tables_exist()
 
     def ensure_tables_exist(self):
-        """Create tables if they don't exist."""    
-
-
-
+        """Create tables if they don't exist."""
         conn = sqlite3.connect(self.db_path)
         try:
             conn.execute('''
@@ -78,28 +49,34 @@ class ChatHistoryStore:
         finally:
             conn.close()
 
-    def log_interaction(self, 
-                       query: str,
-                       response: Dict[str, Any],
-                       results: Dict[str, Any],
-                       processing_time: float):
-        """Log a complete chat interaction with metrics."""
-        try:
-            # Extract metrics from results
-            source_chunks = []
-            relevance_scores = []
-            
-            for result in results.get('results', []):
-                source_chunks.append({
-                    'chunk_id': result.get('chunk_id'),
-                    'document_id': result.get('document_id'),
-                    'source_info': result.get('source_info', {})
-                })
-                relevance_scores.append({
-                    'chunk_id': result.get('chunk_id'),
-                    'score': result.get('relevance_score'),
-                    'initial_score': result.get('initial_score')
-                })
+def log_interaction(self, query: str, response: Dict[str, Any], results: Dict[str, Any], processing_time: float):
+    try:
+        # Extract analysis data safely
+        analysis = results.get('analysis')
+        if isinstance(analysis, QueryAnalysisResult): # analysis is a QueryAnalysisResult object
+            analysis_data = {
+                'complexity_score': getattr(analysis, 'complexity_score', 0.0),
+                'needs_reranking': getattr(analysis, 'needs_reranking', False),
+                'recommended_k': getattr(analysis, 'recommended_k', 0),
+                'recommended_candidates': getattr(analysis, 'recommended_candidates', 0)
+            }
+        else:
+            analysis_data = {}
+
+        # Extract source chunks and scores
+        source_chunks = []
+        relevance_scores = []
+        for result in results.get('results', []):
+            source_chunks.append({
+                'chunk_id': result.get('chunk_id'),
+                'document_id': result.get('document_id'),
+                'source_info': result.get('source_info', {})
+            })
+            relevance_scores.append({
+                'chunk_id': result.get('chunk_id'),
+                'score': result.get('relevance_score'),
+                'initial_score': result.get('initial_score')
+            })
 
             # Prepare data for storage
             interaction_data = {
@@ -109,17 +86,21 @@ class ChatHistoryStore:
                 'metrics': json.dumps({
                     'processing_time': processing_time,
                     'num_chunks': len(results.get('results', [])),
-                    'analysis_complexity': results.get('analysis', {}).get('complexity_score'),
-                    'used_training_data': results.get('response', {}).get('used_training_data', False)
+                    'analysis': analysis_data,
+                    'used_training_data': response.get('used_training_data', False)
                 }),
                 'processing_time': processing_time,
                 'num_chunks': len(results.get('results', [])),
                 'relevance_scores': json.dumps(relevance_scores),
-                'reranking_applied': results.get('analysis', {}).get('needs_reranking', False),
-                'training_data_used': results.get('response', {}).get('used_training_data', False),
+                'reranking_applied': analysis_data.get('needs_reranking', False),
+                'training_data_used': response.get('used_training_data', False),
                 'source_chunks': json.dumps(source_chunks),
                 'error': results.get('error')
             }
+
+            # Add logging
+            logger = get_logger('chat_store')
+            logger.info(f"Logging interaction - Query: {query[:50]}...")
 
             # Store in database
             conn = sqlite3.connect(self.db_path)
@@ -145,11 +126,18 @@ class ChatHistoryStore:
                     interaction_data['error']
                 ))
                 conn.commit()
+                logger.info("Successfully logged interaction to database")
+                
+            except sqlite3.Error as e:
+                logger.error(f"Database error while logging interaction: {str(e)}")
+                raise
             finally:
                 conn.close()
 
-        except Exception as e:
-            print(f"Error logging chat interaction: {str(e)}")
+    except Exception as e:
+        logger = get_logger('chat_store')
+        logger.error(f"Error logging chat interaction: {str(e)}", exc_info=True)
+
 
     def get_recent_history(self, limit: int = 10) -> List[Dict[str, Any]]:
         """Retrieve recent chat history with metrics."""
@@ -202,12 +190,12 @@ class ChatHistoryStore:
             
             row = cursor.fetchone()
             return {
-                'total_queries': row[0] or 0,
-                'avg_processing_time': row[1] or 0.0,
-                'avg_chunks_used': row[2] or 0.0,
-                'reranking_count': row[3] or 0,
-                'training_data_count': row[4] or 0,
-                'error_count': row[5] or 0
+                'total_queries': row[0],
+                'avg_processing_time': row[1],
+                'avg_chunks_used': row[2],
+                'reranking_count': row[3],
+                'training_data_count': row[4],
+                'error_count': row[5]
             }
         finally:
             conn.close()

@@ -12,13 +12,13 @@ from src.rag_pipeline import RAGPipeline
 from src.document_chunker import chunk_document
 from src.config import Configuration  # Assuming you have a Configuration class
 from src.singleton_config import ConfigSingleton      
-from src.logging_config import get_logger, setup_rag_logging  
+from src.logging_config import setup_rag_logging, get_logger
 
 
 # Set up logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s' )
 setup_rag_logging(log_dir='logs', unified_log=True)
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
+
 
 
 def main():

@@ -115,17 +115,18 @@ class RAGSearchClient:
                         # Combine into a result with all metadata
                         results.append({
                             "chunk_id": chunk_id,
-                            "chunk_text": chunk_text,
+                            "chunk_text": chunk_text,    #  "title": title.decode('utf-8') if isinstance(title, bytes) else title,
                             "document_id": doc_id,
                             "relevance_score": relevance_score,
                             "distance": float(distances[0][i]),
                             "metadata": json.loads(chunk_metadata) if chunk_metadata else {},
                             "source_info": {
-                                "title": title or "Unknown Document",
-                                "author": author or "Unknown Author",
-                                "source": source or "Unknown Source",
-                                "start_index": start_index,
-                                "end_index": end_index
+                            "title": (title.decode('utf-8') if isinstance(title, bytes) else 
+                                    title.replace("b'", "").replace("'", "") if isinstance(title, str) and title.startswith("b'")
+                                    else title or "Unknown Document"),                                
+                            "source": source or "Unknown Source",
+                            "start_index": start_index,
+                            "end_index": end_index
                             },
                             "document_metadata": json.loads(doc_metadata) if doc_metadata else {}
                         })
@@ -166,7 +167,7 @@ class RAGSearchClient:
             row = cursor.fetchone()
             if row:
                 return {
-                    "title": row[0],
+                    "title": row[0],    
                     "author": row[1],
                     "source": row[2],
                     "date_added": row[3],

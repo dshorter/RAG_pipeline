@@ -1,4 +1,5 @@
 import torch
+import numpy as np
 from sentence_transformers import CrossEncoder
 from typing import List, Dict, Any
 from src.singleton_config import ConfigSingleton
@@ -31,7 +32,7 @@ class HuggingFaceReRanker(ReRankerBase):
                     'component': 'reranker',
                     'operation': 'init',
                     'model': self.model_name,
-                    'device': self.device  # Use our stored device value
+                    'device': self.device
                 }
             )
         except Exception as e:
@@ -55,6 +56,12 @@ class HuggingFaceReRanker(ReRankerBase):
                     show_progress_bar=False,
                     batch_size=self.batch_size
                 )
+                # Convert to numpy array if not already
+                scores = np.array(scores)
+                
+                # Apply sigmoid to get scores in [0,1] range
+                scores = 1 / (1 + np.exp(-scores))
+                
                 all_scores.extend(scores)
 
             results = []
@@ -75,15 +82,20 @@ class HuggingFaceReRanker(ReRankerBase):
                 results = results[:top_k]
             
             return results
-            
+                
         except Exception as e:
             self.logger.error(f"Re-ranking failed: {str(e)}")
             raise
 
     def get_score(self, query: str, text: str) -> float:
+        """
+        Get relevance score for a single query-text pair.
+        """
         try:
-            score = float(self.model.predict([(query, text)]))
-            return score
+            score = self.model.predict([(query, text)])
+            # Apply sigmoid normalization to match rerank method
+            normalized_score = float(1 / (1 + np.exp(-score)))
+            return normalized_score
         except Exception as e:
             self.logger.error(f"Scoring failed: {str(e)}")
             raise

@@ -1,0 +1,28 @@
+CREATE VIEW [Reporting].[uvInspectionTurnAround] 
+		(InspectionKey, InspectionNumber, LeadAgencyName, EntityName,
+		 IsJointInspectionFlag, TeamName,
+		 StartDate, StopDateActual, StopDateNextWeekDay,
+		 FinalFindingsReleaseDate, AmendedFindingsReleaseDate,
+		 ProcessingTime, AmendedProcessingTime)
+as
+
+	with finalinsp as (
+		select i.InspectionKey
+				, i.InspectionNumber
+				, ISNULL(su.AgencyaffiliationName, 'Not Assigned') LeadAgency
+				, e.EntityName
+				, i.IsJointInspectionFlag
+				, ISNULL(suPOC.PrimaryTeamName, 'Not Assigned') TeamName
+				, dtStrt.DateKey StartDate
+				, dt.DateKey StopDateActual
+				, d2.DateKey StopDateNextWeekDay
+				, dc.DateKey FinalFindingsReleaseDate
+
+		from Fact.Inspections i WITH (NOLOCK) 
+		inner join Dim.Entity e WITH (NOLOCK)  on i.EntityID = e.EntityID
+		inner join Fact.InspectionActions mafi WITH (NOLOCK)
+			on i.InspectionKey = mafi.InspectionKey
+			and mafi.Action = 'Mark as Final Inspection'
+		inner join dim.Date dtStrt WITH (NOLOCK) on i.StartDateID = dtStrt.DateID  
+        inner join dim.Date dt WITH (NOLOCK) on i.StopDateID = dt.DateID  
+        inner join dim.Date dc WITH (NOLOCK) on mafi.ActionDateID = dc.DateID
