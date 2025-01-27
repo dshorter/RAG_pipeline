@@ -72,7 +72,7 @@ pipeline:
     active_model: "azure_openai"  # Specifies which model configuration to use
   chunk_size: 500
   chunk_overlap: 50
-  raw_docs_dir: "./data/raw/nac"
+  raw_docs_dir: "./data/raw"
   processed_docs_dir: "./data/processed"
 
 vectors:

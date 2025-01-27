@@ -5,186 +5,206 @@ import uuid
 import hashlib
 import json
 import numpy as np
-from typing import Dict, Any, List, Tuple, Union
+from datetime import datetime
+from typing import Dict, Any, List, Tuple
 from src.singleton_config import ConfigSingleton
-from src.paths import *
-from src.logging_config import get_logger
+from src.paths import get_db_path, get_faiss_path
+from src.logging_config import get_logger    
+from .metrics_collector import  MetricsCollector   
 
 class RAGSystem:
-    def __init__(self, db_path: str = None):
+    def __init__(self):
         self.logger = get_logger('system')
-        self.logger.debug("Initializing RAG System", 
-                         extra={
-                             'component': 'rag_system',
-                             'operation': 'initialization',
-                             'module_line': 'rag_system:init'                                
-                         })    
-        self.db_path = os.path.abspath(db_path or get_db_path())
         self.config = ConfigSingleton()
-        self.faiss_path = os.path.abspath(get_faiss_path())
-        
-        # Initialize storage
-        self._initialize_storage()
-        
-        self.logger.info("System initialized", 
-                        extra={
-                            'component': 'rag_system',
-                            'operation': 'initialization_complete',
-                            'module_line': 'rag_system:init'
-                        })
+        self.db_path = get_db_path()
+        self.faiss_path = get_faiss_path()  
+        self.metrics_collector = MetricsCollector(self.db_path)     
+        self._ensure_storage()
 
-    def _generate_faiss_id(self, chunk_id: str) -> int:
-        """
-        Generate deterministic FAISS ID from chunk ID using the last 63 bits of SHA-256 hash.
-        """
-        return int(hashlib.sha256(chunk_id.encode()).hexdigest(), 16) % (2**63 - 1)  
-    
-    def _initialize_storage(self):
-        """Initialize SQLite and FAISS storage."""
+    def _ensure_storage(self):
         try:
-            db_dir = os.path.dirname(self.db_path)
-            if db_dir:  
-                os.makedirs(db_dir, exist_ok=True)
-            
-            faiss_dir = os.path.dirname(self.faiss_path)
-            if faiss_dir:  
-                os.makedirs(faiss_dir, exist_ok=True)
-            
-            try:
-                conn = sqlite3.connect(self.db_path)
-                self._create_tables(conn)
-                conn.close()
-            except sqlite3.OperationalError as e:
-                self.logger.error(f"Failed to connect to the SQLite database at {self.db_path}", 
-                                  extra={'error': str(e)})
-                raise e
+            with sqlite3.connect(self.db_path) as conn:
+                conn.execute("""
+                    CREATE TABLE IF NOT EXISTS documents_metadata (
+                        document_id TEXT PRIMARY KEY,
+                        title TEXT NOT NULL,
+                        author TEXT NOT NULL,
+                        source TEXT NOT NULL,
+                        date_added TEXT NOT NULL,
+                        document_length INTEGER NOT NULL,
+                        summary TEXT NOT NULL,
+                        tags TEXT NOT NULL
+                    )
+                """)
+                
+                conn.execute("""
+                    CREATE TABLE IF NOT EXISTS document_chunks_metadata (
+                        chunk_id TEXT PRIMARY KEY,
+                        faiss_id INTEGER NOT NULL UNIQUE,
+                        document_id TEXT NOT NULL,
+                        chunk_text TEXT NOT NULL,
+                        start_index INTEGER NOT NULL,
+                        end_index INTEGER NOT NULL,
+                        chunk_length INTEGER NOT NULL,
+                        date_added TEXT NOT NULL,
+                        relevance_score REAL,
+                        vector_stats TEXT,
+                        FOREIGN KEY (document_id) REFERENCES documents_metadata(document_id)
+                    )
+                """)
 
             if not os.path.exists(self.faiss_path):
-                try:
-                    dimension = 1536
-                    index = faiss.IndexIDMap2(faiss.IndexFlatL2(dimension))
-                    faiss.write_index(index, self.faiss_path)
-                    
-                    self.logger.info("Created new FAISS index", 
-                                   extra={
-                                       'component': 'rag_system',
-                                       'operation': 'faiss_initialization',
-                                       'module_line': 'rag_system:_initialize_storage'
-                                   })
-                except Exception as e:
-                    self.logger.error("Failed to initialize FAISS", 
-                                    extra={
-                                        'component': 'rag_system',
-                                        'operation': 'faiss_initialization',
-                                        'error': str(e)
-                                    })
-                    raise e
-                    
+                dimension = 1536
+                index = faiss.IndexIDMap2(faiss.IndexFlatL2(dimension))
+                faiss.write_index(index, self.faiss_path)
+                
         except Exception as e:
-            self.logger.error("Storage initialization failed", 
-                            extra={
-                                'component': 'rag_system',
-                                'operation': 'storage_initialization',
-                                'module_line': 'rag_system:_initialize_storage',
-                                'error_id': str(uuid.uuid4())[:8],
-                                'error': str(e)
-                            })
-            raise e
-    
-    def _create_tables(self, conn):
+            self.logger.error(f"Storage initialization failed: {e}")
+            raise
+
+    def add_vector(self, chunk: str, vector: np.ndarray, document_id: str,
+                  source: str, start_index: int, end_index: int,
+                  additional_metadata: Dict[str, Any] = None,
+                  doc_metadata: Dict[str, Any] = None):
+        start_time = time.time()
         try:
-            self.logger.debug("Starting table creation", 
-                            extra={
-                                'component': 'rag_system',
-                                'operation': 'table_creation'
-                            })
+            chunk_id = str(uuid.uuid4())
+            faiss_id = self._generate_faiss_id(chunk_id)
             
-            cursor = conn.cursor()
+            # Add to FAISS
+            index = faiss.read_index(self.faiss_path)
+            index.add_with_ids(
+                vector.reshape(1, -1).astype('float32'),
+                np.array([faiss_id], dtype=np.int64)
+            )
+            faiss.write_index(index, self.faiss_path)
             
-            cursor.execute('''
-            CREATE TABLE IF NOT EXISTS documents_metadata (
-                document_id TEXT PRIMARY KEY NOT NULL,
-                title TEXT NOT NULL DEFAULT '',
-                author TEXT NOT NULL DEFAULT '',
-                source TEXT NOT NULL DEFAULT '',
-                date_added TEXT NOT NULL,
-                document_length INTEGER NOT NULL DEFAULT 0,
-                summary TEXT NOT NULL DEFAULT '',
-                tags TEXT NOT NULL DEFAULT ''
-            );
-            ''')
+            # Add to SQLite
+            with sqlite3.connect(self.db_path) as conn:
+                # Insert document metadata if new
+                if doc_metadata:
+                    conn.execute("""
+                        INSERT OR IGNORE INTO documents_metadata 
+                        (document_id, title, author, source, date_added, 
+                         document_length, summary, tags)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    """, (
+                        document_id,
+                        doc_metadata.get('title', ''),
+                        doc_metadata.get('author', ''),
+                        source,
+                        datetime.now().isoformat(),
+                        len(chunk.split()),
+                        doc_metadata.get('summary', ''),
+                        json.dumps(doc_metadata.get('tags', []))
+                    ))
+                
+                # Insert chunk metadata
+                conn.execute("""
+                    INSERT INTO document_chunks_metadata 
+                    (chunk_id, faiss_id, document_id, chunk_text,
+                     start_index, end_index, chunk_length, date_added)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    chunk_id,
+                    faiss_id,
+                    document_id,
+                    chunk,
+                    start_index,
+                    end_index,
+                    len(chunk.split()),
+                    datetime.now().isoformat()
+                ))
+
+            self.metrics_collector.collect(
+                operation='vector_storage',
+                component='rag_system',
+                metrics={
+                    'duration_ms': (time.time() - start_time) * 1000,
+                    'vector_dimension': len(vector),
+                    'chunk_length': len(chunk.split()),
+                    'document_id': document_id,
+                    'chunk_id': chunk_id
+                }
+            )
+
+        except Exception as e:
+            self.logger.error(f"Failed to add vector: {e}")
+            self.metrics_collector.collect(
+                operation='vector_storage',
+                component='rag_system',
+                metrics={
+                    'duration_ms': (time.time() - start_time) * 1000,
+                    'success': False,
+                    'error': str(e)
+                }
+            )
+            raise
+
+    def search(self, query_vector: np.ndarray, k: int = 5) -> List[Dict[str, Any]]:
+        start_time = time.time()
+        try:
+            index = faiss.read_index(self.faiss_path)
+            distances, indices = index.search(query_vector.reshape(1, -1), k)
             
-            cursor.execute('''
-            CREATE TABLE IF NOT EXISTS document_chunks_metadata (
-                chunk_id TEXT PRIMARY KEY NOT NULL,
-                faiss_id INTEGER NOT NULL UNIQUE,
-                document_id TEXT NOT NULL,
-                chunk_text TEXT NOT NULL,
-                start_index INTEGER NOT NULL,
-                end_index INTEGER NOT NULL,
-                chunk_length INTEGER NOT NULL,
-                date_added TEXT NOT NULL,
-                relevance_score REAL,
-                vector_stats TEXT
-            );
-            ''')
-            
-            cursor.execute('''
-            CREATE TABLE IF NOT EXISTS processing_metrics (
-                metric_id TEXT PRIMARY KEY NOT NULL,
-                document_id TEXT NOT NULL,
-                timestamp TEXT NOT NULL,
-                operation_type TEXT NOT NULL,
-                chunk_count INTEGER,
-                token_count INTEGER,
-                processing_time REAL NOT NULL,
-                success BOOLEAN NOT NULL,
-                error_message TEXT,
-                additional_metrics JSON
-            );
-            ''')
-            
-            cursor.execute('''
-            CREATE TABLE IF NOT EXISTS search_metrics (
-                metric_id TEXT PRIMARY KEY NOT NULL,
-                timestamp TEXT NOT NULL,
-                query_text TEXT NOT NULL,
-                embedding_time REAL NOT NULL,
-                search_time REAL NOT NULL,
-                total_time REAL NOT NULL,
-                num_chunks_requested INTEGER NOT NULL,
-                num_chunks_returned INTEGER NOT NULL,
-                relevance_scores JSON NOT NULL,
-                success BOOLEAN NOT NULL,
-                error_message TEXT,
-                additional_metrics JSON
-            );
-            ''')
-            
-            cursor.execute('''
-            CREATE TABLE IF NOT EXISTS system_metrics (
-                metric_id TEXT PRIMARY KEY NOT NULL,
-                timestamp TEXT NOT NULL,
-                metric_type TEXT NOT NULL,
-                value REAL NOT NULL,
-                unit TEXT NOT NULL,
-                context JSON
-            );
-            ''')
-            
-            conn.commit()
-            self.logger.info("Tables and indices created successfully", 
-                        extra={
-                            'component': 'rag_system',
-                            'operation': 'table_creation'
+            results = []
+            with sqlite3.connect(self.db_path) as conn:
+                for i, idx in enumerate(indices[0]):
+                    if idx == -1:
+                        continue
+                        
+                    cursor = conn.execute("""
+                        SELECT 
+                            c.chunk_id, c.chunk_text, c.document_id,
+                            c.start_index, c.end_index,
+                            d.title, d.author, d.source
+                        FROM document_chunks_metadata c
+                        LEFT JOIN documents_metadata d ON c.document_id = d.document_id
+                        WHERE c.faiss_id = ?
+                    """, (int(idx),))
+                    
+                    row = cursor.fetchone()
+                    if row:
+                        results.append({
+                            'chunk_id': row[0],
+                            'chunk_text': row[1],
+                            'document_id': row[2],
+                            'relevance_score': float(1 / (1 + distances[0][i])),
+                            'source_info': {
+                                'title': row[5] or 'Unknown',
+                                'author': row[6] or 'Unknown',
+                                'source': row[7] or 'Unknown',
+                                'start_index': row[3],
+                                'end_index': row[4]
+                            }
                         })
-        except sqlite3.Error as e:
-            error_id = str(uuid.uuid4())[:8]
-            self.logger.error("Failed to create tables", 
-                            extra={
-                                'component': 'rag_system',
-                                'operation': 'table_creation',
-                                'error_id': error_id,
-                                'error': str(e)
-                            })
-            raise e
+
+            self.metrics_collector.collect(
+                operation='vector_search',
+                component='rag_system',
+                metrics={
+                    'duration_ms': (time.time() - start_time) * 1000,
+                    'num_requested': k,
+                    'num_returned': len(results),
+                    'avg_distance': float(np.mean(distances))
+                }
+            )
+
+            return results
+
+        except Exception as e:
+            self.logger.error(f"Search failed: {e}")
+            self.metrics_collector.collect(
+                operation='vector_search',
+                component='rag_system',
+                metrics={
+                    'duration_ms': (time.time() - start_time) * 1000,
+                    'success': False,
+                    'error': str(e)
+                }
+            )
+            raise
+
+    def _generate_faiss_id(self, chunk_id: str) -> int:
+        return int(hashlib.sha256(chunk_id.encode()).hexdigest(), 16) % (2**63 - 1)
+ 
