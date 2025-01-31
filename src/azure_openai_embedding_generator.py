@@ -14,7 +14,7 @@ from .metrics_collector import  MetricsCollector
 class AzureOpenAIEmbeddingGenerator(EmbeddingGenerator):
     def __init__(self, azure_endpoint: str, api_version: str, deployment: str):
         self.logger = get_logger('embedding.azure')
-        self.config = ConfigSingleton()
+        self.config = ConfigSingleton()  
         self.azure_endpoint = azure_endpoint
         self.api_version = api_version
         self.deployment = deployment
@@ -57,7 +57,7 @@ class AzureOpenAIEmbeddingGenerator(EmbeddingGenerator):
                 results.append(None)
 
         # Fire and forget metrics
-        self.metrics_collector.collect(
+        self.metrics_collector.collect(self,
             operation='embedding_generation',
             component='azure_embedder',
             metrics={

@@ -1,19 +1,27 @@
 import os
 import logging
+import sys
 import time
 from typing import List, Dict, Any
 import uuid
-from .knowledge_base import process_documents
-from .document_chunker import chunk_document
-from .metrics_collector import MetricsCollector
-from .embedding_generator_factory import EmbeddingGeneratorFactory
-from .rag_system import RAGSystem
-from .pipeline_result import PipelineResult, ChunkInfo, ChunkMetrics, VectorMetrics
-from .singleton_config import ConfigSingleton
+
+# Add the project root to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from src.knowledge_base import process_documents
+from src.knowledge_base import process_documents
+from src.knowledge_base import process_documents
+from src.knowledge_base import process_documents
+from src.document_chunker import chunk_document
+from src.metrics_collector import MetricsCollector
+from src.embedding_generator_factory import EmbeddingGeneratorFactory
+from src.rag_system import RAGSystem
+from src.pipeline_result import PipelineResult, ChunkInfo  
+from src.singleton_config import ConfigSingleton
 import faiss
-from .generation import Generator
+from src.generation import Generator
 import shutil            
-from .paths import *             
+from src.paths import *             
 
 class RAGPipeline:
     def __init__(self):    
@@ -48,9 +56,9 @@ class RAGPipeline:
                 doc['document_id'] = str(uuid.uuid4())
 
             self.metrics_collector.collect(
-                'document_processing',
-                'rag_pipeline',
-                {
+                operation='document_processing',
+                component='rag_pipeline',
+                metrics={
                     'duration_ms': (time.time() - start_time) * 1000,
                     'num_documents': len(result),
                     'file_path': file_path
@@ -60,9 +68,9 @@ class RAGPipeline:
         except Exception as e:
             self.logger.error(f"Error processing document: {str(e)}")
             self.metrics_collector.collect(
-                'document_processing',
-                'rag_pipeline',
-                {
+                operation='document_processing',
+                component='rag_pipeline',
+                metrics={
                     'duration_ms': (time.time() - start_time) * 1000,
                     'success': False,
                     'error': str(e)
@@ -79,9 +87,9 @@ class RAGPipeline:
                                   chunk_overlap=self.config.get_pipeline_config().chunk_overlap)
             
             self.metrics_collector.collect(
-                'document_chunking',
-                'rag_pipeline',
-                {
+                operation='document_chunking',
+                component='rag_pipeline',
+                metrics={
                     'duration_ms': (time.time() - start_time) * 1000,
                     'document_id': processed_doc.get('document_id'),
                     'num_chunks': len(result['chunks']),
@@ -92,9 +100,9 @@ class RAGPipeline:
         except Exception as e:
             self.logger.error(f"Chunking failed: {str(e)}")
             self.metrics_collector.collect(
-                'document_chunking',
-                'rag_pipeline',
-                {
+                operation='document_chunking',
+                component='rag_pipeline',
+                metrics={
                     'duration_ms': (time.time() - start_time) * 1000,
                     'success': False,
                     'error': str(e)
@@ -108,9 +116,9 @@ class RAGPipeline:
             embeddings = self.embedding_generator.generate_embeddings(chunks)
             
             self.metrics_collector.collect(
-                'embedding_generation',
-                'rag_pipeline',
-                {
+                operation='embedding_generation',
+                component='rag_pipeline',
+                metrics={
                     'duration_ms': (time.time() - start_time) * 1000,
                     'num_chunks': len(chunks),
                     'num_embeddings': len(embeddings)
@@ -120,9 +128,9 @@ class RAGPipeline:
         except Exception as e:
             self.logger.error(f"Error generating embeddings: {str(e)}")
             self.metrics_collector.collect(
-                'embedding_generation',
-                'rag_pipeline',
-                {
+                operation='embedding_generation',
+                component='rag_pipeline',
+                metrics={
                     'duration_ms': (time.time() - start_time) * 1000,
                     'success': False,
                     'error': str(e)
@@ -139,7 +147,7 @@ class RAGPipeline:
                     document_id=document_id,
                     chunk=chunk_data['chunk'],
                     vector=chunk_data['vector'],
-                    source=chunk_data['source'],
+                    source=chunk_data.get('source', ''),
                     start_index=chunk_data['start_index'],
                     end_index=chunk_data['end_index'],
                     additional_metadata=chunk_data.get('additional_metadata', {}),
@@ -147,9 +155,9 @@ class RAGPipeline:
                 )
             
             self.metrics_collector.collect(
-                'document_indexing',
-                'rag_pipeline',
-                {
+                operation='document_indexing',
+                component='rag_pipeline',
+                metrics={
                     'duration_ms': (time.time() - start_time) * 1000,
                     'document_id': document_id,
                     'num_chunks': len(prepared_chunks)
@@ -158,9 +166,9 @@ class RAGPipeline:
         except Exception as e:
             self.logger.error(f"Indexing failed: {str(e)}")
             self.metrics_collector.collect(
-                'document_indexing',
-                'rag_pipeline',
-                {
+                operation='document_indexing',
+                component='rag_pipeline',
+                metrics={
                     'duration_ms': (time.time() - start_time) * 1000,
                     'success': False,
                     'error': str(e)
@@ -175,7 +183,6 @@ class RAGPipeline:
             results = []
             
             for processed_doc in processed_docs:
-                doc_start_time = time.time()
                 document_name = processed_doc['metadata'].get('title', 'Unknown Document')    
                 document_id = processed_doc['document_id']            
                 
@@ -197,10 +204,10 @@ class RAGPipeline:
                     results.append(result)
                     
                     self.metrics_collector.collect(
-                        'document_pipeline',
-                        'rag_pipeline',
-                        {
-                            'duration_ms': (time.time() - doc_start_time) * 1000,
+                        operation='document_pipeline',
+                        component='rag_pipeline',
+                        metrics={
+                            'duration_ms': (time.time() - time.time()) * 1000,
                             'document_id': document_id,
                             'success': True,
                             'num_chunks': len(chunks),
@@ -210,10 +217,10 @@ class RAGPipeline:
                 except Exception as e:
                     self.logger.error(f"Failed to process document {document_name}: {str(e)}")
                     self.metrics_collector.collect(
-                        'document_pipeline',
-                        'rag_pipeline',
-                        {
-                            'duration_ms': (time.time() - doc_start_time) * 1000,
+                        operation='document_pipeline',
+                        component='rag_pipeline',
+                        metrics={
+                            'duration_ms': (time.time() - time.time()) * 1000,
                             'document_id': document_id,
                             'success': False,
                             'error': str(e)
@@ -221,9 +228,9 @@ class RAGPipeline:
                     )
 
             self.metrics_collector.collect(
-                'pipeline_execution',
-                'rag_pipeline',
-                {
+                operation='pipeline_execution',
+                component='rag_pipeline',
+                metrics={
                     'duration_ms': (time.time() - pipeline_start_time) * 1000,
                     'total_documents': len(processed_docs),
                     'successful_documents': len(results),
@@ -236,13 +243,12 @@ class RAGPipeline:
         except Exception as e:
             self.logger.error(f"Pipeline execution failed: {str(e)}")
             self.metrics_collector.collect(
-                'pipeline_execution',
-                'rag_pipeline',
-                {
+                operation='pipeline_execution',
+                component='rag_pipeline',
+                metrics={
                     'duration_ms': (time.time() - pipeline_start_time) * 1000,
                     'success': False,
                     'error': str(e)
                 }
             )
             raise
-

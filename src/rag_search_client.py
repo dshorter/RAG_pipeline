@@ -73,12 +73,19 @@ class RAGSearchClient:
             raise
 
     def _get_chunk_info(self, faiss_ids: np.ndarray, distances: np.ndarray) -> List[Dict[str, Any]]:
-        results = []
+        """Get chunk information from SQLite database."""
+        results = []  
+        
+        self.logger.info(f"Getting chunk info for {len(faiss_ids)} FAISS IDs")
+        
         with sqlite3.connect(self.db_path) as conn:
             for i, faiss_id in enumerate(faiss_ids):
                 if faiss_id == -1:
                     continue
                     
+                    # Log the FAISS ID we're looking up
+                    self.logger.debug(f"Looking up chunk_id for FAISS ID: {faiss_id}")
+            
                 cursor = conn.execute("""
                     SELECT 
                         c.chunk_id,
@@ -86,7 +93,6 @@ class RAGSearchClient:
                         c.document_id,
                         c.start_index,
                         c.end_index,
-                        c.metadata,
                         d.title,
                         d.author,
                         d.source
@@ -97,7 +103,14 @@ class RAGSearchClient:
                 
                 row = cursor.fetchone()
                 if row:
-                    chunk_id, text, doc_id, start, end, metadata, title, author, source = row
+                    chunk_id, text, doc_id, start, end, title, author, source = row
+                    self.logger.debug(f"Found chunk with id: {chunk_id}")
+                else:
+                    self.logger.warning(f"No chunk found for FAISS ID: {faiss_id}")
+                
+                row = cursor.fetchone()
+                if row:
+                    chunk_id, text, doc_id, start, end, title, author, source = row
                     
                     results.append({
                         'chunk_id': chunk_id,
@@ -109,9 +122,8 @@ class RAGSearchClient:
                             'author': author or 'Unknown Author',
                             'source': source or 'Unknown Source',
                             'start_index': start,
-                            'end_index': end,
-                            'metadata': json.loads(metadata) if metadata else {}
+                            'end_index': end
                         }
                     })
         
-        return results 
+        return results

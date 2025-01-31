@@ -12,6 +12,7 @@ __pycache__/
 env/
 venv/
 ragenv/
+data/  
 
 # IDEs
 .vscode/

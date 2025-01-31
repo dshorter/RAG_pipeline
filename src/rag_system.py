@@ -1,16 +1,22 @@
 import os
 import sqlite3
+import sys
+import time
 import faiss
 import uuid
 import hashlib
 import json
 import numpy as np
 from datetime import datetime
-from typing import Dict, Any, List, Tuple
+from typing import Dict, Any, List, Tuple    
+
+# Add the project root to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from src.singleton_config import ConfigSingleton
 from src.paths import get_db_path, get_faiss_path
 from src.logging_config import get_logger    
-from .metrics_collector import  MetricsCollector   
+from src.metrics_collector import  MetricsCollector   
 
 class RAGSystem:
     def __init__(self):
@@ -74,7 +80,7 @@ class RAGSystem:
             # Add to FAISS
             index = faiss.read_index(self.faiss_path)
             index.add_with_ids(
-                vector.reshape(1, -1).astype('float32'),
+                np.array(vector).reshape(1, -1).astype('float32'),
                 np.array([faiss_id], dtype=np.int64)
             )
             faiss.write_index(index, self.faiss_path)

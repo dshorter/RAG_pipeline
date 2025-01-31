@@ -1,13 +1,19 @@
 # src/metrics_collector.py
 
-import logging
+import logging   
+import os  
+import sys
 from typing import Dict, Any
 from datetime import datetime
 import sqlite3
 import json
 import uuid
 from pathlib import Path    
-from .paths import *     
+
+# Add the project root to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from src.paths import *     
 
 
 class MetricsCollector:
@@ -19,7 +25,7 @@ class MetricsCollector:
     def _ensure_database(self):
         try:
             Path(self.db_path).parent.mkdir(parents=True, exist_ok=True)
-            with sqlite3.connect(self.db_path) as conn:
+            with sqlite3.connect( get_db_path( ) ) as conn:
                 conn.execute("""
                     CREATE TABLE IF NOT EXISTS metrics (
                         metric_id TEXT PRIMARY KEY,
@@ -62,7 +68,7 @@ class MetricsCollector:
                 'metrics_data': json.dumps(metrics)
             }
 
-            with sqlite3.connect(self.db_path) as conn:
+            with sqlite3.connect( get_db_path( ) ) as conn:
                 conn.execute("""
                     INSERT INTO metrics (
                         metric_id, timestamp, operation, component,
@@ -72,7 +78,7 @@ class MetricsCollector:
 
         except Exception as e:
             self.logger.warning(f"Failed to collect metrics for {operation}: {e}")
-            self._track_collection_failure(operation, e)
+            # self._track_collection_failure(operation, e)
 
     def _track_collection_failure(self, operation: str, error: Exception):
         try:

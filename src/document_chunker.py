@@ -1,9 +1,15 @@
 import logging
+import os
+import sys
 import time
 from typing import Dict
 from typing import List, Dict, Any  
-from nltk.tokenize import sent_tokenize, word_tokenize  
-from .metrics_collector import  MetricsCollector   
+from nltk.tokenize import sent_tokenize, word_tokenize      
+
+# Add the project root to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from src.metrics_collector import  MetricsCollector   
 import nltk
 
 # Download required NLTK data
@@ -43,7 +49,7 @@ def chunk_document(content: str, chunk_size: int = 500, chunk_overlap: int = 50)
             'overlap_size': chunk_overlap
         }
 
-        MetricsCollector(self.db_path).collect(
+        MetricsCollector( ).collect(
             operation='document_chunking',
             component='document_chunker',
             metrics=metrics

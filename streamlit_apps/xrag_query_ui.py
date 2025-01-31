@@ -21,7 +21,7 @@ from src.generation import Generator
 from src.rag_search_client import RAGSearchClient
 from src.logging_config import get_logger, setup_rag_logging
 
-class RAGQueryUI:
+class  xRAGQueryUI:
     def __init__(self):
         """Initialize the RAG Query UI with all required components."""
         setup_rag_logging(log_dir='logs', unified_log=True)

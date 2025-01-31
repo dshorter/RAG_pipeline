@@ -5,6 +5,7 @@ import numpy as np
 from typing import Dict, Tuple  
 
 import os, sys 
+
 # Add the project root to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -124,7 +125,9 @@ def verify_faiss_sqlite_alignment() -> Dict:
                 print(f"  • {mismatch['document']}: Chunk {mismatch['chunk_id']}")
                 print(f"    Error: {mismatch['error']}")
         
-        conn.close()
+        conn.close()     
+        
+        
         return results
         
     except Exception as e:
