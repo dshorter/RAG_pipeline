@@ -10,10 +10,11 @@ def get_data_dir():
     return os.path.join(get_project_root(), config.get('data_dir', 'data'))
 
 def get_db_path():
-    return os.path.join(get_data_dir(), config.get('db_name', 'metadata.db'))
+    return os.path.join(get_data_dir(), config.get('db_name', 'vagococcus_metadata.db'))
 
 def get_faiss_path():
-    return os.path.join(get_data_dir(), config.get('faiss_index_name', 'faiss_index.bin'))
+    result = os.path.join(get_data_dir(), config.get('faiss_index_name', 'vagococcus_faiss_index.bin')) 
+    return  result  
 
 def get_raw_docs_dir():
     return os.path.join(get_data_dir(), config.get('raw_docs_dir', 'raw'))

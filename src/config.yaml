@@ -1,11 +1,11 @@
 # RAG Pipeline Configuration
 
 paths:
-  data_dir: data
-  db_name: metadata.db
-  faiss_index_name: faiss_index.bin
-  raw_docs_dir: raw/nac
-  processed_docs_dir: processed       
+   data_dir: data
+   db_name: vagococcus_metadata.db
+   faiss_index_name: vagococcus_faiss_index.bin
+   raw_docs_dir: raw/vagococcus
+   processed_docs_dir: processed       
 
 gpt:
   provider: "azure_openai"
@@ -72,12 +72,12 @@ pipeline:
     active_model: "azure_openai"  # Specifies which model configuration to use
   chunk_size: 500
   chunk_overlap: 50
-  raw_docs_dir: "./data/raw"
+  raw_docs_dir: "./data/raw/vagococcus"
   processed_docs_dir: "./data/processed"
 
 vectors:
   faiss:
-    faiss_index_dir: "./data/faiss_index"
+    faiss_index_dir: "./data/data/vagococcus_faiss_index"
     faiss_index_dimensions: 1536 
   azure_cogs:
 

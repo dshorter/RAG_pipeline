@@ -40,7 +40,7 @@ def main():
     st.title("FAISS Index Viewer")
 
     project_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    index_path = os.path.join(project_folder, 'data', 'faiss_index.bin')    
+    index_path = os.path.join(project_folder, 'data', 'vagococcus_faiss_index.bin')    
 
     # Load the FAISS index
     index = load_faiss_index(index_path)
