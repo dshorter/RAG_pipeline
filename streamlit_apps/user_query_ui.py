@@ -82,81 +82,105 @@ class RAGChatInterface:
         
         # Add custom CSS for professional appearance
         st.markdown("""
-            <style>
-            .stApp {
-                background-color: #ffffff;
-                min-height: 100vh;
-                padding-bottom: 60px;
-            }
-            .main > div {
-                padding-top: 0 !important;
-                margin-top: -2rem;
-            }
-            .block-container {
-                padding-top: 0;
-                max-width: none;
-            }
-            
-            /* Hide default elements */
-            #MainMenu {visibility: hidden;}
-            header {visibility: hidden;}
-            
-            /* Professional chat styling */
-            .stChatMessage {
-                color: #1e293b !important;
-                font-size: 18px !important;
-            }
-            .stChatMessage div[data-testid="stMarkdownContainer"] {
-                color: #1e293b !important;
-                font-size: 18px !important;
-            }
-            .stChatMessage div[data-testid="stMarkdownContainer"] p {
-                color: #1e293b !important;
-                font-size: 18px !important;
-                line-height: 1.6 !important;
-            }
+        <style>
+        .stApp {
+            background-color: #ffffff;
+            min-height: 100vh;
+            padding-bottom: 60px;
+        }
+        .main > div {
+            padding-top: 0 !important;
+            margin-top: -2rem;
+        }
+        .block-container {
+            padding-top: 0;
+            max-width: none;
+        }
+        
+        /* Hide default elements */
+        #MainMenu {visibility: hidden;}
+        header {visibility: hidden;}
+        
+        /* Professional chat styling */
+        .stChatMessage {
+            color: #1e293b !important;
+            font-size: 18px !important;
+        }
+        
+        /* FIX: Force consistent font sizes for ALL text in chat messages */
+        .stChatMessage div[data-testid="stMarkdownContainer"] * {
+            font-size: 18px !important;
+            line-height: 1.6 !important;
+            color: #1e293b !important;  /* Ensure text color is visible */
+        }
+        
+        /* FIX: Specifically target paragraphs that might be rendered as larger text */
+        .stChatMessage div[data-testid="stMarkdownContainer"] p {
+            font-size: 18px !important;
+            margin-bottom: 1rem !important;
+            color: #1e293b !important;  /* Dark slate blue color for text */
+        }
+        
+        /* FIX: Target summary sections and AI knowledge blocks which may use different formatting */
+        .stChatMessage div[data-testid="stMarkdownContainer"] blockquote,
+        .stChatMessage div[data-testid="stMarkdownContainer"] h1,
+        .stChatMessage div[data-testid="stMarkdownContainer"] h2,
+        .stChatMessage div[data-testid="stMarkdownContainer"] h3,
+        .stChatMessage div[data-testid="stMarkdownContainer"] h4 {
+            font-size: 18px !important;
+            font-weight: normal !important;
+            margin: 1rem 0 !important;
+            padding: 0 !important;
+            color: #1e293b !important;  /* Ensure heading text is visible */
+        }
 
-            /* Citation styling */
-            .citation-container {
-                margin-top: 1rem;
-                padding: 1rem;
-                background-color: #f8fafc;
-                border-radius: 0.5rem;
-                border-left: 4px solid #3b82f6;
-                font-size: 0.9rem;
-                color: #475569;
-                line-height: 1.5;
-            }
+        /* Citation styling */
+        .citation-container {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #f8fafc;
+            border-radius: 0.5rem;
+            border-left: 4px solid #3b82f6;
+            font-size: 0.9rem !important;
+            color: #475569 !important;
+            line-height: 1.5;
+        }
+        
+        /* FIX: Make sure citations have consistent font size but DIFFERENT color */
+        .citation-container * {
+            font-size: 0.9rem !important;
+            color: #475569 !important;  /* Lighter color for citations */
+        }
 
-            /* UI Elements */
-            .drsc-footer {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                background-color: rgba(248, 250, 252, 0.85);
-                backdrop-filter: blur(8px);
-                border-top: 1px solid #e2e8f0;
-                z-index: 1000;
-            }
-            
-            .status-dot {
-                display: inline-block;
-                width: 8px;
-                height: 8px;
-                background-color: #22c55e;
-                border-radius: 50%;
-                animation: pulse 2s infinite;
-            }
-            
-            @keyframes pulse {
-                0% { opacity: 1; }
-                50% { opacity: 0.5; }
-                100% { opacity: 1; }
-            }
-            </style>
-        """, unsafe_allow_html=True)
-
+        /* UI Elements */
+        .drsc-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(248, 250, 252, 0.85);
+            backdrop-filter: blur(8px);
+            border-top: 1px solid #e2e8f0;
+            z-index: 1000;
+        }
+        
+        .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        </style>
+    """, unsafe_allow_html=True)
+        
         # Add professional header with experimental badge
         st.markdown("""
             <div style="background-color: #0f172a; color: white; padding: 1.5rem 2rem; margin: -4rem -4rem 0 -4rem;">
