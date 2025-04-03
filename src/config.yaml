@@ -77,7 +77,7 @@ pipeline:
 
 vectors:
   faiss:
-    faiss_index_dir: "./data/data/vagococcus_faiss_index"
+    faiss_index_dir: "./data/vagococcus_faiss_index"
     faiss_index_dimensions: 1536 
   azure_cogs:
 
